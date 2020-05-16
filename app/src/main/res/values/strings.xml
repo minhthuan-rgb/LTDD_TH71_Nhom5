@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Parzival\'s\nStore.</string>
+    <string name="slogan">Let\'s\nread !</string>
+    <string name="forgot_password">Forgot password ?</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_home">Trang chủ</string>
+    <string name="title_category">Danh mục</string>
+    <string name="title_notifications">Thông báo</string>
+    <string name="title_personal">Cá nhân</string>
+</resources>
