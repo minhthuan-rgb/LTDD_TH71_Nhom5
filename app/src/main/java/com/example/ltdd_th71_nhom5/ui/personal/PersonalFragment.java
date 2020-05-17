@@ -22,7 +22,7 @@ public class PersonalFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         personnalViewModel =
                 ViewModelProviders.of(this).get(PersonalViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_category, container, false);
+        View root = inflater.inflate(R.layout.fragment_personal, container, false);
         final TextView textView = root.findViewById(R.id.text_category);
         personnalViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/personal_ordermanage"
+        android:checkable="false"
+        android:icon="@drawable/tools_and_utensils"
+        android:title="Quản lý đơn hàng" />
+    <item
+        android:id="@+id/personal_boughtproduct"
+        android:icon="@drawable/cartblack"
+        android:title="Sản phẩm đã mua" />
+    <item
+        android:id="@+id/personal_seenproduct"
+        android:icon="@drawable/eye"
+        android:title="Sản phẩm đã xem" />
+    <item
+        android:id="@+id/personal_favorproduct"
+        android:icon="@drawable/love_and_romance"
+        android:title="Sản phẩm yêu thích" />
+    <item
+        android:id="@+id/personal_laterproduct"
+        android:icon="@drawable/fashion"
+        android:title="Sản phẩm mua sau" />
+    <item
+        android:id="@+id/personal_comment"
+        android:icon="@drawable/communications"
+        android:title="Nhận xét của tôi" />
+</menu>
