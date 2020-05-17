@@ -27,5 +27,5 @@
         android:id="@+id/navigation_personal"
         android:name="com.example.ltdd_th71_nhom5.ui.notifications.NotificationsFragment"
         android:label="@string/title_personal"
-        tools:layout="@layout/fragment_personal" />
+        tools:layout="@layout/fragment_personal_tool" />
 </navigation>
