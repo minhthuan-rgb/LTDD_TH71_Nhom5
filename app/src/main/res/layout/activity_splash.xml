@@ -5,7 +5,6 @@
     android:layout_height="match_parent"
     android:background="@color/colorBackground">
 
-
     <View
         android:id="@+id/people_2"
         android:layout_width="206dp"
