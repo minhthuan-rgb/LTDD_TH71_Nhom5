@@ -25,16 +25,16 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView navView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
-        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_home, R.id.navigation_category, R.id.navigation_notifications, R.id.navigation_personal)
-                .build();
+        //AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
+                //R.id.navigation_home, R.id.navigation_category, R.id.navigation_notifications, R.id.navigation_personal)
+                //.build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+        //NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
 
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayShowTitleEnabled(false);
-        actionBar.setBackgroundDrawable(new ColorDrawable(Color.BLACK));
+        //ActionBar actionBar = getSupportActionBar();
+        //.setDisplayShowTitleEnabled(false);
+        //actionBar.setBackgroundDrawable(new ColorDrawable(Color.BLACK));
     }
 
 }

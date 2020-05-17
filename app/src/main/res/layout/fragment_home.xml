@@ -72,16 +72,33 @@
             android:layout_below="@+id/viewFlipper"
             android:layout_marginTop="20dp">
 
-            <TextView
-                android:id="@+id/txtFlashDeal"
+            <RelativeLayout
+                android:id="@+id/relativeFlash"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
-                android:background="@color/backGroundNavigation" />
+                android:background="@color/backGroundNavigation">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Flash Deal"
+                    android:textAppearance="@style/home_panels" />
+
+                <Button
+                    android:id="@+id/btnMoreFlash"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:background="@color/transparency"
+                    android:text="Xem thêm"
+                    android:textSize="10sp" />
+            </RelativeLayout>
 
             <HorizontalScrollView
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
-                android:layout_below="@+id/txtFlashDeal"
+                android:layout_below="@+id/relativeFlash"
                 android:layout_marginTop="10dp"
                 android:scrollbars="horizontal">
 
@@ -126,25 +143,42 @@
                         android:layout_height="120dp"/>
 
                     <ImageView
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/vf_7"
-                        android:layout_width="120dp"
-                        android:layout_height="120dp"/>
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/vf_7"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"/>
                 </LinearLayout>
             </HorizontalScrollView>
 
-            <TextView
-                android:id="@+id/txtDetective"
+            <RelativeLayout
+                android:id="@+id/relativeDetective"
                 android:layout_width="match_parent"
-                android:layout_height="33dp"
-                android:background="@color/backGroundNavigation"
-                android:layout_below="@+id/txtFlashDeal"
-                android:layout_marginTop="140dp"/>
+                android:layout_height="30dp"
+                android:layout_below="@+id/relativeFlash"
+                android:layout_marginTop="140dp"
+                android:background="@color/backGroundNavigation">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Trinh thám"
+                    android:textAppearance="@style/home_panels"/>
+
+                <Button
+                    android:id="@+id/btnMoreDetective"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:background="@color/transparency"
+                    android:text="Xem thêm"
+                    android:textSize="10sp" />
+            </RelativeLayout>
 
             <HorizontalScrollView
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
-                android:layout_below="@+id/txtDetective"
+                android:layout_below="@+id/relativeDetective"
                 android:layout_marginTop="10dp"
                 android:scrollbars="horizontal">
 
@@ -156,67 +190,35 @@
                 </LinearLayout>
             </HorizontalScrollView>
 
-            <TextView
-                android:id="@+id/txtLove"
+            <RelativeLayout
+                android:id="@+id/relativeLove"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
+                android:layout_below="@+id/relativeDetective"
                 android:background="@color/backGroundNavigation"
-                android:layout_below="@+id/txtDetective"
-                android:layout_marginTop="140dp"/>
+                android:layout_marginTop="140dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Ngôn tình"
+                    android:textAppearance="@style/home_panels" />
+                <Button
+                    android:id="@+id/btnMoreLove"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:background="@color/transparency"
+                    android:text="Xem thêm"
+                    android:textSize="10sp" />
+            </RelativeLayout>
+
 
             <HorizontalScrollView
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
-                android:layout_below="@+id/txtLove"
-                android:layout_marginTop="10dp"
-                android:scrollbars="horizontal">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                </LinearLayout>
-
-            </HorizontalScrollView>
-
-            <TextView
-                android:id="@+id/txtHorror"
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:background="@color/backGroundNavigation"
-                android:layout_below="@+id/txtLove"
-                android:layout_marginTop="140dp"/>
-
-            <HorizontalScrollView
-                android:layout_width="match_parent"
-                android:layout_height="120dp"
-                android:layout_below="@+id/txtHorror"
-                android:layout_marginTop="10dp"
-                android:scrollbars="horizontal">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-
-                </LinearLayout>
-
-            </HorizontalScrollView>
-
-            <TextView
-                android:id="@+id/txtAdventure"
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:background="@color/backGroundNavigation"
-                android:layout_below="@+id/txtHorror"
-                android:layout_marginTop="140dp"/>
-
-            <HorizontalScrollView
-                android:layout_width="match_parent"
-                android:layout_height="120dp"
-                android:layout_below="@+id/txtAdventure"
+                android:layout_below="@+id/relativeLove"
                 android:layout_marginTop="10dp"
                 android:scrollbars="horizontal">
 
@@ -229,18 +231,116 @@
 
             </HorizontalScrollView>
 
-            <TextView
-                android:id="@+id/txtNovel"
+            <RelativeLayout
+                android:id="@+id/relativeHorror"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
                 android:background="@color/backGroundNavigation"
-                android:layout_below="@+id/txtAdventure"
-                android:layout_marginTop="140dp"/>
+                android:layout_below="@+id/relativeLove"
+                android:layout_marginTop="140dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Kinh dị"
+                    android:textAppearance="@style/home_panels"/>
+                <Button
+                    android:id="@+id/btnMoreHorror"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:background="@color/transparency"
+                    android:text="Xem thêm"
+                    android:textSize="10sp" />
+            </RelativeLayout>
 
             <HorizontalScrollView
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
-                android:layout_below="@+id/txtNovel"
+                android:layout_below="@+id/relativeHorror"
+                android:layout_marginTop="10dp"
+                android:scrollbars="horizontal">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+
+                </LinearLayout>
+
+            </HorizontalScrollView>
+
+            <RelativeLayout
+                android:id="@+id/relativeAdventure"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:background="@color/backGroundNavigation"
+                android:layout_below="@+id/relativeHorror"
+                android:layout_marginTop="140dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Khám phá"
+                    android:textAppearance="@style/home_panels"/>
+                <Button
+                    android:id="@+id/btnMoreAdventure"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:background="@color/transparency"
+                    android:text="Xem thêm"
+                    android:textSize="10sp" />
+            </RelativeLayout>
+
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:layout_below="@+id/relativeAdventure"
+                android:layout_marginTop="10dp"
+                android:scrollbars="horizontal">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                </LinearLayout>
+
+            </HorizontalScrollView>
+
+            <RelativeLayout
+                android:id="@+id/relativeNovel"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:background="@color/backGroundNavigation"
+                android:layout_below="@+id/relativeAdventure"
+                android:layout_marginTop="140dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Tiểu thuyết"
+                    android:textAppearance="@style/home_panels"/>
+                <Button
+                    android:id="@+id/btnMoreNovel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:background="@color/transparency"
+                    android:text="Xem thêm"
+                    android:textSize="10sp" />
+            </RelativeLayout>
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:layout_below="@+id/relativeNovel"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="100dp"
                 android:scrollbars="horizontal">

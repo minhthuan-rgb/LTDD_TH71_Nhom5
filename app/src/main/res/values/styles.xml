@@ -21,7 +21,7 @@
     </style>
 
     <style name="app_name">
-        <item name="android:textSize">75sp</item>
+        <item name="android:textSize">60sp</item>
         <item name="android:textColor">#F2F2F2</item>
         <item name="android:shadowColor">#40000000</item>
         <item name="android:shadowDx">0</item>
@@ -32,5 +32,18 @@
     <style name="forgot_password">
         <item name="android:textSize">18sp</item>
         <item name="android:textColor">#E0E0E0</item>
+    </style>
+
+    <style name="home_panels">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">#000</item>
+        <item name="android:shadowColor">#40000000</item>
+        <item name="android:shadowDx">0</item>
+        <item name="android:shadowDy">10</item>
+        <item name="android:shadowRadius">10</item>
+        <item name="fontFamily">@font/roboto_slab_light</item>
+        <item name="android:gravity">top|bottom</item>
+        <item name="android:textStyle">bold|italic</item>
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Large</item>
     </style>
 </resources>
