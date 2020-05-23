@@ -43,7 +43,7 @@
         <item name="android:shadowRadius">10</item>
         <item name="fontFamily">@font/roboto_slab_light</item>
         <item name="android:gravity">top|bottom</item>
-        <item name="android:textStyle">bold|italic</item>
+        <item name="android:textStyle">bold</item>
         <item name="android:textAppearance">@style/TextAppearance.AppCompat.Large</item>
     </style>
 </resources>
