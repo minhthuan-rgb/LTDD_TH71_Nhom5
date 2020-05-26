@@ -46,4 +46,29 @@
         <item name="android:textStyle">bold</item>
         <item name="android:textAppearance">@style/TextAppearance.AppCompat.Large</item>
     </style>
+
+    <style name="single_book_title">
+        <item name="android:textSize">22sp</item>
+        <item name="android:textColor">#F2F2F2</item>
+    </style>
+
+    <style name="single_book_value">
+        <item name="android:textSize">24sp</item>
+        <item name="android:textColor">#F2F2F2</item>
+    </style>
+
+    <style name="titleCart">
+        <item name="android:textSize">24sp</item>
+        <item name="android:textColor">#333333</item>
+    </style>
+
+    <style name="supplierCart">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">#333333</item>
+    </style>
+
+    <style name="valueCart">
+        <item name="android:textSize">25sp</item>
+        <item name="android:textColor">#EB5757</item>
+    </style>
 </resources>

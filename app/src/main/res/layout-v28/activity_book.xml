@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorBackground">
+
+        <TextView
+            android:id="@+id/txtTitle"
+            android:layout_width="311dp"
+            android:layout_height="53dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="49dp"
+            android:layout_marginLeft="49dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginEnd="49dp"
+            android:layout_marginRight="49dp"
+            android:fontFamily="@font/quando"
+            android:gravity="center_horizontal|top"
+            android:textAppearance="@style/single_book_title"
+            android:lineHeight="27sp" />
+
+        <ImageView
+            android:id="@+id/imgBookSingle"
+            android:layout_width="225dp"
+            android:layout_height="353dp"
+            android:layout_below="@+id/txtTitle"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="92dp"
+            android:layout_marginLeft="92dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="92dp"
+            android:layout_marginRight="92dp"
+            android:scaleType="centerCrop"/>
+
+        <TextView
+            android:id="@+id/txtValue"
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:layout_below="@+id/imgBookSingle"
+            android:layout_alignStart="@+id/imgBookSingle"
+            android:layout_marginStart="-50dp"
+            android:layout_marginTop="35dp"
+            android:fontFamily="sans-serif-light"
+            android:gravity="center_horizontal|top"
+            android:lineHeight="32sp"
+            android:textAppearance="@style/single_book_value" />
+
+        <TextView
+            android:id="@+id/txtSale"
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:layout_below="@+id/imgBookSingle"
+            android:layout_alignEnd="@+id/imgBookSingle"
+            android:layout_marginTop="33dp"
+            android:layout_marginEnd="-50dp"
+            android:fontFamily="sans-serif-light"
+            android:gravity="center_horizontal|top"
+            android:lineHeight="32sp"
+            android:textAppearance="@style/single_book_value" />
+
+        <Button
+            android:id="@+id/btnChoose"
+            android:layout_width="293dp"
+            android:layout_height="61dp"
+            android:layout_below="@+id/txtValue"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="59dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="59dp"
+            android:background="@drawable/background_navigation"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:text="Chọn mua"
+            android:textSize="24sp"
+            tools:ignore="HardcodedText" />
+    </RelativeLayout>
+
+</ScrollView>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:title="Search book"
+        android:id="@+id/action_search_sub"
+        android:icon="@drawable/ic_search_black_24dp"
+        app:showAsAction="always|collapseActionView" />
+
+    <item android:title="Cart"
+        android:id="@+id/action_shopping_cart_sub"
+        android:icon="@drawable/cart"
+        app:showAsAction="always|collapseActionView"/>
+
+    <item android:title="Home"
+        android:id="@+id/action_home"
+        android:icon="@drawable/home"
+        app:showAsAction="always|collapseActionView"/>
+
+    <item android:title="Category"
+        android:id="@+id/action_category"
+        android:icon="@drawable/category"
+        app:showAsAction="always|collapseActionView"/>
+
+    <item android:title="Notification"
+        android:id="@+id/action_notification"
+        android:icon="@drawable/notification"
+        app:showAsAction="always|collapseActionView"/>
+
+    <item android:title="Personal"
+        android:id="@+id/action_personal"
+        android:icon="@drawable/personal"
+        app:showAsAction="always|collapseActionView"/>
+</menu>

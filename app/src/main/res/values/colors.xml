@@ -8,4 +8,5 @@
     <color name="white">#F2F2F2</color>
     <color name="backGroundNavigation">#FFCC00</color>
     <color name="transparency">#00000000</color>
+    <color name="backgroundSearch">#4E4A4A</color>
 </resources>

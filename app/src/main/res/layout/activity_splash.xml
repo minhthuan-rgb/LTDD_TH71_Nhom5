@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorBackground">
 
-    <View
+    <ImageView
         android:id="@+id/people_2"
         android:layout_width="206dp"
         android:layout_height="206dp"
