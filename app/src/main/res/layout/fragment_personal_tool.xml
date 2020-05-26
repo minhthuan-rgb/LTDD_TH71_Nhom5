@@ -177,7 +177,7 @@
             android:textStyle="bold"
             tools:ignore="MissingConstraints"
             tools:layout_editor_absoluteX="3dp"
-            tools:layout_editor_absoluteY="262dp" />/>
+            tools:layout_editor_absoluteY="262dp" />
 
         <TextView
             android:id="@+id/textView8"
@@ -195,7 +195,7 @@
             android:textStyle="bold"
             tools:ignore="MissingConstraints"
             tools:layout_editor_absoluteX="3dp"
-            tools:layout_editor_absoluteY="262dp" />/>
+            tools:layout_editor_absoluteY="262dp" />
         <!--    </LinearLayout>-->
 
         <!--    <LinearLayout-->
