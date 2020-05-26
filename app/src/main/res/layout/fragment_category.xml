@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.category.CategoryFragment">
 
+<<<<<<< HEAD
     <TextView
         android:id="@+id/text_category"
         android:layout_width="match_parent"
@@ -20,4 +22,384 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:gravity="center_horizontal" />
+=======
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="97dp"
+        android:layout_height="84dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="32dp"
+        android:src="@drawable/category_suggest"
+        app:layout_constraintEnd_toStartOf="@+id/tableLayout"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout5"
+        android:layout_width="97dp"
+        android:layout_height="567dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:background="@drawable/category_bg"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2"
+        app:layout_constraintVertical_bias="0.209">
+
+        <TextView
+            android:id="@+id/textView15"
+            android:layout_width="match_parent"
+            android:layout_height="81dp"
+            android:drawableTop="@drawable/langman"
+            android:gravity="center"
+            android:paddingTop="10dp"
+            android:text="Lãng mạn"
+            android:textColor="#000000"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textView16"
+            android:layout_width="match_parent"
+            android:layout_height="81dp"
+            android:drawableTop="@drawable/phieuluu"
+            android:gravity="center"
+            android:paddingTop="10dp"
+            android:text="Phiêu lưu"
+            android:textColor="#000000"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textView17"
+            android:layout_width="match_parent"
+            android:layout_height="81dp"
+            android:drawableTop="@drawable/kinhte"
+            android:gravity="center"
+            android:paddingTop="10dp"
+            android:text="Kinh tế"
+            android:textColor="#000000"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textView18"
+            android:layout_width="match_parent"
+            android:layout_height="81dp"
+            android:drawableTop="@drawable/treem"
+            android:gravity="center"
+            android:paddingTop="10dp"
+            android:text="Trẻ em"
+            android:textColor="#000000"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textView19"
+            android:layout_width="match_parent"
+            android:layout_height="81dp"
+            android:drawableTop="@drawable/tieuthuyet"
+            android:gravity="center"
+            android:paddingTop="10dp"
+            android:text="Tiểu thuyết"
+            android:textColor="#000000"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textView20"
+            android:layout_width="match_parent"
+            android:layout_height="81dp"
+            android:drawableTop="@drawable/sinhhoc"
+            android:gravity="center"
+            android:paddingTop="10dp"
+            android:text="Sinh học"
+            android:textColor="#000000"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textView21"
+            android:layout_width="match_parent"
+            android:layout_height="81dp"
+            android:drawableTop="@drawable/toanhoc"
+            android:gravity="center"
+            android:paddingTop="10dp"
+            android:text="Toán học"
+            android:textColor="#000000"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <TableLayout
+        android:id="@+id/tableLayout"
+        android:layout_width="290dp"
+        android:layout_height="660dp"
+        android:background="@drawable/category_bg"
+        android:stretchColumns="*"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/linearLayout5"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TableRow>
+
+            <TextView
+                android:id="@+id/textView22"
+                android:layout_width="match_parent"
+                android:layout_height="94dp"
+                android:drawableTop="@drawable/langman"
+                android:gravity="center"
+                android:paddingTop="10dp"
+                android:text="Lãng mạn"
+                android:textColor="#000000"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textView23"
+                android:layout_width="match_parent"
+                android:layout_height="94dp"
+                android:drawableTop="@drawable/phieuluu"
+                android:gravity="center"
+                android:paddingTop="10dp"
+                android:text="Phiêu lưu"
+                android:textColor="#000000"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textView24"
+                android:layout_width="match_parent"
+                android:layout_height="94dp"
+                android:drawableTop="@drawable/kinhte"
+                android:gravity="center"
+                android:paddingTop="10dp"
+                android:text="Kinh tế"
+                android:textColor="#000000"
+                android:textSize="12sp"
+                android:textStyle="bold"
+
+                />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:id="@+id/textView25"
+                android:layout_width="match_parent"
+                android:layout_height="94dp"
+                android:drawableTop="@drawable/treem"
+                android:gravity="center"
+                android:paddingTop="10dp"
+                android:text="Trẻ em"
+                android:textColor="#000000"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textView26"
+                android:layout_width="match_parent"
+                android:layout_height="94dp"
+                android:drawableTop="@drawable/tieuthuyet"
+                android:gravity="center"
+                android:paddingTop="10dp"
+                android:text="Tiểu thuyết"
+                android:textColor="#000000"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textView27"
+                android:layout_width="match_parent"
+                android:layout_height="94dp"
+                android:drawableTop="@drawable/sinhhoc"
+                android:gravity="center"
+                android:paddingTop="10dp"
+                android:text="Sinh học"
+                android:textColor="#000000"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:id="@+id/textView31"
+                android:layout_width="match_parent"
+                android:layout_height="94dp"
+                android:drawableTop="@drawable/toanhoc"
+                android:gravity="center"
+                android:paddingTop="10dp"
+                android:text="Toán học"
+                android:textColor="#000000"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textView32"
+                android:layout_width="match_parent"
+                android:layout_height="94dp"
+                android:drawableTop="@drawable/vatly"
+                android:gravity="center"
+                android:paddingTop="10dp"
+                android:text="Vật lí học"
+                android:textColor="#000000"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textView33"
+                android:layout_width="match_parent"
+                android:layout_height="94dp"
+                android:drawableTop="@drawable/cuocsong"
+                android:gravity="center"
+                android:paddingTop="10dp"
+                android:text="Cuộc sống"
+                android:textColor="#000000"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:id="@+id/textView34"
+                android:layout_width="match_parent"
+                android:layout_height="94dp"
+                android:drawableTop="@drawable/nauan"
+                android:gravity="center"
+                android:paddingTop="10dp"
+                android:text="Nấu ăn"
+                android:textColor="#000000"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textView35"
+                android:layout_width="match_parent"
+                android:layout_height="94dp"
+                android:drawableTop="@drawable/ngoaingu"
+                android:gravity="center"
+                android:paddingTop="10dp"
+                android:text="Ngoại ngữ"
+                android:textColor="#000000"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textView36"
+                android:layout_width="match_parent"
+                android:layout_height="94dp"
+                android:drawableTop="@drawable/diali"
+                android:gravity="center"
+                android:paddingTop="10dp"
+                android:text="Địa lí"
+                android:textColor="#000000"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:id="@+id/textView37"
+                android:layout_width="match_parent"
+                android:layout_height="94dp"
+                android:drawableTop="@drawable/lichsu"
+                android:gravity="center"
+                android:paddingTop="10dp"
+                android:text="Lịch sử"
+                android:textColor="#000000"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textView38"
+                android:layout_width="match_parent"
+                android:layout_height="94dp"
+                android:drawableTop="@drawable/phunu"
+                android:gravity="center"
+                android:paddingTop="10dp"
+                android:text="Phụ nữ"
+                android:textColor="#000000"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textView39"
+                android:layout_width="match_parent"
+                android:layout_height="94dp"
+                android:drawableTop="@drawable/khoahoc"
+                android:gravity="center"
+                android:paddingTop="10dp"
+                android:text="Khoa học"
+                android:textColor="#000000"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:id="@+id/textView40"
+                android:layout_width="match_parent"
+                android:layout_height="94dp"
+                android:drawableTop="@drawable/giaoduc"
+                android:gravity="center"
+                android:paddingTop="10dp"
+                android:text="Giáo dục"
+                android:textColor="#000000"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textView41"
+                android:layout_width="match_parent"
+                android:layout_height="94dp"
+                android:drawableTop="@drawable/truyentranh"
+                android:gravity="center"
+                android:paddingTop="10dp"
+                android:text="Truyện tranh"
+                android:textColor="#000000"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textView42"
+                android:layout_width="match_parent"
+                android:layout_height="94dp"
+                android:drawableTop="@drawable/toanhoc"
+                android:gravity="center"
+                android:paddingTop="10dp"
+                android:text="Kinh dị"
+                android:textColor="#000000"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+        </TableRow>
+
+        <TableRow android:layout_height="94dp">
+
+            <TextView
+                android:id="@+id/TextView1"
+                android:layout_width="match_parent"
+                android:layout_height="94dp"
+                android:drawableLeft="@drawable/leftarrow"
+                android:gravity="center"
+                android:paddingLeft="30dp" />
+
+            <TextView
+                android:id="@+id/TextView46"
+                android:layout_width="match_parent"
+                android:layout_height="94dp"
+                android:layout_column="2"
+                android:drawableLeft="@drawable/rightarrow"
+                android:gravity="center"
+                android:paddingLeft="30dp" />
+        </TableRow>
+    </TableLayout>
+>>>>>>> 4e2533cd63fe6f59ce4ef60928220beaba14491a
 </androidx.constraintlayout.widget.ConstraintLayout>
