@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     android:layout_marginTop="5dp"
     android:background="@color/colorBackground"
-    android:paddingTop="?attr/actionBarSize"
     tools:context=".ui.personal.PersonalFragment">
 
     <LinearLayout

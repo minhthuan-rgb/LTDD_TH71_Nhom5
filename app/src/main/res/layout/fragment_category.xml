@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".ui.category.CategoryFragment">
 
-<<<<<<< HEAD
+
     <TextView
         android:id="@+id/text_category"
         android:layout_width="match_parent"
