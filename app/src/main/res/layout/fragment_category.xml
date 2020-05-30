@@ -8,21 +8,21 @@
     tools:context=".ui.category.CategoryFragment">
 
 
-    <TextView
-        android:id="@+id/text_category"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:gravity="center_horizontal" />
-=======
+<!--    <TextView-->
+<!--        android:id="@+id/text_category"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="8dp"-->
+<!--        android:layout_marginTop="8dp"-->
+<!--        android:layout_marginEnd="8dp"-->
+<!--        android:textAlignment="center"-->
+<!--        android:textSize="20sp"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        android:gravity="center_horizontal" />-->
+<!--=======-->
 
     <ImageView
         android:id="@+id/imageView2"
@@ -143,7 +143,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/linearLayout5"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.464">
 
         <TableRow>
 
@@ -372,7 +373,7 @@
                 android:id="@+id/textView42"
                 android:layout_width="match_parent"
                 android:layout_height="94dp"
-                android:drawableTop="@drawable/toanhoc"
+                android:drawableTop="@drawable/kinhdi"
                 android:gravity="center"
                 android:paddingTop="10dp"
                 android:text="Kinh dị"
@@ -401,5 +402,5 @@
                 android:paddingLeft="30dp" />
         </TableRow>
     </TableLayout>
->>>>>>> 4e2533cd63fe6f59ce4ef60928220beaba14491a
+    >>>>>>> 4e2533cd63fe6f59ce4ef60928220beaba14491a
 </androidx.constraintlayout.widget.ConstraintLayout>
