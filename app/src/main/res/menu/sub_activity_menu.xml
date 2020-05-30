@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item android:title="Search book"
         android:id="@+id/action_search_sub"
-        android:icon="@drawable/ic_search_black_24dp"
+        android:icon="@drawable/ic_search"
         app:showAsAction="always|collapseActionView" />
 
     <item android:title="Cart"
@@ -14,20 +14,20 @@
     <item android:title="Home"
         android:id="@+id/action_home"
         android:icon="@drawable/home"
-        app:showAsAction="always|collapseActionView"/>
+        app:showAsAction="ifRoom|collapseActionView"/>
 
     <item android:title="Category"
         android:id="@+id/action_category"
         android:icon="@drawable/category"
-        app:showAsAction="always|collapseActionView"/>
+        app:showAsAction="ifRoom|collapseActionView"/>
 
     <item android:title="Notification"
         android:id="@+id/action_notification"
         android:icon="@drawable/notification"
-        app:showAsAction="always|collapseActionView"/>
+        app:showAsAction="ifRoom|collapseActionView"/>
 
     <item android:title="Personal"
         android:id="@+id/action_personal"
         android:icon="@drawable/personal"
-        app:showAsAction="always|collapseActionView"/>
+        app:showAsAction="ifRoom|collapseActionView"/>
 </menu>
