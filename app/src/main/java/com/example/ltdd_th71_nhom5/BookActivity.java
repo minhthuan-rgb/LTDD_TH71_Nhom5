@@ -5,6 +5,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -25,8 +26,7 @@ public class BookActivity extends AppCompatActivity {
 
         // action bar
         ActionBar actionBar = getSupportActionBar();
-        assert actionBar != null;
-        actionBar.setBackgroundDrawable(Drawable.createFromPath("@drawable/background_navigation"));
+        actionBar.setBackgroundDrawable(new ColorDrawable(Color.BLACK));
         actionBar.setDisplayShowTitleEnabled(false);
 
         txtTitle = (TextView)findViewById(R.id.txtTitle);
