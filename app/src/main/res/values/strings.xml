@@ -8,4 +8,46 @@
     <string name="title_notifications">Thông báo</string>
     <string name="title_personal">Cá nhân</string>
     <string name="search_hint">Nhập từ khóa cần tìm</string>
+
+<!--    recyclerView Category-->
+    <string-array name="recView_category">
+        <item>Langman</item>
+        <item>Phieuluu</item>
+        <item>Kinhte</item>
+        <item>Treem</item>
+        <item>Tieuthuyet</item>
+        <item>Sinhhoc</item>
+        <item>Toanhoc</item>
+        <item>Vatlihoc</item>
+        <item>Cuocsong</item>
+        <item>Nauan</item>
+        <item>Ngoaingu</item>
+        <item>Diali</item>
+        <item>Lichsu</item>
+        <item>Phunu</item>
+        <item>Khoahoc</item>
+        <item>Giaoduc</item>
+        <item>Truyentranh</item>
+        <item>Kinhdi</item>
+    </string-array>
+    <string-array name="description">
+        <item>Romance</item>
+        <item>Adventure</item>
+        <item>Economy</item>
+        <item>Kid</item>
+        <item>Light Novel</item>
+        <item>Biology</item>
+        <item>Math</item>
+        <item>Physics</item>
+        <item>Life</item>
+        <item>Cooking</item>
+        <item>Language</item>
+        <item>Geography</item>
+        <item>History</item>
+        <item>Woman</item>
+        <item>Science</item>
+        <item>Education</item>
+        <item>Comic</item>
+        <item>Horror</item>
+    </string-array>
 </resources>
