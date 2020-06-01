@@ -15,45 +15,44 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.ltdd_th71_nhom5.R;
 import com.example.ltdd_th71_nhom5.ui.category.CategoryFragment;
+import com.example.ltdd_th71_nhom5.ui.category.Model_category;
 
-public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyViewHolder> {
+import java.util.List;
 
-    String data1[];
-    int images[];
+public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
     Context context;
+    List<Model_category> models;
 
-    public CategoryAdapter(Context ct, String[] s1, int[] img){
-        this.context = ct;
-        data1 = s1;
-        images = img;
+    public CategoryAdapter(Context context, List<Model_category> models) {
+        this.context = context;
+        this.models = models;
     }
 
     @NonNull
     @Override
-    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.item_category, parent,false);
-        return new MyViewHolder(view);
+        return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.myText1.setText(data1[position]);
-        holder.myImage.setImageResource(images[position]);
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        holder.myText1.setText(models.get(position).getTitle());
+        holder.myImage.setImageResource(models.get(position).getImg());
 
     }
 
     @Override
     public int getItemCount() {
-        return images.length;
+        return models.size();
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder{
-
+    public static class ViewHolder extends RecyclerView.ViewHolder{
         TextView myText1;
         ImageView myImage;
 
-        public MyViewHolder(@NonNull View itemView) {
+        public ViewHolder(@NonNull View itemView) {
             super(itemView);
             myText1 = itemView.findViewById(R.id.txt_category);
             myImage = itemView.findViewById(R.id.imageCategory);

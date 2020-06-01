@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:layout_marginTop="5dp"
     android:background="@color/colorBackground"
-    tools:context=".ui.personal.PersonalFragment">
+    tools:context=".ui.category.CategoryFragment">
 
 
 <!--    <TextView-->
@@ -29,32 +29,30 @@
     <ImageView
         android:id="@+id/imageView2"
         android:layout_width="97dp"
-        android:layout_height="84dp"
-        android:layout_marginLeft="10dp"
+        android:layout_height="81dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
         android:layout_marginTop="32dp"
         android:src="@drawable/category_suggest"
-        app:layout_constraintEnd_toStartOf="@+id/tableLayout"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
         android:id="@+id/linearLayout5"
         android:layout_width="97dp"
-        android:layout_height="567dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
+        android:layout_marginTop="4dp"
         android:background="@drawable/category_bg"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2"
-        app:layout_constraintVertical_bias="0.209">
+        app:layout_constraintTop_toBottomOf="@+id/imageView2">
 
         <TextView
             android:id="@+id/textView15"
             android:layout_width="match_parent"
-            android:layout_height="81dp"
+            android:layout_height="82dp"
             android:drawableTop="@drawable/langman"
             android:gravity="center"
             android:paddingTop="10dp"
@@ -66,7 +64,7 @@
         <TextView
             android:id="@+id/textView16"
             android:layout_width="match_parent"
-            android:layout_height="81dp"
+            android:layout_height="82dp"
             android:drawableTop="@drawable/phieuluu"
             android:gravity="center"
             android:paddingTop="10dp"
@@ -78,7 +76,7 @@
         <TextView
             android:id="@+id/textView17"
             android:layout_width="match_parent"
-            android:layout_height="81dp"
+            android:layout_height="82dp"
             android:drawableTop="@drawable/kinhte"
             android:gravity="center"
             android:paddingTop="10dp"
@@ -90,7 +88,7 @@
         <TextView
             android:id="@+id/textView18"
             android:layout_width="match_parent"
-            android:layout_height="81dp"
+            android:layout_height="82dp"
             android:drawableTop="@drawable/treem"
             android:gravity="center"
             android:paddingTop="10dp"
@@ -102,7 +100,7 @@
         <TextView
             android:id="@+id/textView19"
             android:layout_width="match_parent"
-            android:layout_height="81dp"
+            android:layout_height="82dp"
             android:drawableTop="@drawable/tieuthuyet"
             android:gravity="center"
             android:paddingTop="10dp"
@@ -114,7 +112,7 @@
         <TextView
             android:id="@+id/textView20"
             android:layout_width="match_parent"
-            android:layout_height="81dp"
+            android:layout_height="82dp"
             android:drawableTop="@drawable/sinhhoc"
             android:gravity="center"
             android:paddingTop="10dp"
@@ -126,7 +124,7 @@
         <TextView
             android:id="@+id/textView21"
             android:layout_width="match_parent"
-            android:layout_height="81dp"
+            android:layout_height="82dp"
             android:drawableTop="@drawable/toanhoc"
             android:gravity="center"
             android:paddingTop="10dp"
@@ -139,14 +137,14 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recView_Category"
-        android:layout_width="272dp"
-        android:layout_height="659dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="357dp"
+        android:layout_height="656dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@color/light_gray"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/linearLayout5"
-        app:layout_constraintTop_toTopOf="parent"
-
-        />
+        app:layout_constraintTop_toTopOf="parent" />
 
 
     <!--    <TableLayout-->

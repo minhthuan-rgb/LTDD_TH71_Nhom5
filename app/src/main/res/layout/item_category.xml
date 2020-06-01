@@ -1,55 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
-<!--    <TextView-->
-<!--        android:id="@+id/category_item"-->
-<!--        android:layout_width="96dp"-->
-<!--        android:layout_height="94dp"-->
-<!--        android:drawableTop="@drawable/langman"-->
-<!--        android:gravity="center"-->
-<!--        android:paddingTop="10dp"-->
-<!--        android:text="Lãng mạn"-->
-<!--        android:textColor="#000000"-->
-<!--        android:textSize="12sp"-->
-<!--        android:textStyle="bold" />-->
+    xmlns:cardview="http://schemas.android.com/apk/res-auto"
+    android:layout_width="110dp"
+    android:layout_height="120dp"
+    android:layout_margin="5dp"
+    app:cardCornerRadius="4dp">
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="96dp"
-        android:layout_height="94dp"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="2dp">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/light_gray">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <ImageView
+            android:id="@+id/imageCategory"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="80dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintBottom_toTopOf="@+id/txt_category"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/langman" />
 
-            <TextView
-                android:id="@+id/txt_category"
-                android:layout_width="96dp"
-                android:layout_height="24dp"
-                android:gravity="center"
-                android:text="Title"
-                android:textColor="#000000"
-                android:textSize="12sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageCategory" />
-
-            <ImageView
-                android:id="@+id/imageCategory"
-                android:layout_width="96dp"
-                android:layout_height="70dp"
-                app:layout_constraintBottom_toTopOf="@+id/txt_category"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/langman" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-                </androidx.cardview.widget.CardView>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/txt_category"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="Title"
+            android:textColor="#000000"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageCategory" />
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

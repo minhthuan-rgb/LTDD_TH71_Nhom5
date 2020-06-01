@@ -19,29 +19,120 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.ltdd_th71_nhom5.R;
 import com.example.ltdd_th71_nhom5.adapter.CategoryAdapter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class CategoryFragment extends Fragment {
 
     RecyclerView recyclerView;
-    Context ct;
-    String s1[],s2[];
-    int images[] = {R.drawable.langman,R.drawable.phieuluu,R.drawable.kinhte,R.drawable.treem,R.drawable.tieuthuyet,
-            R.drawable.sinhhoc,R.drawable.toanhoc,R.drawable.vatly,R.drawable.cuocsong,R.drawable.nauan,R.drawable.ngoaingu,
-            R.drawable.diali,R.drawable.lichsu,R.drawable.phunu,R.drawable.khoahoc,R.drawable.giaoduc,R.drawable.truyentranh,
-            R.drawable.kinhdi};
+    CategoryAdapter madapter;
 
     private CategoryViewModel categoryViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
-        s1 = getResources().getStringArray(R.array.recView_category);
         View root = inflater.inflate(R.layout.fragment_category, container, false);
         recyclerView = root.findViewById(R.id.recView_Category);
-
-        CategoryAdapter categoryAdapter = new CategoryAdapter(ct ,s1,images);
-        recyclerView.setAdapter(categoryAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        madapter = new CategoryAdapter(root.getContext(),getmyList());
+        recyclerView.setAdapter(madapter);
+        recyclerView.setLayoutManager(new GridLayoutManager(root.getContext(),3));
         return root;
     }
 
+    private List<Model_category> getmyList(){
+
+        ArrayList<Model_category> models = new ArrayList<>();
+        Model_category m = new Model_category();
+        m.setTitle("Lãng mạn");
+        m.setImg(R.drawable.langman);
+        models.add(m);
+
+        m = new Model_category();
+        m.setTitle("Phiêu lưu");
+        m.setImg(R.drawable.phieuluu);
+        models.add(m);
+
+        m = new Model_category();
+        m.setTitle("Kinh tế");
+        m.setImg(R.drawable.kinhte);
+        models.add(m);
+
+        m = new Model_category();
+        m.setTitle("Trẻ em");
+        m.setImg(R.drawable.treem);
+        models.add(m);
+
+        m = new Model_category();
+        m.setTitle("Tiểu thuyết");
+        m.setImg(R.drawable.tieuthuyet);
+        models.add(m);
+
+        m = new Model_category();
+        m.setTitle("Sinh học");
+        m.setImg(R.drawable.sinhhoc);
+        models.add(m);
+
+        m = new Model_category();
+        m.setTitle("Toán học");
+        m.setImg(R.drawable.toanhoc);
+        models.add(m);
+
+        m = new Model_category();
+        m.setTitle("Vật lí học");
+        m.setImg(R.drawable.vatly);
+        models.add(m);
+
+        m = new Model_category();
+        m.setTitle("Cuộc sống");
+        m.setImg(R.drawable.cuocsong);
+        models.add(m);
+
+        m = new Model_category();
+        m.setTitle("Nấu ăn");
+        m.setImg(R.drawable.nauan);
+        models.add(m);
+
+        m = new Model_category();
+        m.setTitle("Ngoại ngữ");
+        m.setImg(R.drawable.ngoaingu);
+        models.add(m);
+
+        m = new Model_category();
+        m.setTitle("Địa lí");
+        m.setImg(R.drawable.diali);
+        models.add(m);
+
+        m = new Model_category();
+        m.setTitle("Lịch sử");
+        m.setImg(R.drawable.lichsu);
+        models.add(m);
+
+        m = new Model_category();
+        m.setTitle("Phụ nữ");
+        m.setImg(R.drawable.phunu);
+        models.add(m);
+
+        m = new Model_category();
+        m.setTitle("Khoa học");
+        m.setImg(R.drawable.khoahoc);
+        models.add(m);
+
+        m = new Model_category();
+        m.setTitle("Giáo dục");
+        m.setImg(R.drawable.giaoduc);
+        models.add(m);
+
+        m = new Model_category();
+        m.setTitle("Truyện tranh");
+        m.setImg(R.drawable.truyentranh);
+        models.add(m);
+
+        m = new Model_category();
+        m.setTitle("Kinh dị");
+        m.setImg(R.drawable.kinhdi);
+        models.add(m);
+        
+        return models;
+    }
 }
