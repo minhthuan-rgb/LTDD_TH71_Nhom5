@@ -18,15 +18,13 @@ import com.example.ltdd_th71_nhom5.ui.category.CategoryFragment;
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyViewHolder> {
 
-    String data1[],data2[];
+    String data1[];
     int images[];
     Context context;
-    CategoryFragment cf;
 
-    public CategoryAdapter(CategoryFragment ct, String[] s1, String[] s2, int[] img){
-        cf = ct;
+    public CategoryAdapter(Context ct, String[] s1, int[] img){
+        this.context = ct;
         data1 = s1;
-        data2 = s2;
         images = img;
     }
 

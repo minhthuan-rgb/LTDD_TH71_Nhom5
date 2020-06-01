@@ -1,5 +1,6 @@
 package com.example.ltdd_th71_nhom5.ui.category;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,7 +22,7 @@ import com.example.ltdd_th71_nhom5.adapter.CategoryAdapter;
 public class CategoryFragment extends Fragment {
 
     RecyclerView recyclerView;
-
+    Context ct;
     String s1[],s2[];
     int images[] = {R.drawable.langman,R.drawable.phieuluu,R.drawable.kinhte,R.drawable.treem,R.drawable.tieuthuyet,
             R.drawable.sinhhoc,R.drawable.toanhoc,R.drawable.vatly,R.drawable.cuocsong,R.drawable.nauan,R.drawable.ngoaingu,
@@ -29,20 +30,18 @@ public class CategoryFragment extends Fragment {
             R.drawable.kinhdi};
 
     private CategoryViewModel categoryViewModel;
-    @Override
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
         s1 = getResources().getStringArray(R.array.recView_category);
-        s2 = getResources().getStringArray(R.array.description);
         View root = inflater.inflate(R.layout.fragment_category, container, false);
         recyclerView = root.findViewById(R.id.recView_Category);
 
-        CategoryAdapter categoryAdapter = new CategoryAdapter(this,s1,s2,images);
+        CategoryAdapter categoryAdapter = new CategoryAdapter(ct ,s1,images);
         recyclerView.setAdapter(categoryAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         return root;
     }
-
 
 }
