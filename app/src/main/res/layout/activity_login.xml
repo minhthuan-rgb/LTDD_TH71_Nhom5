@@ -91,11 +91,8 @@
             android:layout_width="100dp"
             android:layout_height="45dp"
             android:layout_below="@+id/txtForgotPassword"
+            android:layout_marginLeft="70dp"
             android:layout_marginTop="50dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_toStartOf="@+id/btnSignIn"
-            android:layout_toLeftOf="@+id/btnSignIn"
             android:background="@color/white"
             android:text="Đăng ký" />
 
