@@ -3,6 +3,8 @@ const router = express.Router();
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt')
 
+const User = require('../models/user')
+
 exports.user_sign_up =   async (req, res, next) => {
     User.find({ email: req.body.email })
       .exec()
@@ -21,7 +23,9 @@ exports.user_sign_up =   async (req, res, next) => {
               const user = new User({
                 _id: new mongoose.Types.ObjectId(),
                 email: req.body.email,
-                password: hash
+                password: hash,
+                name: req.body.name,
+                birthday: req.body.birthday
               });
               user
                 .save()
@@ -91,4 +95,3 @@ exports.user_delete =  async (req, res, next) => {
         });
       });
   }
-
