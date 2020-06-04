@@ -25,7 +25,8 @@ exports.user_sign_up =   async (req, res, next) => {
                 email: req.body.email,
                 password: hash,
                 name: req.body.name,
-                birthday: req.body.birthday
+                birthday: req.body.birthday,
+                phonenumber: req.body.phonenumber
               });
               user
                 .save()
@@ -94,4 +95,22 @@ exports.user_delete =  async (req, res, next) => {
           error: err
         });
       });
-  }
+}
+
+exports.user_reset_pass = async(req, res, next) =>{
+  User.findOne({email: req.body.email})
+    .exec()
+    .then(user => {
+      if(user.length = 1) {
+        return res.status(401).json({
+          message: "Mail exists, moving to next page"
+        });
+      }
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(404).json({
+        error: err
+      })
+    })
+}
