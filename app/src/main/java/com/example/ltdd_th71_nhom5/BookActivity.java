@@ -3,6 +3,7 @@ package com.example.ltdd_th71_nhom5;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -11,9 +12,13 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.ltdd_th71_nhom5.ui.home.HomeFragment;
+import com.example.ltdd_th71_nhom5.ui.personal.PersonalFragment;
 
 public class BookActivity extends AppCompatActivity {
     private TextView txtTitle, txtValue, txtSale;
@@ -58,22 +63,18 @@ public class BookActivity extends AppCompatActivity {
         int id = item.getItemId();
         switch(id){
             case R.id.action_search_sub:
-                Toast.makeText(getApplicationContext(),"Action help",Toast.LENGTH_LONG).show();
+                Intent searchIntent = new Intent(BookActivity.this, SearchActivity.class);
+                startActivity(searchIntent);
                 return true;
             case R.id.action_shopping_cart_sub:
-                Toast.makeText(getApplicationContext(), "Action search", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Action shopping card", Toast.LENGTH_LONG).show();
                 return  true;
             case R.id.action_home:
-                Toast.makeText(getApplicationContext(), "Action refresh", Toast.LENGTH_LONG).show();
-                return  true;
             case R.id.action_personal:
-                Toast.makeText(getApplicationContext(), "Action personal", Toast.LENGTH_LONG).show();
-                return  true;
             case R.id.action_category:
-                Toast.makeText(getApplicationContext(), "Action category", Toast.LENGTH_LONG).show();
-                return  true;
             case R.id.action_notification:
-                Toast.makeText(getApplicationContext(), "Action notification", Toast.LENGTH_LONG).show();
+                Intent homeIntent = new Intent(BookActivity.this, MainActivity.class);
+                startActivity(homeIntent);
                 return  true;
             default:
                 return  super.onOptionsItemSelected(item);

@@ -1,24 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".SearchActivity"
+    android:layout_marginTop="?attr/actionBarSize"
     android:background="@color/backgroundSearch">
-    
-   <LinearLayout
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       android:layout_gravity="center"
-       android:orientation="vertical"
-       android:layout_margin="20dp">
 
-       <ImageView
-           android:layout_width="120dp"
-           android:layout_height="120dp"
-           app:srcCompat="@drawable/people_2"
-           android:layout_gravity="center"/>
-   </LinearLayout>
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@color/backgroundSearch">
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="10dp"
+            app:srcCompat="@drawable/hotkey" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Từ khóa hot"
+            android:layout_marginLeft="50dp"
+            android:textAppearance="@style/home_panels"
+            android:textColor="@color/white" />
+
+           <androidx.recyclerview.widget.RecyclerView
+               android:id="@+id/rvHotKey"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:layout_marginTop="40dp"/>
+    </FrameLayout>
+</ScrollView>
     
