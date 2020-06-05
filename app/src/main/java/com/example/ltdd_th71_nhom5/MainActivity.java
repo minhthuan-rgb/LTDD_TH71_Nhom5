@@ -6,9 +6,11 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.SearchView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
@@ -41,29 +43,21 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.mymenu,menu);
-
-        SearchView searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
-        searchView.setQueryHint("Nhập từ khóa bạn cần tìm");
-        searchView.setIconified(false);
-
-
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener(){
-
-            // search full
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                Toast.makeText(MainActivity.this, query, Toast.LENGTH_SHORT).show();
-                return false;
-            }
-
-            // search char
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                Log.d("AAA", newText);
-                return false;
-            }
-        });
-
         return super.onCreateOptionsMenu(menu);
+    }
+
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+        switch(id){
+            case R.id.action_search:
+                Intent searchIntent = new Intent(MainActivity.this, SearchActivity.class);
+                startActivity(searchIntent);
+                return true;
+            case R.id.action_shopping_cart:
+                Toast.makeText(getApplicationContext(), "Action search", Toast.LENGTH_LONG).show();
+                return  true;
+            default:
+                return  super.onOptionsItemSelected(item);
+        }
     }
 }

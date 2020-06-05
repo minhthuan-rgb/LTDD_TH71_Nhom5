@@ -57,10 +57,10 @@ public class BookActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
         switch(id){
-            case R.id.action_search:
+            case R.id.action_search_sub:
                 Toast.makeText(getApplicationContext(),"Action help",Toast.LENGTH_LONG).show();
                 return true;
-            case R.id.action_shopping_cart:
+            case R.id.action_shopping_cart_sub:
                 Toast.makeText(getApplicationContext(), "Action search", Toast.LENGTH_LONG).show();
                 return  true;
             case R.id.action_home:
