@@ -7,3 +7,4 @@
 .externalNativeBuild
 .cxx
 /.idea
+/back-end/node-book-shop/uploads

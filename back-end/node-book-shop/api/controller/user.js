@@ -100,11 +100,30 @@ exports.user_delete =  async (req, res, next) => {
 exports.user_reset_pass = async(req, res, next) =>{
   User.findOne({email: req.body.email})
     .exec()
-    .then(user => {
-      if(user.length = 1) {
-        return res.status(401).json({
-          message: "Mail exists, moving to next page"
+    .then(async user => {
+      if(user.length < 1) {
+        res.status(404).json({
+          error: err
+        })
+      } else if(req.body.password == req.body.comfinpass){
+        User.updateOne({email: req.body.email},{password: req.body.password})
+        .exec()
+        .then(result => {
+          console.log(result);
+          res.status(201).json({
+            message: "success change password"
+          });
+        })
+        .catch(err => {
+          console.log(err);
+          res.status(500).json({
+            error: err
+          });
         });
+      } else {
+        res.status(500).json({
+          message:"wrong confim password please retry"
+        })
       }
     })
     .catch(err => {

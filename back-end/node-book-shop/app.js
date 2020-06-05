@@ -4,6 +4,7 @@ const morgan = require('morgan');
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose');
 
+
 const productRoutes = require('./api/routes/products')
 const orderRoutes = require('./api/routes/orders')
 const userRoutes = require('./api/routes/user')
@@ -38,6 +39,12 @@ app.use('/orders', orderRoutes);
 app.use('/user', userRoutes);
 
 app.use((req, res, next) => {
+    const error = new Error();
+    error.status = 401;
+    next(error);
+});
+
+app.use((req, res, next) => {
     const error = new Error('Not found');
     error.status = 404;
     next(error);
@@ -51,5 +58,6 @@ app.use((error, req, res, next) => {
         }
     });
 });
+
 
 module.exports = app;
