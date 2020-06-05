@@ -12,4 +12,6 @@ router.post('/login',UserController.user_login)
 
 router.delete("/:userId",UserController.user_delete);
 
+router.post("/resetpassword",UserController.user_reset_pass);
+
 module.exports = router;

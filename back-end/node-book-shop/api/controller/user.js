@@ -25,7 +25,8 @@ exports.user_sign_up =   async (req, res, next) => {
                 email: req.body.email,
                 password: hash,
                 name: req.body.name,
-                birthday: req.body.birthday
+                birthday: req.body.birthday,
+                phonenumber: req.body.phonenumber
               });
               user
                 .save()
@@ -94,4 +95,41 @@ exports.user_delete =  async (req, res, next) => {
           error: err
         });
       });
-  }
+}
+
+exports.user_reset_pass = async(req, res, next) =>{
+  User.findOne({email: req.body.email})
+    .exec()
+    .then(async user => {
+      if(user.length < 1) {
+        res.status(404).json({
+          error: err
+        })
+      } else if(req.body.password == req.body.comfinpass){
+        User.updateOne({email: req.body.email},{password: req.body.password})
+        .exec()
+        .then(result => {
+          console.log(result);
+          res.status(201).json({
+            message: "success change password"
+          });
+        })
+        .catch(err => {
+          console.log(err);
+          res.status(500).json({
+            error: err
+          });
+        });
+      } else {
+        res.status(500).json({
+          message:"wrong confim password please retry"
+        })
+      }
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(404).json({
+        error: err
+      })
+    })
+}
