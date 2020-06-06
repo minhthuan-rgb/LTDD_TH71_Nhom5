@@ -1,19 +1,22 @@
 package com.example.ltdd_th71_nhom5;
 
 
+import android.app.SearchManager;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.SearchRecentSuggestions;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ListView;
-import android.widget.SearchView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.example.ltdd_th71_nhom5.adapter.HotkeyAdapter;
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
@@ -24,6 +27,7 @@ public class SearchActivity extends AppCompatActivity  implements HotkeyAdapter.
     private  String[] mHotKey;
     private RecyclerView rvHotKey;
     private HotkeyAdapter adapter;
+    private Menu menu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,11 +35,11 @@ public class SearchActivity extends AppCompatActivity  implements HotkeyAdapter.
         setContentView(R.layout.activity_search);
 
         mSuggestions = new String[]{"Ha Noi", "Ha nam", "Da nang", "Dong nai", "Phú Tho", "Quang ngai", "Thanh hoa", "Hue"};
-        mHotKey = new String[]{"Túp lều bác Tôm","Quẳng gánh lo đi và vui sống","3 ngày ở nước Tý hon","Đất Rừng Phương Nam",
+        mHotKey = new String[]{"a","b", "c", "d", "e", "f", "Túp lều bác Tôm","Quẳng gánh lo đi và vui sống","3 ngày ở nước Tý hon","Đất Rừng Phương Nam",
         "Truyện Kiều","Đại Việt sử ký toàn thư","Đời mưa gió","Kỹ nghệ lấy Tây","Đại Nam quốc âm tự vị","Lục Vân Tiên"};
 
         //Toolbar
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbarSearch);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowTitleEnabled(false);
@@ -76,7 +80,7 @@ public class SearchActivity extends AppCompatActivity  implements HotkeyAdapter.
         adapter = new HotkeyAdapter(this,mHotKey);
         adapter.setClickListener(this);
         rvHotKey = findViewById(R.id.rvHotKey);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(7, StaggeredGridLayoutManager.HORIZONTAL);
         rvHotKey.setLayoutManager(layoutManager);
         rvHotKey.setAdapter(adapter);
     }
@@ -86,6 +90,7 @@ public class SearchActivity extends AppCompatActivity  implements HotkeyAdapter.
         getMenuInflater().inflate(R.menu.search_menu,menu);
         MenuItem item = menu.findItem(R.id.search);
         mySearch.setMenuItem(item);
+        this.menu = menu;
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -100,7 +105,8 @@ public class SearchActivity extends AppCompatActivity  implements HotkeyAdapter.
 
     @Override
     public void onItemClick(View view, int position) {
-        if (mySearch.isSearchOpen())
-            mySearch.setQuery(adapter.getItem(position),true);
+        if (!mySearch.isSearchOpen())
+            mySearch.showSearch();
+        mySearch.setQuery(adapter.getItem(position),true);
     }
 }

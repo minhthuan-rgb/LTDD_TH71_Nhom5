@@ -48,7 +48,7 @@ public class BookActivity extends AppCompatActivity {
 
         //set up view
         txtTitle.setText(title);
-        txtValue.setText(String.valueOf(value));
+        txtValue.setText(String.format("%.3f VNĐ",value));
         txtSale.setText(sale);
         imgBookSingle.setImageResource(image);
     }

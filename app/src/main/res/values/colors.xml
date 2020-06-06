@@ -9,4 +9,6 @@
     <color name="backGroundNavigation">#FFCC00</color>
     <color name="transparency">#00000000</color>
     <color name="backgroundSearch">#4E4A4A</color>
+    <color name="dark_gray">#3E3A3A</color>
+    <color name="light_gray">#9E9898</color>
 </resources>

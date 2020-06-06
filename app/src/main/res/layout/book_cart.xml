@@ -14,7 +14,7 @@
             android:id="@+id/imgBookCart"
             android:layout_width="85dp"
             android:layout_height="200dp"
-            android:scaleType="centerCrop" />
+            android:scaleType="fitXY" />
 
         <TextView
             android:id="@+id/txtQuantity"
