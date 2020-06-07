@@ -1,4 +1,4 @@
-package com.example.ltdd_th71_nhom5.ui.category;
+package com.example.ltdd_th71_nhom5.model;
 
 public class Model_category {
     private String title;

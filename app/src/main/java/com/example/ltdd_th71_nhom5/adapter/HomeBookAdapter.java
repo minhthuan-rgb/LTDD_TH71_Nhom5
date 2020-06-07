@@ -1,5 +1,6 @@
 package com.example.ltdd_th71_nhom5.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.ltdd_th71_nhom5.BookActivity;
 import com.example.ltdd_th71_nhom5.R;
+import com.example.ltdd_th71_nhom5.model.Book;
 
 import java.util.List;
 
@@ -36,9 +38,10 @@ public class HomeBookAdapter extends RecyclerView.Adapter<HomeBookAdapter.ViewHo
         return new ViewHolder(view);
     }
 
+    @SuppressLint({"DefaultLocale", "SetTextI18n"})
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
-        holder.txtSale.setText(mData.get(position).getSale());
+        holder.txtSale.setText( String.format("%d",mData.get(position).getSale()) + "%");
         holder.bookImg.setImageResource(mData.get(position).getImgID());
 
         // set click listener
@@ -48,10 +51,12 @@ public class HomeBookAdapter extends RecyclerView.Adapter<HomeBookAdapter.ViewHo
                 Intent intent = new Intent(mContext,BookActivity.class);
 
                 // passing data to the book activity
+                intent.putExtra("ID", mData.get(position).getBookID());
                 intent.putExtra("Title", mData.get(position).getTitle());
                 intent.putExtra("Image", mData.get(position).getImgID());
                 intent.putExtra("Value", mData.get(position).getValue());
                 intent.putExtra("Sale", mData.get(position).getSale());
+                intent.putExtra("description", mData.get(position).getDescription());
 
                 // start the activity
                 mContext.startActivity(intent);

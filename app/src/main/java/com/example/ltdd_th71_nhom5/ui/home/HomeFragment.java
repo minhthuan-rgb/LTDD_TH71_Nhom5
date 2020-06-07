@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.Toast;
 import android.widget.ViewFlipper;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -16,7 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.ltdd_th71_nhom5.R;
-import com.example.ltdd_th71_nhom5.adapter.Book;
+import com.example.ltdd_th71_nhom5.model.Book;
 import com.example.ltdd_th71_nhom5.adapter.HomeBookAdapter;
 
 import java.util.ArrayList;
@@ -66,14 +65,14 @@ public class HomeFragment extends Fragment{
 
     public void createList(){
         listBook = new ArrayList<>();
-        listBook.add(new Book("a", "Trinh thám", 45.000, "Fahasa", "50%", "abcdefghijklmnopq", R.drawable.vf_1));
-        listBook.add(new Book("b", "Trinh thám", 45.000, "Fahasa", "40%", "abcdefghijklmnopq", R.drawable.vf_2));
-        listBook.add(new Book("c", "Trinh thám", 45.000, "Fahasa", "30%", "abcdefghijklmnopq", R.drawable.vf_3));
-        listBook.add(new Book("d", "Trinh thám", 45.000, "Fahasa", "20%", "abcdefghijklmnopq", R.drawable.vf_4));
-        listBook.add(new Book("e", "Trinh thám", 45.000, "Fahasa", "10%", "abcdefghijklmnopq", R.drawable.vf_5));
-        listBook.add(new Book("f", "Trinh thám", 45.000, "Fahasa", "", "abcdefghijklmnopq", R.drawable.vf_6));
-        listBook.add(new Book("g", "Trinh thám", 45.000, "Fahasa", "", "abcdefghijklmnopq", R.drawable.vf_7));
-        listBook.add(new Book("h", "Trinh thám", 45.000, "Fahasa", "", "abcdefghijklmnopq", R.drawable.vf_8));
+        listBook.add(new Book(1,"a", 1, 45.000, 50, "abcdefghijklmnopq", R.drawable.vf_1));
+        listBook.add(new Book(2,"b", 2, 45.000, 40, "abcdefghijklmnopq", R.drawable.vf_2));
+        listBook.add(new Book(3,"c", 3, 45.000, 30, "abcdefghijklmnopq", R.drawable.vf_3));
+        listBook.add(new Book(4,"d", 4, 45.000, 20, "abcdefghijklmnopq", R.drawable.vf_4));
+        listBook.add(new Book(5,"e", 5, 45.000, 10, "abcdefghijklmnopq", R.drawable.vf_5));
+        listBook.add(new Book(6,"f", 6, 45.000, 0, "abcdefghijklmnopq", R.drawable.vf_6));
+        listBook.add(new Book(8,"g", 7, 45.000, 0, "abcdefghijklmnopq", R.drawable.vf_7));
+        listBook.add(new Book(9,"h", 8, 45.000, 0, "abcdefghijklmnopq", R.drawable.vf_8));
     }
 
     public void setUpRecyclerView(Context context, List<Book> listBook, RecyclerView recyclerView){

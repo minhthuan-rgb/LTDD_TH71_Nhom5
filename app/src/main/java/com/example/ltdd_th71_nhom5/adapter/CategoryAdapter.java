@@ -1,9 +1,6 @@
 package com.example.ltdd_th71_nhom5.adapter;
 
-import android.app.LauncherActivity;
 import android.content.Context;
-import android.media.Image;
-import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,8 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.ltdd_th71_nhom5.R;
-import com.example.ltdd_th71_nhom5.ui.category.CategoryFragment;
-import com.example.ltdd_th71_nhom5.ui.category.Model_category;
+import com.example.ltdd_th71_nhom5.model.Model_category;
 
 import java.util.List;
 

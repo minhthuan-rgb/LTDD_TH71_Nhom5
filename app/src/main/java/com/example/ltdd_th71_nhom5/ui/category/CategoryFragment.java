@@ -1,23 +1,18 @@
 package com.example.ltdd_th71_nhom5.ui.category;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.ltdd_th71_nhom5.R;
 import com.example.ltdd_th71_nhom5.adapter.CategoryAdapter;
+import com.example.ltdd_th71_nhom5.model.Model_category;
 
 import java.util.ArrayList;
 import java.util.List;

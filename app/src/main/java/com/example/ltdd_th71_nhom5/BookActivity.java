@@ -1,29 +1,33 @@
 package com.example.ltdd_th71_nhom5;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.FrameLayout;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.ltdd_th71_nhom5.ui.home.HomeFragment;
-import com.example.ltdd_th71_nhom5.ui.personal.PersonalFragment;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.ltdd_th71_nhom5.model.ShoppingCart;
 
 public class BookActivity extends AppCompatActivity {
-    private TextView txtTitle, txtValue, txtSale;
+    private TextView txtTitle, txtValue, txtSale, txtDescription;
     private ImageView imgBookSingle;
+    private Spinner spinner;
+    private Button btnChoose;
 
+    @SuppressLint({"DefaultLocale", "SetTextI18n"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,20 +41,69 @@ public class BookActivity extends AppCompatActivity {
         txtTitle = (TextView)findViewById(R.id.txtTitle);
         txtSale = (TextView)findViewById(R.id.txtSale);
         txtValue = (TextView)findViewById(R.id.txtValue);
-        imgBookSingle =(ImageView)findViewById(R.id.imgBookSingle);
+        imgBookSingle = (ImageView)findViewById(R.id.imgBookSingle);
+        txtDescription = (TextView)findViewById(R.id.txtDescription);
+        spinner = (Spinner)findViewById(R.id.spinner);
+        btnChoose = (Button)findViewById(R.id.btnChoose);
 
         //Recieve data
         Intent intent = getIntent();
+        int ID = intent.getExtras().getInt("ID");
         String title = intent.getExtras().getString("Title");
         int image = intent.getExtras().getInt("Image");
         double value = intent.getExtras().getDouble("Value");
-        String sale = intent.getExtras().getString("Sale");
+        int sale = intent.getExtras().getInt("Sale");
+        String description = intent.getExtras().getString("description");
 
         //set up view
         txtTitle.setText(title);
         txtValue.setText(String.format("%.3f VNĐ",value));
-        txtSale.setText(sale);
+        txtSale.setText(String.format("-%d",sale) + "%");
         imgBookSingle.setImageResource(image);
+        txtDescription.setText(description);
+
+        //spinner
+        CatchEventSpinner();
+
+        // Button Choose
+        btnChoose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int quantity = Integer.parseInt(spinner.getSelectedItem().toString());
+                if(MainActivity.listShoppingCart.size() > 0){
+                    boolean exists = false;
+                    for(int i = 0; i < MainActivity.listShoppingCart.size(); i++){
+                        if (MainActivity.listShoppingCart.get(i).getBookID() == ID){
+                            MainActivity.listShoppingCart.get(i)
+                                    .setQuantity(MainActivity.listShoppingCart.get(i).getQuantity() + quantity);
+
+                            if (MainActivity.listShoppingCart.get(i).getQuantity() > 10)
+                                MainActivity.listShoppingCart.get(i).setQuantity(10);
+
+                            MainActivity.listShoppingCart.get(i)
+                                    .setBookValue((1-(value*sale)/100) * MainActivity.listShoppingCart.get(i).getQuantity());
+                            exists = true;
+                        }
+                    }
+
+                    if (!exists){
+                        double newValue = quantity * (1-(value*sale)/100);
+                        MainActivity.listShoppingCart.add(new ShoppingCart(ID,title,newValue,image,quantity));
+                    }
+                }else{
+                    double newValue = quantity * (1-(value*sale)/100);
+                    MainActivity.listShoppingCart.add(new ShoppingCart(ID,title,newValue,image,quantity));
+                }
+                Intent cartIntent = new Intent(BookActivity.this, ShoppingCartActivity.class);
+                startActivity(cartIntent);
+            }
+        });
+    }
+
+    private void CatchEventSpinner() {
+        Integer[] quantity = new Integer[]{1,2,3,4,5,6,7,8,9,10};
+        ArrayAdapter<Integer> arrayAdapter = new ArrayAdapter<Integer>(this, android.R.layout.simple_spinner_dropdown_item, quantity);
+        spinner.setAdapter(arrayAdapter);
     }
 
     @Override

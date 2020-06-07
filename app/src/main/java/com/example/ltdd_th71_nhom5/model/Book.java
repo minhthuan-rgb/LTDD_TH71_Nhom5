@@ -1,22 +1,22 @@
-package com.example.ltdd_th71_nhom5.adapter;
+package com.example.ltdd_th71_nhom5.model;
 
 public class Book {
+    private int bookID;
     private String title;
-    private  String category;
+    private  int categoryID;
     private double value;
-    private String supplier;
-    private String sale;
+    private int sale;
     private String description;
     private int imgID;
 
     public Book(){
     }
 
-    public Book(String title, String category, double value, String supplier, String sale, String description, int imgID){
+    public Book(int bookID, String title, int categoryID, double value, int sale, String description, int imgID){
+        this.bookID = bookID;
         this.title = title;
-        this.category = category;
+        this.categoryID = categoryID;
         this.value = value;
-        this.supplier = supplier;
         this.sale = sale;
         this.description = description;
         this.imgID = imgID;
@@ -30,12 +30,12 @@ public class Book {
         this.title = title;
     }
 
-    public String getCategory() {
-        return category;
+    public int getCategoryID() {
+        return categoryID;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
+    public void setCategoryID(int categoryID) {
+        this.categoryID = categoryID;
     }
 
     public double getValue() {
@@ -46,19 +46,11 @@ public class Book {
         this.value = value;
     }
 
-    public String getSupplier() {
-        return supplier;
-    }
-
-    public void setSupplier(String supplier) {
-        this.supplier = supplier;
-    }
-
-    public String getSale() {
+    public int getSale() {
         return sale;
     }
 
-    public void setSale(String sale) {
+    public void setSale(int sale) {
         this.sale = sale;
     }
 
@@ -76,5 +68,13 @@ public class Book {
 
     public void setImgID(int imgID) {
         this.imgID = imgID;
+    }
+
+    public int getBookID() {
+        return bookID;
+    }
+
+    public void setBookID(int bookID) {
+        this.bookID = bookID;
     }
 }

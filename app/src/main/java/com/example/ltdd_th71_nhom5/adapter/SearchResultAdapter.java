@@ -1,5 +1,6 @@
 package com.example.ltdd_th71_nhom5.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.ltdd_th71_nhom5.BookActivity;
 import com.example.ltdd_th71_nhom5.R;
+import com.example.ltdd_th71_nhom5.model.Book;
 
 import java.util.List;
 
@@ -37,12 +39,13 @@ public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapte
         return new SearchResultAdapter.ViewHolder(view);
     }
 
+    @SuppressLint({"DefaultLocale", "SetTextI18n"})
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         holder.bookTitle.setText(mData.get(position).getTitle());
         holder.bookValue.setText(String.format("%.3f VNĐ",mData.get(position).getValue()));
-            if (mData.get(position).getSale() != "")
-                holder.bookSale.setText(String.format("-%s",mData.get(position).getSale()));
+            if (mData.get(position).getSale() != 0)
+                holder.bookSale.setText(String.format("-%d",mData.get(position).getSale()) + "%");
             else
                 holder.bookSale.setVisibility(View.GONE);
         holder.bookImg.setImageResource(mData.get(position).getImgID());
@@ -54,10 +57,12 @@ public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapte
                         Intent intent = new Intent(mContext, BookActivity.class);
 
                 // passing data to the book activity
+                intent.putExtra("ID", mData.get(position).getBookID());
                 intent.putExtra("Title", mData.get(position).getTitle());
                 intent.putExtra("Image", mData.get(position).getImgID());
                 intent.putExtra("Value", mData.get(position).getValue());
                 intent.putExtra("Sale", mData.get(position).getSale());
+                intent.putExtra("description", mData.get(position).getDescription());
 
                 // start the activity
                 mContext.startActivity(intent);
