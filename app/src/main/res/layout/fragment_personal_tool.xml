@@ -119,7 +119,6 @@
             android:textSize="19sp"
             android:textStyle="bold"
             tools:ignore="MissingConstraints" />
-
     </LinearLayout>
 
     <ImageView
@@ -180,64 +179,6 @@
             tools:ignore="MissingConstraints"
             tools:layout_editor_absoluteX="3dp"
             tools:layout_editor_absoluteY="262dp" />
-        <!--    </LinearLayout>-->
 
-        <!--    <LinearLayout-->
-        <!--        android:id="@+id/linearLayout2"-->
-        <!--        android:layout_width="404dp"-->
-        <!--        android:layout_height="66dp"-->
-        <!--        android:orientation="horizontal"-->
-        <!--        android:background="@drawable/chunhat"-->
-        <!--        app:layout_constraintEnd_toEndOf="parent"-->
-        <!--        app:layout_constraintStart_toStartOf="parent"-->
-        <!--        app:layout_constraintTop_toTopOf="parent">-->
-
-        <!--        <TextView-->
-        <!--            android:id="@+id/textView9"-->
-        <!--            android:layout_width="94dp"-->
-        <!--            android:layout_height="66dp"-->
-        <!--            android:layout_weight="1"-->
-        <!--            android:drawableLeft="@drawable/ui"-->
-        <!--            android:paddingLeft="15dp" />-->
-
-        <!--        <TextView-->
-        <!--            android:id="@+id/textView10"-->
-        <!--            android:layout_width="wrap_content"-->
-        <!--            android:layout_height="66dp"-->
-        <!--            android:layout_weight="1"-->
-        <!--            android:drawableLeft="@drawable/loupe"-->
-        <!--            android:paddingRight="10dp"/>/>-->
-
-        <!--        <TextView-->
-        <!--            android:id="@+id/textView11"-->
-        <!--            android:layout_width="wrap_content"-->
-        <!--            android:layout_height="66dp"-->
-        <!--            android:layout_weight="1"-->
-        <!--            android:drawableRight="@drawable/home"-->
-        <!--            android:paddingRight="10dp"/>/>-->
-
-        <!--        <TextView-->
-        <!--            android:id="@+id/textView12"-->
-        <!--            android:layout_width="wrap_content"-->
-        <!--            android:layout_height="66dp"-->
-        <!--            android:layout_weight="1"-->
-        <!--            android:drawableRight="@drawable/category"-->
-        <!--            android:paddingRight="10dp"/>/>-->
-
-        <!--        <TextView-->
-        <!--            android:id="@+id/textView13"-->
-        <!--            android:layout_width="wrap_content"-->
-        <!--            android:layout_height="66dp"-->
-        <!--            android:layout_weight="1"-->
-        <!--            android:drawableRight="@drawable/cartwhite"-->
-        <!--            android:paddingRight="10dp"/>/>-->
-
-        <!--        <TextView-->
-        <!--            android:id="@+id/textView14"-->
-        <!--            android:layout_width="wrap_content"-->
-        <!--            android:layout_height="66dp"-->
-        <!--            android:layout_weight="1"-->
-        <!--            android:drawableRight="@drawable/menu"-->
-        <!--            android:paddingRight="10dp"/>-->
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
