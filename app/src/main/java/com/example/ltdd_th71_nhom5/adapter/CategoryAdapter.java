@@ -18,10 +18,12 @@ import java.util.List;
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
     Context context;
     List<Model_category> models;
+    private OnCategoryListener mOnCategoryListener;
 
-    public CategoryAdapter(Context context, List<Model_category> models) {
+    public CategoryAdapter(Context context, List<Model_category> models,OnCategoryListener onCategoryListener) {
         this.context = context;
         this.models = models;
+        this.mOnCategoryListener = onCategoryListener;
     }
 
     @NonNull
@@ -29,7 +31,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.item_category, parent,false);
-        return new ViewHolder(view);
+        return new ViewHolder(view,mOnCategoryListener);
     }
 
     @Override
@@ -44,14 +46,26 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
         return models.size();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder{
+    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView myText1;
         ImageView myImage;
+        OnCategoryListener onCategoryListener;
 
-        public ViewHolder(@NonNull View itemView) {
+        public ViewHolder(@NonNull View itemView,OnCategoryListener onCategoryListener) {
             super(itemView);
             myText1 = itemView.findViewById(R.id.txt_category);
             myImage = itemView.findViewById(R.id.imageCategory);
+            this.onCategoryListener = onCategoryListener;
+
+            itemView.setOnClickListener(this);
         }
+
+        @Override
+        public void onClick(View v) {
+            onCategoryListener.onCategoryClick(getAdapterPosition());
+        }
+    }
+    public interface OnCategoryListener{
+        void onCategoryClick(int position);
     }
 }

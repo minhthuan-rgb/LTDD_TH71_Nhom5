@@ -17,7 +17,7 @@ import com.example.ltdd_th71_nhom5.model.Model_category;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CategoryFragment extends Fragment {
+public class CategoryFragment extends Fragment implements CategoryAdapter.OnCategoryListener{
 
     RecyclerView recyclerView;
     CategoryAdapter madapter;
@@ -29,7 +29,7 @@ public class CategoryFragment extends Fragment {
 
         View root = inflater.inflate(R.layout.fragment_category, container, false);
         recyclerView = root.findViewById(R.id.recView_Category);
-        madapter = new CategoryAdapter(root.getContext(),getmyList());
+        madapter = new CategoryAdapter(root.getContext(),getmyList(),this);
         recyclerView.setAdapter(madapter);
         recyclerView.setLayoutManager(new GridLayoutManager(root.getContext(),3));
         return root;
@@ -129,5 +129,10 @@ public class CategoryFragment extends Fragment {
         models.add(m);
         
         return models;
+    }
+
+    @Override
+    public void onCategoryClick(int position) {
+
     }
 }
