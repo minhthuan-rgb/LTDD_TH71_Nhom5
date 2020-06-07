@@ -12,7 +12,7 @@
         <TextView
             android:id="@+id/txtTitle"
             android:layout_width="311dp"
-            android:layout_height="53dp"
+            android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
@@ -38,12 +38,12 @@
             android:layout_marginTop="30dp"
             android:layout_marginEnd="92dp"
             android:layout_marginRight="92dp"
-            android:scaleType="centerCrop"/>
+            android:scaleType="fitXY"/>
 
         <TextView
             android:id="@+id/txtValue"
             android:layout_width="wrap_content"
-            android:layout_height="45dp"
+            android:layout_height="wrap_content"
             android:layout_below="@+id/imgBookSingle"
             android:layout_alignStart="@+id/imgBookSingle"
             android:layout_marginStart="-50dp"
@@ -56,10 +56,10 @@
         <TextView
             android:id="@+id/txtSale"
             android:layout_width="wrap_content"
-            android:layout_height="45dp"
+            android:layout_height="wrap_content"
             android:layout_below="@+id/imgBookSingle"
             android:layout_alignEnd="@+id/imgBookSingle"
-            android:layout_marginTop="33dp"
+            android:layout_marginTop="35dp"
             android:layout_marginEnd="-50dp"
             android:fontFamily="sans-serif-light"
             android:gravity="center_horizontal|top"

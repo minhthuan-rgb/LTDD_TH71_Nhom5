@@ -36,18 +36,17 @@ public class HomeFragment extends Fragment{
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_home, container, false);
 
+        // view flipper
         vfHome = root.findViewById(R.id.vfHome);
-        recyclerFlash = root.findViewById(R.id.recyclerFlash);
-
         in = AnimationUtils.loadAnimation(root.getContext(), R.anim.fade_in);
         out = AnimationUtils.loadAnimation(root.getContext(), R.anim.fade_out);
-
         vfHome.setInAnimation(in);
         vfHome.setOutAnimation(out);
         vfHome.setAutoStart(true);
 
         createList();
         //set up RecyclerView
+        recyclerFlash = root.findViewById(R.id.recyclerFlash);
         recyclerFlash = root.findViewById((R.id.recyclerFlash));
         recyclerDetective = root.findViewById(R.id.recyclerDetective);
         recyclerLove = root.findViewById(R.id.recyclerLove);

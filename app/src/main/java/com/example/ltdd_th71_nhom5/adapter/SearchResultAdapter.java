@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,12 +17,12 @@ import com.example.ltdd_th71_nhom5.R;
 
 import java.util.List;
 
-public class HomeBookAdapter extends RecyclerView.Adapter<HomeBookAdapter.ViewHolder> {
+public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapter.ViewHolder>{
     private List<Book> mData;
     private Context mContext;
 
     // data is passed into the constructor
-    public HomeBookAdapter(Context mcontext, List<Book> mData) {
+    public SearchResultAdapter(Context mcontext, List<Book> mData) {
         this.mContext = mcontext;
         this.mData = mData;
     }
@@ -29,23 +30,28 @@ public class HomeBookAdapter extends RecyclerView.Adapter<HomeBookAdapter.ViewHo
     // inflates the row layout from xml when needed
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public SearchResultAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view;
         LayoutInflater inflater = LayoutInflater.from(mContext);
-        view = inflater.inflate(R.layout.book_home, parent,false);
-        return new ViewHolder(view);
+        view = inflater.inflate(R.layout.book_search_result, parent,false);
+        return new SearchResultAdapter.ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
-        holder.txtSale.setText(mData.get(position).getSale());
+        holder.bookTitle.setText(mData.get(position).getTitle());
+        holder.bookValue.setText(String.format("%.3f VNĐ",mData.get(position).getValue()));
+            if (mData.get(position).getSale() != "")
+                holder.bookSale.setText(String.format("-%s",mData.get(position).getSale()));
+            else
+                holder.bookSale.setVisibility(View.GONE);
         holder.bookImg.setImageResource(mData.get(position).getImgID());
 
         // set click listener
         holder.cardView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(mContext,BookActivity.class);
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(mContext, BookActivity.class);
 
                 // passing data to the book activity
                 intent.putExtra("Title", mData.get(position).getTitle());
@@ -65,17 +71,18 @@ public class HomeBookAdapter extends RecyclerView.Adapter<HomeBookAdapter.ViewHo
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView txtSale;
+        TextView bookTitle, bookValue, bookSale;
         ImageView bookImg;
         CardView cardView;
 
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            txtSale = itemView.findViewById(R.id.sale);
-            bookImg = itemView.findViewById(R.id.imgBookHome);
-            cardView = itemView.findViewById(R.id.cvBookHome);
+            bookTitle = itemView.findViewById(R.id.txtTitleSearch);
+            bookImg = itemView.findViewById(R.id.imgBookSearch);
+            cardView = itemView.findViewById(R.id.cvBookSearch);
+            bookValue = itemView.findViewById(R.id.txtValueSearch);
+            bookSale = itemView.findViewById(R.id.txtSaleSearch);
         }
     }
 }
-
-

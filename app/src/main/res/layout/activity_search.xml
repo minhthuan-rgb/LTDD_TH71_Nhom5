@@ -10,12 +10,11 @@
         android:layout_height="wrap_content"
         tools:ignore="MissingConstraints">
         <FrameLayout
-            android:id="@+id/toolbar_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
+                android:id="@+id/toolbarSearch"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:background="@color/backgroundSearch"/>
@@ -23,7 +22,7 @@
             <com.miguelcatalan.materialsearchview.MaterialSearchView
                 android:id="@+id/mySearch"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content" />
 
         </FrameLayout>
     </com.google.android.material.appbar.AppBarLayout>
