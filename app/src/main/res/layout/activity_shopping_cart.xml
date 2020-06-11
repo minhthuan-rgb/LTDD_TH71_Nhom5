@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,147 +7,76 @@
     android:background="@color/colorBackground">
 
     <LinearLayout
+        android:id="@+id/linearNullList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <LinearLayout
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="210dp"
+            android:layout_marginTop="90dp"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:srcCompat="@drawable/head_giohang"
+            android:layout_gravity="center|top" />
+
+        <TextView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:text="Hiện tại bạn chưa có sản phẩm nào trong giỏ hàng."
+            android:layout_marginTop="20dp"/>
 
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-                <LinearLayout
-                    android:id="@+id/linearNullList"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
+        <Button
+            android:id="@+id/btnContinue1"
+            android:layout_width="300dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="20dp"
+            android:text="Tiếp tục mua sắm"
+            android:textStyle="bold"
+            android:textSize="22sp"
+            android:textColor="#333333"
+            android:background="@drawable/chunhat"
+            app:layout_constraintHorizontal_bias="0.496"
+            android:layout_gravity="center"/>
 
-                    <ImageView
-                        android:layout_width="150dp"
-                        android:layout_height="210dp"
-                        android:layout_marginTop="90dp"
-                        app:layout_constraintHorizontal_bias="0.498"
-                        app:srcCompat="@drawable/head_giohang"
-                        android:layout_gravity="center|top" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="30dp"
+            android:text="Đề xuất"
+            android:textStyle="bold"
+            android:textSize="30sp"
+            android:textColor="#333333"
+            android:gravity="fill_vertical"
+            android:background="@drawable/chunhat"
+            android:paddingLeft="10dp"
+            android:drawableRight="@drawable/direction_giohang"
+            android:paddingRight="10dp"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            android:drawableEnd="@drawable/direction_giohang" />
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:textColor="@color/white"
-                        android:textStyle="bold"
-                        android:text="Hiện tại bạn chưa có sản phẩm nào trong giỏ hàng."
-                        android:layout_marginTop="20dp"/>
-
-                    <Button
-                        android:id="@+id/btnContinue1"
-                        android:layout_width="300dp"
-                        android:layout_height="60dp"
-                        android:layout_marginTop="20dp"
-                        android:text="Tiếp tục mua sắm"
-                        android:textStyle="bold"
-                        android:textSize="22sp"
-                        android:textColor="#333333"
-                        android:background="@drawable/chunhat"
-                        app:layout_constraintHorizontal_bias="0.496"
-                        android:layout_gravity="center"/>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:layout_marginTop="30dp"
-                        android:text="Đề xuất"
-                        android:textStyle="bold"
-                        android:textSize="30sp"
-                        android:textColor="#333333"
-                        android:gravity="fill_vertical"
-                        android:background="@drawable/chunhat"
-                        android:paddingLeft="10dp"
-                        android:drawableRight="@drawable/direction_giohang"
-                        android:paddingRight="10dp"
-                        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.0"
-                        app:layout_constraintStart_toStartOf="parent"
-                        android:drawableEnd="@drawable/direction_giohang" />
-
-                    <ListView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/linearListNotNull"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:layout_weight="7"
-                        android:id="@+id/rvShoppingCart"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"/>
-
-                    <LinearLayout
-                        android:layout_weight="3"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:orientation="vertical"
-                        android:background="@drawable/background_navigation"
-                        android:layout_marginBottom="0dp">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="30dp"
-                                android:layout_marginStart="20dp"
-                                android:layout_marginLeft="20dp"
-                                android:layout_marginTop="10dp"
-                                android:gravity="center"
-                                android:lineHeight="26sp"
-                                android:text="Tổng tiền:"
-                                android:textAppearance="@style/totalText" />
-
-                            <TextView
-                                android:id="@+id/totalValue"
-                                android:layout_width="wrap_content"
-                                android:layout_height="30dp"
-                                android:layout_marginLeft="30dp"
-                                android:gravity="center"/>
-                        </LinearLayout>
-
-                        <Button
-                            android:id="@+id/btnPay"
-                            android:layout_width="match_parent"
-                            android:layout_height="45dp"
-                            android:layout_gravity="center"
-                            android:layout_marginHorizontal="30dp"
-                            android:background="@color/colorBackground"
-                            android:text="Thanh toán"
-                            android:textColor="#F2C94C"
-                            android:textSize="27sp"
-                            android:layout_marginTop="10dp"/>
-
-                        <Button
-                            android:id="@+id/btnContinue2"
-                            android:layout_width="match_parent"
-                            android:layout_height="45dp"
-                            android:layout_gravity="center"
-                            android:layout_marginHorizontal="30dp"
-                            android:background="@color/colorBackground"
-                            android:text="Tiếp tục mua sắm"
-                            android:textColor="#F2C94C"
-                            android:textSize="27sp"
-                            android:layout_marginTop="15dp"/>
-                    </LinearLayout>
-                </LinearLayout>
-            </FrameLayout>
-        </LinearLayout>
+        <ListView
+            android:id="@+id/lvOffer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
     </LinearLayout>
-</ScrollView>
+
+    <FrameLayout
+        android:id="@+id/frameListNotNull"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvShoppingCart"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        <include layout="@layout/bottom_shopping_cart_activity" />
+    </FrameLayout>
+</FrameLayout>

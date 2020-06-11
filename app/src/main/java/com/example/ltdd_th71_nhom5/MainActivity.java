@@ -24,7 +24,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    public static List<ShoppingCart> listShoppingCart;
+    public static ArrayList<ShoppingCart> listShoppingCart;
+    public static ArrayList<String> listRecentQuery;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,10 +45,11 @@ public class MainActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowTitleEnabled(true);
         actionBar.setBackgroundDrawable(new ColorDrawable(Color.BLACK));
+        if(listShoppingCart == null)
+            listShoppingCart = new ArrayList<>();
 
-        //init listShoppingCart
-        if (listShoppingCart == null)
-                listShoppingCart = new ArrayList<>();
+        if (listRecentQuery == null)
+            listRecentQuery = new ArrayList<>();
     }
 
     @Override

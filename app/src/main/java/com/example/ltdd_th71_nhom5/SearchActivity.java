@@ -54,6 +54,7 @@ public class SearchActivity extends AppCompatActivity  implements HotkeyAdapter.
                     Intent intent = new Intent(SearchActivity.this, SearchResultActivity.class);
                     intent.putExtra("Search text", query);
                     startActivity(intent);
+                    addRecentQuery(query);
                 }
                 return true;
             }
@@ -83,6 +84,22 @@ public class SearchActivity extends AppCompatActivity  implements HotkeyAdapter.
         StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(7, StaggeredGridLayoutManager.HORIZONTAL);
         rvHotKey.setLayoutManager(layoutManager);
         rvHotKey.setAdapter(adapter);
+    }
+
+    private void addRecentQuery(String query) {
+        if(MainActivity.listRecentQuery.size() > 0){
+            boolean exists = false;
+            for(int i = 0; i < MainActivity.listRecentQuery.size(); i++){
+                if (MainActivity.listRecentQuery.get(i) == query){
+                    exists = true;
+                    break;
+                }
+            }
+            if (!exists)
+                MainActivity.listRecentQuery.add(query);
+        }else{
+            MainActivity.listRecentQuery.add(query);
+        }
     }
 
     @Override

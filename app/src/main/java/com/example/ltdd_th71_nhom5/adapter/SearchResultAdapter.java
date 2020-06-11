@@ -57,12 +57,13 @@ public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapte
                         Intent intent = new Intent(mContext, BookActivity.class);
 
                 // passing data to the book activity
-                intent.putExtra("ID", mData.get(position).getBookID());
-                intent.putExtra("Title", mData.get(position).getTitle());
-                intent.putExtra("Image", mData.get(position).getImgID());
-                intent.putExtra("Value", mData.get(position).getValue());
-                intent.putExtra("Sale", mData.get(position).getSale());
-                intent.putExtra("description", mData.get(position).getDescription());
+                        intent.putExtra("ID", mData.get(position).getBookID());
+                        intent.putExtra("Title", mData.get(position).getTitle());
+                        intent.putExtra("Image", mData.get(position).getImgID());
+                        intent.putExtra("Value", mData.get(position).getValue());
+                        intent.putExtra("Sale", mData.get(position).getSale());
+                        intent.putExtra("Description", mData.get(position).getDescription());
+                        intent.putExtra("CategoryID", mData.get(position).getCategoryID());
 
                 // start the activity
                 mContext.startActivity(intent);

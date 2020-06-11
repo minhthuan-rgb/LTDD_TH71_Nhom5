@@ -56,7 +56,8 @@ public class HomeBookAdapter extends RecyclerView.Adapter<HomeBookAdapter.ViewHo
                 intent.putExtra("Image", mData.get(position).getImgID());
                 intent.putExtra("Value", mData.get(position).getValue());
                 intent.putExtra("Sale", mData.get(position).getSale());
-                intent.putExtra("description", mData.get(position).getDescription());
+                intent.putExtra("Description", mData.get(position).getDescription());
+                intent.putExtra("CategoryID", mData.get(position).getCategoryID());
 
                 // start the activity
                 mContext.startActivity(intent);

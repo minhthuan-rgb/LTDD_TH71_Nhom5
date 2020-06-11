@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Toast;
 import android.widget.ViewFlipper;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -44,6 +45,7 @@ public class HomeFragment extends Fragment{
         vfHome.setAutoStart(true);
 
         createList();
+
         //set up RecyclerView
         recyclerFlash = root.findViewById(R.id.recyclerFlash);
         recyclerFlash = root.findViewById((R.id.recyclerFlash));

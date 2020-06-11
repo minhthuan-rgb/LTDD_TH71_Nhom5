@@ -1,50 +1,22 @@
 package com.example.ltdd_th71_nhom5.model;
 
 public class ShoppingCart {
-    private int bookID;
-    private String bookTitle;
-    private double bookValue;
-    private int bookImage;
+    private Book book;
     private int quantity;
+    private double newValue;
 
-    public ShoppingCart(int bookID, String bookTitle, double bookValue, int bookImage, int quantity) {
-        this.bookID = bookID;
-        this.bookTitle = bookTitle;
-        this.bookValue = bookValue;
-        this.bookImage = bookImage;
+    public ShoppingCart(Book book, int quantity, double newValue) {
+        this.book = book;
         this.quantity = quantity;
+        this.newValue = newValue;
     }
 
-    public int getBookID() {
-        return bookID;
+    public Book getBook() {
+        return book;
     }
 
-    public void setBookID(int bookID) {
-        this.bookID = bookID;
-    }
-
-    public String getBookTitle() {
-        return bookTitle;
-    }
-
-    public void setBookTitle(String bookTitle) {
-        this.bookTitle = bookTitle;
-    }
-
-    public double getBookValue() {
-        return bookValue;
-    }
-
-    public void setBookValue(double bookValue) {
-        this.bookValue = bookValue;
-    }
-
-    public int getBookImage() {
-        return bookImage;
-    }
-
-    public void setBookImage(int bookImage) {
-        this.bookImage = bookImage;
+    public void setBook(Book book) {
+        this.book = book;
     }
 
     public int getQuantity() {
@@ -53,5 +25,13 @@ public class ShoppingCart {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+
+    public double getNewValue() {
+        return newValue;
+    }
+
+    public void setNewValue(double newValue) {
+        this.newValue = newValue;
     }
 }

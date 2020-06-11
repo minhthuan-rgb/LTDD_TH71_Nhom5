@@ -14,12 +14,16 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.ltdd_th71_nhom5.model.Book;
 import com.example.ltdd_th71_nhom5.model.ShoppingCart;
+
+import java.util.ArrayList;
 
 public class BookActivity extends AppCompatActivity {
     private TextView txtTitle, txtValue, txtSale, txtDescription;
@@ -38,13 +42,8 @@ public class BookActivity extends AppCompatActivity {
         actionBar.setBackgroundDrawable(new ColorDrawable(Color.BLACK));
         actionBar.setDisplayShowTitleEnabled(false);
 
-        txtTitle = (TextView)findViewById(R.id.txtTitle);
-        txtSale = (TextView)findViewById(R.id.txtSale);
-        txtValue = (TextView)findViewById(R.id.txtValue);
-        imgBookSingle = (ImageView)findViewById(R.id.imgBookSingle);
-        txtDescription = (TextView)findViewById(R.id.txtDescription);
-        spinner = (Spinner)findViewById(R.id.spinner);
-        btnChoose = (Button)findViewById(R.id.btnChoose);
+        //map view
+        mapView();
 
         //Recieve data
         Intent intent = getIntent();
@@ -53,7 +52,10 @@ public class BookActivity extends AppCompatActivity {
         int image = intent.getExtras().getInt("Image");
         double value = intent.getExtras().getDouble("Value");
         int sale = intent.getExtras().getInt("Sale");
-        String description = intent.getExtras().getString("description");
+        String description = intent.getExtras().getString("Description");
+        int categoryID = intent.getExtras().getInt("CategoryID");
+
+        Book book = new Book(ID, title, categoryID, value, sale, description, image);
 
         //set up view
         txtTitle.setText(title);
@@ -73,31 +75,38 @@ public class BookActivity extends AppCompatActivity {
                 if(MainActivity.listShoppingCart.size() > 0){
                     boolean exists = false;
                     for(int i = 0; i < MainActivity.listShoppingCart.size(); i++){
-                        if (MainActivity.listShoppingCart.get(i).getBookID() == ID){
+                        if (MainActivity.listShoppingCart.get(i).getBook().getBookID() == ID){
                             MainActivity.listShoppingCart.get(i)
                                     .setQuantity(MainActivity.listShoppingCart.get(i).getQuantity() + quantity);
 
                             if (MainActivity.listShoppingCart.get(i).getQuantity() > 10)
                                 MainActivity.listShoppingCart.get(i).setQuantity(10);
 
-                            MainActivity.listShoppingCart.get(i)
-                                    .setBookValue((1-(value*sale)/100) * MainActivity.listShoppingCart.get(i).getQuantity());
+                            MainActivity.listShoppingCart.get(i).setNewValue((1-(value*sale)/100) * MainActivity.listShoppingCart.get(i).getQuantity());
                             exists = true;
+                            break;
                         }
                     }
 
                     if (!exists){
                         double newValue = quantity * (1-(value*sale)/100);
-                        MainActivity.listShoppingCart.add(new ShoppingCart(ID,title,newValue,image,quantity));
+                        MainActivity.listShoppingCart.add(new ShoppingCart(book, quantity, (int) newValue));
                     }
                 }else{
                     double newValue = quantity * (1-(value*sale)/100);
-                    MainActivity.listShoppingCart.add(new ShoppingCart(ID,title,newValue,image,quantity));
+                    MainActivity.listShoppingCart.add(new ShoppingCart(book, quantity,newValue));
                 }
-                Intent cartIntent = new Intent(BookActivity.this, ShoppingCartActivity.class);
-                startActivity(cartIntent);
             }
         });
+    }
+    private void mapView() {
+        txtTitle = (TextView)findViewById(R.id.txtTitle);
+        txtSale = (TextView)findViewById(R.id.txtSale);
+        txtValue = (TextView)findViewById(R.id.txtValue);
+        imgBookSingle = (ImageView)findViewById(R.id.imgBookSingle);
+        txtDescription = (TextView)findViewById(R.id.txtDescription);
+        spinner = (Spinner)findViewById(R.id.spinner);
+        btnChoose = (Button)findViewById(R.id.btnChoose);
     }
 
     private void CatchEventSpinner() {
@@ -120,7 +129,8 @@ public class BookActivity extends AppCompatActivity {
                 startActivity(searchIntent);
                 return true;
             case R.id.action_shopping_cart_sub:
-                Toast.makeText(getApplicationContext(), "Action shopping card", Toast.LENGTH_LONG).show();
+                Intent cartIntent  = new Intent(BookActivity.this, ShoppingCartActivity.class);
+                startActivity(cartIntent);
                 return  true;
             case R.id.action_home:
             case R.id.action_personal:
