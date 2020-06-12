@@ -24,8 +24,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    public static ArrayList<ShoppingCart> listShoppingCart;
-    public static ArrayList<String> listRecentQuery;
+    public static List<ShoppingCart> listShoppingCart;
+    public static List<String> listRecentQuery;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,7 +66,8 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(searchIntent);
                 return true;
             case R.id.action_shopping_cart:
-                Toast.makeText(getApplicationContext(), "Action search", Toast.LENGTH_LONG).show();
+                Intent cartIntent = new Intent(MainActivity.this, ShoppingCartActivity.class);
+                startActivity(cartIntent);
                 return  true;
             default:
                 return  super.onOptionsItemSelected(item);

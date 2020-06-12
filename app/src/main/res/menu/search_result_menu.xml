@@ -6,19 +6,19 @@
         android:icon="@drawable/cart"
         app:showAsAction="always|collapseActionView" />
 
-    <item android:title="Home"
+    <item android:title="Trở về trang chủ"
         android:id="@+id/action_search_home"
         android:icon="@drawable/home" />
 
-    <item android:title="Category"
+    <item android:title="Danh mục sản phẩm"
         android:id="@+id/action_search_category"
         android:icon="@drawable/category" />
 
-    <item android:title="Notification"
+    <item android:title="Thông báo"
         android:id="@+id/action_search_notification"
         android:icon="@drawable/notification" />
 
-    <item android:title="Personal"
+    <item android:title="Cá nhân"
         android:id="@+id/action_search_personal"
         android:icon="@drawable/personal" />
 </menu>

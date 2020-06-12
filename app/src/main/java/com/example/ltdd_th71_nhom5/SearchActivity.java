@@ -1,33 +1,32 @@
 package com.example.ltdd_th71_nhom5;
 
 
-import android.app.SearchManager;
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.SearchRecentSuggestions;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.FrameLayout;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.example.ltdd_th71_nhom5.adapter.HotkeyAdapter;
+import com.example.ltdd_th71_nhom5.adapter.RecentQueryAdapter;
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 
-public class SearchActivity extends AppCompatActivity  implements HotkeyAdapter.ItemClickListener {
+public class SearchActivity extends AppCompatActivity  implements HotkeyAdapter.ItemClickListener, RecentQueryAdapter.RecentItemClickListener{
     public MaterialSearchView mySearch;
     private  String[] mSuggestions;
     private  String[] mHotKey;
-    private RecyclerView rvHotKey;
-    private HotkeyAdapter adapter;
-    private Menu menu;
+    private RecyclerView rvHotKey, rvRecentQuery;
+    private HotkeyAdapter hotkeyAdapter;
+    private RecentQueryAdapter queryAdapter;
+    private FrameLayout frameRecentQuery;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,33 +71,53 @@ public class SearchActivity extends AppCompatActivity  implements HotkeyAdapter.
 
             @Override
             public void onSearchViewClosed() {
-                Intent mainIntent = new Intent(SearchActivity.this, MainActivity.class);
-                startActivity(mainIntent);
+                onBackPressed();
             }
         });
 
-        //HotkeyAdapter and recycler view hot key
-        adapter = new HotkeyAdapter(this,mHotKey);
-        adapter.setClickListener(this);
+        mapView();
+        checkData();
+    }
+
+    private void mapView() {
+        frameRecentQuery = (FrameLayout)findViewById(R.id.frameRecentQuery);
+        //HotkeyAdapter and recyclerView
+        hotkeyAdapter = new HotkeyAdapter(this,mHotKey);
+        hotkeyAdapter.setClickListener(this);
         rvHotKey = findViewById(R.id.rvHotKey);
         StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(7, StaggeredGridLayoutManager.HORIZONTAL);
         rvHotKey.setLayoutManager(layoutManager);
-        rvHotKey.setAdapter(adapter);
+        rvHotKey.setAdapter(hotkeyAdapter);
+
+        //RecentQueryAdapter and recyclerView
+        queryAdapter = new RecentQueryAdapter(this, MainActivity.listRecentQuery);
+        queryAdapter.setClickListener(this);
+        rvRecentQuery = findViewById(R.id.rvRecentQuery);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        rvRecentQuery.setLayoutManager(linearLayoutManager);
+        rvRecentQuery.setAdapter(queryAdapter);
+    }
+
+    private void checkData() {
+        if(MainActivity.listRecentQuery.size() > 0)
+            frameRecentQuery.setVisibility(View.VISIBLE);
+        else
+            frameRecentQuery.setVisibility(View.INVISIBLE);
     }
 
     private void addRecentQuery(String query) {
         if(MainActivity.listRecentQuery.size() > 0){
             boolean exists = false;
             for(int i = 0; i < MainActivity.listRecentQuery.size(); i++){
-                if (MainActivity.listRecentQuery.get(i) == query){
+                if (MainActivity.listRecentQuery.get(i) == query.toLowerCase()){
                     exists = true;
                     break;
                 }
             }
             if (!exists)
-                MainActivity.listRecentQuery.add(query);
+                MainActivity.listRecentQuery.add(query.toLowerCase());
         }else{
-            MainActivity.listRecentQuery.add(query);
+            MainActivity.listRecentQuery.add(query.toLowerCase());
         }
     }
 
@@ -107,23 +126,20 @@ public class SearchActivity extends AppCompatActivity  implements HotkeyAdapter.
         getMenuInflater().inflate(R.menu.search_menu,menu);
         MenuItem item = menu.findItem(R.id.search);
         mySearch.setMenuItem(item);
-        this.menu = menu;
         return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public void onBackPressed() {
-        if (mySearch.isSearchOpen()) {
-            mySearch.closeSearch();
-        } else {
-            super.onBackPressed();
-        }
     }
 
     @Override
     public void onItemClick(View view, int position) {
         if (!mySearch.isSearchOpen())
             mySearch.showSearch();
-        mySearch.setQuery(adapter.getItem(position),true);
+        mySearch.setQuery(hotkeyAdapter.getItem(position),true);
+    }
+
+    @Override
+    public void onRecentItemClick(View view, int position) {
+        if (!mySearch.isSearchOpen())
+            mySearch.showSearch();
+        mySearch.setQuery(queryAdapter.getItem(position),false);
     }
 }

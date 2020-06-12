@@ -19,9 +19,11 @@ import android.widget.Toolbar;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 
 import com.example.ltdd_th71_nhom5.model.Book;
 import com.example.ltdd_th71_nhom5.model.ShoppingCart;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 
@@ -30,6 +32,7 @@ public class BookActivity extends AppCompatActivity {
     private ImageView imgBookSingle;
     private Spinner spinner;
     private Button btnChoose;
+    CoordinatorLayout main_content;
 
     @SuppressLint({"DefaultLocale", "SetTextI18n"})
     @Override
@@ -72,6 +75,7 @@ public class BookActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 int quantity = Integer.parseInt(spinner.getSelectedItem().toString());
+                double newValue = 0;
                 if(MainActivity.listShoppingCart.size() > 0){
                     boolean exists = false;
                     for(int i = 0; i < MainActivity.listShoppingCart.size(); i++){
@@ -82,19 +86,33 @@ public class BookActivity extends AppCompatActivity {
                             if (MainActivity.listShoppingCart.get(i).getQuantity() > 10)
                                 MainActivity.listShoppingCart.get(i).setQuantity(10);
 
-                            MainActivity.listShoppingCart.get(i).setNewValue((1-(value*sale)/100) * MainActivity.listShoppingCart.get(i).getQuantity());
+                            if (sale != 0)
+                                newValue = (MainActivity.listShoppingCart.get(i).getQuantity() * value
+                                        *(100 - sale))/100;
+                            else
+                                newValue = value*MainActivity.listShoppingCart.get(i).getQuantity();
+
+                            MainActivity.listShoppingCart.get(i).setNewValue(newValue);
                             exists = true;
                             break;
                         }
                     }
 
                     if (!exists){
-                        double newValue = quantity * (1-(value*sale)/100);
-                        MainActivity.listShoppingCart.add(new ShoppingCart(book, quantity, (int) newValue));
+                        if (sale != 0)
+                            newValue = (quantity * value * (100 - sale))/100;
+                        else
+                            newValue = quantity * value;
+
+                        MainActivity.listShoppingCart.add(new ShoppingCart(book, quantity, newValue));
                     }
                 }else{
-                    double newValue = quantity * (1-(value*sale)/100);
-                    MainActivity.listShoppingCart.add(new ShoppingCart(book, quantity,newValue));
+                    if (sale != 0)
+                        newValue = (quantity * value * (100 - sale))/100;
+                    else
+                        newValue = quantity * value;
+
+                    MainActivity.listShoppingCart.add(new ShoppingCart(book, quantity, newValue));
                 }
             }
         });
@@ -111,7 +129,7 @@ public class BookActivity extends AppCompatActivity {
 
     private void CatchEventSpinner() {
         Integer[] quantity = new Integer[]{1,2,3,4,5,6,7,8,9,10};
-        ArrayAdapter<Integer> arrayAdapter = new ArrayAdapter<Integer>(this, android.R.layout.simple_spinner_dropdown_item, quantity);
+        ArrayAdapter<Integer> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, quantity);
         spinner.setAdapter(arrayAdapter);
     }
 

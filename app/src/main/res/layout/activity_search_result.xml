@@ -22,15 +22,17 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_marginRight="95dp"
+                android:layout_marginEnd="95dp"
+                android:layout_marginLeft="50dp"
+                android:layout_marginStart="50dp">
 
                 <ImageView
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     app:srcCompat="@drawable/ic_search_black"
                     android:background="@color/white"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginStart="20dp"
                     android:layout_gravity="center"
                     android:padding="5dp"/>
                 <TextView
@@ -38,9 +40,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
                     android:layout_gravity="center"
-                    android:background="@drawable/textview"
-                    android:layout_marginRight="95dp"
-                    android:layout_marginEnd="95dp"
+                    android:background="@color/white"
                     android:paddingLeft="10dp"
                     android:paddingStart="10dp"
                     android:gravity="left|center"

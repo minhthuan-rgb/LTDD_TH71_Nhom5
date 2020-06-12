@@ -46,7 +46,7 @@ public class HomeFragment extends Fragment{
 
         createList();
 
-        //set up RecyclerView
+        //map view
         recyclerFlash = root.findViewById(R.id.recyclerFlash);
         recyclerFlash = root.findViewById((R.id.recyclerFlash));
         recyclerDetective = root.findViewById(R.id.recyclerDetective);
@@ -55,6 +55,7 @@ public class HomeFragment extends Fragment{
         recyclerAdventure = root.findViewById(R.id.recyclerAdventure);
         recyclerNovel = root.findViewById(R.id.recyclerNovel);
 
+        //set up recyclerView
         setUpRecyclerView(root.getContext(),listBook,recyclerFlash);
         setUpRecyclerView(root.getContext(),listBook,recyclerDetective);
         setUpRecyclerView(root.getContext(),listBook,recyclerLove);

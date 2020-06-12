@@ -3,9 +3,11 @@ package com.example.ltdd_th71_nhom5;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -33,6 +35,7 @@ public class SearchResultActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowTitleEnabled(false);
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
         //Textview
         Intent intent = getIntent();
@@ -43,8 +46,7 @@ public class SearchResultActivity extends AppCompatActivity {
         txtSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent searchIntent = new Intent(SearchResultActivity.this, SearchActivity.class);
-                startActivity(searchIntent);
+                onBackPressed();
             }
         });
 
@@ -73,5 +75,21 @@ public class SearchResultActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.search_result_menu,menu);
         return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+        switch (id){
+            case android.R.id.home:
+                onBackPressed();
+                return  true;
+            case R.id.action_search_shopping:
+                Intent cartIntent = new Intent(SearchResultActivity.this, ShoppingCartActivity.class);
+                startActivity(cartIntent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }

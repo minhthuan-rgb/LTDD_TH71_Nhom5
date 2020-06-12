@@ -11,22 +11,22 @@
         android:icon="@drawable/cart"
         app:showAsAction="always|collapseActionView"/>
 
-    <item android:title="Home"
+    <item android:title="Trở về Trang chủ"
         android:id="@+id/action_home"
         android:icon="@drawable/home"
         app:showAsAction="ifRoom|collapseActionView"/>
 
-    <item android:title="Category"
+    <item android:title="Danh mục sản phẩm"
         android:id="@+id/action_category"
         android:icon="@drawable/category"
         app:showAsAction="ifRoom|collapseActionView"/>
 
-    <item android:title="Notification"
+    <item android:title="Thông báo"
         android:id="@+id/action_notification"
         android:icon="@drawable/notification"
         app:showAsAction="ifRoom|collapseActionView"/>
 
-    <item android:title="Personal"
+    <item android:title="Cá nhân"
         android:id="@+id/action_personal"
         android:icon="@drawable/personal"
         app:showAsAction="ifRoom|collapseActionView"/>

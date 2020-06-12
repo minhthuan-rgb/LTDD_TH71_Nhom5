@@ -11,38 +11,49 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-
-        <ImageView
-            android:layout_width="150dp"
-            android:layout_height="210dp"
-            android:layout_marginTop="90dp"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:srcCompat="@drawable/head_giohang"
-            android:layout_gravity="center|top" />
-
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:textColor="@color/white"
-            android:textStyle="bold"
-            android:text="Hiện tại bạn chưa có sản phẩm nào trong giỏ hàng."
-            android:layout_marginTop="20dp"/>
+            android:layout_height="0dp"
+            android:layout_weight="6"
+            android:orientation="vertical">
+            <ImageView
+                android:layout_width="150dp"
+                android:layout_height="210dp"
+                android:layout_marginTop="30dp"
+                app:layout_constraintHorizontal_bias="0.498"
+                app:srcCompat="@drawable/head_giohang"
+                android:layout_gravity="center|top" />
 
-        <Button
-            android:id="@+id/btnContinue1"
-            android:layout_width="300dp"
-            android:layout_height="60dp"
-            android:layout_marginTop="20dp"
-            android:text="Tiếp tục mua sắm"
-            android:textStyle="bold"
-            android:textSize="22sp"
-            android:textColor="#333333"
-            android:background="@drawable/chunhat"
-            app:layout_constraintHorizontal_bias="0.496"
-            android:layout_gravity="center"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:text="Hiện tại bạn chưa có sản phẩm nào trong giỏ hàng."
+                android:layout_marginTop="20dp"/>
 
-        <TextView
+            <Button
+                android:id="@+id/btnContinue1"
+                android:layout_width="300dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/chunhat"
+                android:text="Tiếp tục mua sắm"
+                android:textColor="#333333"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                app:layout_constraintHorizontal_bias="0.496" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="4"
+            android:orientation="vertical">
+            <TextView
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="30dp"
@@ -61,22 +72,30 @@
             app:layout_constraintStart_toStartOf="parent"
             android:drawableEnd="@drawable/direction_giohang" />
 
-        <ListView
-            android:id="@+id/lvOffer"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            <ListView
+                android:id="@+id/lvOffer"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
     </LinearLayout>
 
-    <FrameLayout
-        android:id="@+id/frameListNotNull"
+    <LinearLayout
+        android:id="@+id/linearListNotNull"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <androidx.recyclerview.widget.RecyclerView
+            android:layout_weight="6"
             android:id="@+id/rvShoppingCart"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="0dp"/>
 
-        <include layout="@layout/bottom_shopping_cart_activity" />
-    </FrameLayout>
+        <include
+            layout="@layout/bottom_shopping_cart_activity"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="4"
+            android:onClick="btnContinue_Click" />
+    </LinearLayout>
 </FrameLayout>
