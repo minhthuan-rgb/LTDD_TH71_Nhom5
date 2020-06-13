@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,31 +34,16 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class LoginActivity extends AppCompatActivity {
     EditText txtNameLogin, txtPassWord;
-    Button btnSignIn, btnSignUp, btn;
+    Button btnSignIn, btnSignUp;
     TextView txtForgotPassword;
+    ImageView imgCancel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        txtNameLogin = (EditText)findViewById(R.id.txtNameLogin);
-        txtPassWord = (EditText)findViewById(R.id.txtPassword);
-        btnSignIn = (Button)findViewById(R.id.btnSignIn);
-        btnSignUp = (Button)findViewById(R.id.btnSignUp);
-        txtForgotPassword = (TextView)findViewById(R.id.txtForgotPassword);
-
-        txtForgotPassword.setPaintFlags(txtForgotPassword.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
-
-
-
-        btnSignIn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Intent mainIntent = new Intent(LoginActivity.this, MainActivity.class);
-                startActivity(mainIntent);
-            }
-        });
+        mapView();
+        catchViewClickEvent();
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://172.16.1.62:3000/")
@@ -90,4 +76,38 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+    private void catchViewClickEvent() {
+        btnSignIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent mainIntent = new Intent(LoginActivity.this, MainActivity.class);
+                startActivity(mainIntent);
+            }
+        });
+
+        txtForgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent forgotPWIntent = new Intent(LoginActivity.this, ForgotPasswordActivity.class);
+                startActivity(forgotPWIntent);
+            }
+        });
+
+        imgCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+    }
+
+    private void mapView() {
+        txtNameLogin = findViewById(R.id.txtNameLogin);
+        txtPassWord = findViewById(R.id.txtPassword);
+        btnSignIn = findViewById(R.id.btnSignIn);
+        btnSignUp = findViewById(R.id.btnSignUp);
+        txtForgotPassword = findViewById(R.id.txtForgotPassword);
+        imgCancel = findViewById(R.id.imgCancel);
+        txtForgotPassword.setPaintFlags(txtForgotPassword.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+    }
 }

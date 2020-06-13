@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.style.StrikethroughSpan;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -28,7 +30,7 @@ import com.google.android.material.snackbar.Snackbar;
 import java.util.ArrayList;
 
 public class BookActivity extends AppCompatActivity {
-    private TextView txtTitle, txtValue, txtSale, txtDescription;
+    private TextView txtTitle, txtValue, txtSale, txtDescription, txtNewValue;
     private ImageView imgBookSingle;
     private Spinner spinner;
     private Button btnChoose;
@@ -44,6 +46,8 @@ public class BookActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setBackgroundDrawable(new ColorDrawable(Color.BLACK));
         actionBar.setDisplayShowTitleEnabled(false);
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
 
         //map view
         mapView();
@@ -62,8 +66,19 @@ public class BookActivity extends AppCompatActivity {
 
         //set up view
         txtTitle.setText(title);
-        txtValue.setText(String.format("%.3f VNĐ",value));
-        txtSale.setText(String.format("-%d",sale) + "%");
+        if (sale > 0){
+            txtSale.setText(String.format("-%d",sale) + "%");
+            txtNewValue.setText(String.format("%.3f VNĐ",(value * (100 - sale))/100));
+            String oldValue = String.format("%.3f VNĐ",value);
+            SpannableString spanned = new SpannableString(oldValue);
+            spanned.setSpan(new StrikethroughSpan(),0,oldValue.length(),0);
+            txtValue.setText(spanned);
+            txtValue.setTextColor(Color.parseColor("#9E9898"));
+            txtValue.setTextSize(20);
+        }
+        else
+            txtValue.setText(String.format("%.3f VNĐ",value));
+
         imgBookSingle.setImageResource(image);
         txtDescription.setText(description);
 
@@ -118,13 +133,14 @@ public class BookActivity extends AppCompatActivity {
         });
     }
     private void mapView() {
-        txtTitle = (TextView)findViewById(R.id.txtTitle);
-        txtSale = (TextView)findViewById(R.id.txtSale);
-        txtValue = (TextView)findViewById(R.id.txtValue);
-        imgBookSingle = (ImageView)findViewById(R.id.imgBookSingle);
-        txtDescription = (TextView)findViewById(R.id.txtDescription);
-        spinner = (Spinner)findViewById(R.id.spinner);
-        btnChoose = (Button)findViewById(R.id.btnChoose);
+        txtTitle = findViewById(R.id.txtTitle);
+        txtSale = findViewById(R.id.txtSale);
+        txtValue = findViewById(R.id.txtValue);
+        imgBookSingle = findViewById(R.id.imgBookSingle);
+        txtDescription = findViewById(R.id.txtDescription);
+        spinner = findViewById(R.id.spinner);
+        btnChoose = findViewById(R.id.btnChoose);
+        txtNewValue = findViewById(R.id.txtNewValue);
     }
 
     private void CatchEventSpinner() {
@@ -151,12 +167,15 @@ public class BookActivity extends AppCompatActivity {
                 startActivity(cartIntent);
                 return  true;
             case R.id.action_home:
-            case R.id.action_personal:
             case R.id.action_category:
+            case R.id.action_personal:
             case R.id.action_notification:
                 Intent homeIntent = new Intent(BookActivity.this, MainActivity.class);
                 startActivity(homeIntent);
-                return  true;
+                return true;
+            case android.R.id.home:
+                onBackPressed();
+                return true;
             default:
                 return  super.onOptionsItemSelected(item);
         }

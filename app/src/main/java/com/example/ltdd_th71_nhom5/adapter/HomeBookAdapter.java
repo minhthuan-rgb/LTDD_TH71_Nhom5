@@ -41,7 +41,8 @@ public class HomeBookAdapter extends RecyclerView.Adapter<HomeBookAdapter.ViewHo
     @SuppressLint({"DefaultLocale", "SetTextI18n"})
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
-        holder.txtSale.setText( String.format("%d",mData.get(position).getSale()) + "%");
+        if(mData.get(position).getSale() > 0)
+            holder.txtSale.setText( String.format("%d",mData.get(position).getSale()) + "%");
         holder.bookImg.setImageResource(mData.get(position).getImgID());
 
         // set click listener

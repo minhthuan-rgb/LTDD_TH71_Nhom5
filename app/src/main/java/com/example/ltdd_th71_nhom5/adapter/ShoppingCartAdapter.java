@@ -5,6 +5,9 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.text.SpannableString;
+import android.text.style.StrikethroughSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,8 +50,19 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
     @SuppressLint({"DefaultLocale", "SetTextI18n"})
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
+        if (mData.get(position).getBook().getSale() > 0){
+            holder.txtNewValue.setText(String.format("%.3f VNĐ",(mData.get(position).getBook().getValue()
+                    * (100 - mData.get(position).getBook().getSale()))/100));
+            String oldValue = String.format("%.3f VNĐ",(mData.get(position).getBook().getValue()));
+            SpannableString spanned = new SpannableString(oldValue);
+            spanned.setSpan(new StrikethroughSpan(),0,oldValue.length(),0);
+            holder.txtBookValue.setText(spanned);
+            holder.txtBookValue.setTextColor(Color.parseColor("#9E9898"));
+            holder.txtBookValue.setTextSize(20);
+        }
+        else
+            holder.txtBookValue.setText(String.format("%.3f VNĐ",(mData.get(position).getBook().getValue())));
         holder.txtTitle.setText(mData.get(position).getBook().getTitle());
-        holder.txtBookValue.setText(String.format("%.3f VNĐ",mData.get(position).getBook().getValue()));
         holder.txtQuantity.setText(String.format("X%d", mData.get(position).getQuantity()));
         holder.imgCart.setImageResource(mData.get(position).getBook().getImgID());
 
@@ -173,7 +187,7 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
 
     static class ViewHolder extends RecyclerView.ViewHolder {
         ImageView imgCart;
-        TextView txtTitle, txtBookValue, txtQuantity;
+        TextView txtTitle, txtBookValue, txtQuantity, txtNewValue;
         Button btnAdd, btnSub, btnMultiply;
 
         public ViewHolder(@NonNull View itemView) {
@@ -185,6 +199,7 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
             btnAdd = itemView.findViewById(R.id.btnAdd);
             btnSub = itemView.findViewById(R.id.btnSub);
             btnMultiply = itemView.findViewById(R.id.btnMultiply);
+            txtNewValue = itemView.findViewById(R.id.txtNewValueCart);
         }
     }
 }

@@ -23,5 +23,5 @@
         android:text="↖"
         android:textSize="18sp"
         android:padding="5dp"
-        android:gravity="center"/>
+        android:gravity="center" />
 </androidx.constraintlayout.widget.ConstraintLayout>
