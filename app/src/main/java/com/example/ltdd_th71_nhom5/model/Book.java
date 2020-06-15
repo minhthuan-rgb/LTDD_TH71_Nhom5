@@ -3,23 +3,30 @@ package com.example.ltdd_th71_nhom5.model;
 public class Book {
     private int bookID;
     private String title;
-    private  int categoryID;
     private double value;
     private int sale;
     private String description;
-    private int imgID;
+    private String URL;
 
     public Book(){
+
     }
 
-    public Book(int bookID, String title, int categoryID, double value, int sale, String description, int imgID){
+    public Book(int bookID, String title, double value, int sale, String description, String URL) {
         this.bookID = bookID;
         this.title = title;
-        this.categoryID = categoryID;
         this.value = value;
         this.sale = sale;
         this.description = description;
-        this.imgID = imgID;
+        this.URL = URL;
+    }
+
+    public int getBookID() {
+        return bookID;
+    }
+
+    public void setBookID(int bookID) {
+        this.bookID = bookID;
     }
 
     public String getTitle() {
@@ -28,14 +35,6 @@ public class Book {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public int getCategoryID() {
-        return categoryID;
-    }
-
-    public void setCategoryID(int categoryID) {
-        this.categoryID = categoryID;
     }
 
     public double getValue() {
@@ -62,19 +61,11 @@ public class Book {
         this.description = description;
     }
 
-    public int getImgID() {
-        return imgID;
+    public String getURL() {
+        return URL;
     }
 
-    public void setImgID(int imgID) {
-        this.imgID = imgID;
-    }
-
-    public int getBookID() {
-        return bookID;
-    }
-
-    public void setBookID(int bookID) {
-        this.bookID = bookID;
+    public void setURL(String URL) {
+        this.URL = URL;
     }
 }

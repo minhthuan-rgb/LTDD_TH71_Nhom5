@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.ltdd_th71_nhom5.BookActivity;
 import com.example.ltdd_th71_nhom5.R;
 import com.example.ltdd_th71_nhom5.model.Book;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -43,7 +44,12 @@ public class HomeBookAdapter extends RecyclerView.Adapter<HomeBookAdapter.ViewHo
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         if(mData.get(position).getSale() > 0)
             holder.txtSale.setText( String.format("%d",mData.get(position).getSale()) + "%");
-        holder.bookImg.setImageResource(mData.get(position).getImgID());
+        Picasso.get()
+                .load(mData.get(position).getURL())
+                .placeholder(R.drawable.placeholder)
+                .error(R.drawable.error)
+                .fit()
+                .into(holder.bookImg);
 
         // set click listener
         holder.cardView.setOnClickListener(new View.OnClickListener() {
@@ -54,11 +60,11 @@ public class HomeBookAdapter extends RecyclerView.Adapter<HomeBookAdapter.ViewHo
                 // passing data to the book activity
                 intent.putExtra("ID", mData.get(position).getBookID());
                 intent.putExtra("Title", mData.get(position).getTitle());
-                intent.putExtra("Image", mData.get(position).getImgID());
+                intent.putExtra("URL", mData.get(position).getURL());
                 intent.putExtra("Value", mData.get(position).getValue());
                 intent.putExtra("Sale", mData.get(position).getSale());
                 intent.putExtra("Description", mData.get(position).getDescription());
-                intent.putExtra("CategoryID", mData.get(position).getCategoryID());
+
 
                 // start the activity
                 mContext.startActivity(intent);

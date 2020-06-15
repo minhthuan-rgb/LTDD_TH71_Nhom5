@@ -57,7 +57,7 @@
             android:gravity="left|center"
             android:lineHeight="32sp"
             android:textSize="20sp"
-            android:textColor="#000"
+            android:textColor="#CF1616"
             tools:ignore="RtlHardcoded" />
 
         <TextView
@@ -71,7 +71,7 @@
             android:fontFamily="sans-serif-light"
             android:gravity="left|center"
             android:lineHeight="32sp"
-            android:textColor="#000"
+            android:textColor="#CA05EC"
             android:textSize="24sp"
             tools:ignore="RtlHardcoded" />
     </RelativeLayout>

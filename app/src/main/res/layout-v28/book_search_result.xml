@@ -57,13 +57,13 @@
             android:gravity="left|center"
             android:lineHeight="32sp"
             android:textSize="20sp"
-            android:textColor="#000"
+            android:textColor="#CF1616"
             tools:ignore="RtlHardcoded" />
 
         <TextView
             android:id="@+id/txtSaleSearch"
             android:layout_width="wrap_content"
-            android:layout_height="30dp"
+            android:layout_height="wrap_content"
             android:layout_below="@+id/txtTitleSearch"
             android:layout_alignRight="@id/imgBookSearch"
             android:layout_marginRight="10dp"
@@ -71,7 +71,7 @@
             android:fontFamily="sans-serif-light"
             android:gravity="left|center"
             android:lineHeight="32sp"
-            android:textColor="#000"
+            android:textColor="#CA05EC"
             android:textSize="24sp"
             tools:ignore="RtlHardcoded" />
     </RelativeLayout>

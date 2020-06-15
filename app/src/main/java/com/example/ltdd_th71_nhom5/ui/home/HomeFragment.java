@@ -26,8 +26,10 @@ public class HomeFragment extends Fragment{
     ViewFlipper vfHome;
     Animation in, out;
     RecyclerView recyclerFlash, recyclerLove, recyclerDetective, recyclerHorror, recyclerAdventure, recyclerNovel;
-    //  HomeBookAdapter adapterSale, adapterNull;
-    List<Book> listBook;
+    List<Book> listBook = new ArrayList<>();
+    HomeBookAdapter adapter1 = null, adapter2 = null, adapter3 = null, adapter4 = null,
+            adapter5 = null, adapter6 = null;
+
 
     public HomeFragment() {
     }
@@ -44,11 +46,8 @@ public class HomeFragment extends Fragment{
         vfHome.setOutAnimation(out);
         vfHome.setAutoStart(true);
 
-        createList();
-
         //map view
         recyclerFlash = root.findViewById(R.id.recyclerFlash);
-        recyclerFlash = root.findViewById((R.id.recyclerFlash));
         recyclerDetective = root.findViewById(R.id.recyclerDetective);
         recyclerLove = root.findViewById(R.id.recyclerLove);
         recyclerHorror = root.findViewById(R.id.recyclerHorror);
@@ -56,32 +55,20 @@ public class HomeFragment extends Fragment{
         recyclerNovel = root.findViewById(R.id.recyclerNovel);
 
         //set up recyclerView
-        setUpRecyclerView(root.getContext(),listBook,recyclerFlash);
-        setUpRecyclerView(root.getContext(),listBook,recyclerDetective);
-        setUpRecyclerView(root.getContext(),listBook,recyclerLove);
-        setUpRecyclerView(root.getContext(),listBook,recyclerHorror);
-        setUpRecyclerView(root.getContext(),listBook,recyclerAdventure);
-        setUpRecyclerView(root.getContext(),listBook,recyclerNovel);
+        setUpRecyclerView(root.getContext(),listBook,recyclerFlash, adapter1);
+        setUpRecyclerView(root.getContext(),listBook,recyclerDetective, adapter2);
+        setUpRecyclerView(root.getContext(),listBook,recyclerLove, adapter3);
+        setUpRecyclerView(root.getContext(),listBook,recyclerHorror, adapter4);
+        setUpRecyclerView(root.getContext(),listBook,recyclerAdventure, adapter5);
+        setUpRecyclerView(root.getContext(),listBook,recyclerNovel, adapter6);
 
         return root;
     }
 
-    public void createList(){
-        listBook = new ArrayList<>();
-        listBook.add(new Book(1,"a", 1, 45.000, 50, "abcdefghijklmnopq", R.drawable.vf_1));
-        listBook.add(new Book(2,"b", 2, 45.000, 40, "abcdefghijklmnopq", R.drawable.vf_2));
-        listBook.add(new Book(3,"c", 3, 45.000, 30, "abcdefghijklmnopq", R.drawable.vf_3));
-        listBook.add(new Book(4,"d", 4, 45.000, 20, "abcdefghijklmnopq", R.drawable.vf_4));
-        listBook.add(new Book(5,"e", 5, 45.000, 10, "abcdefghijklmnopq", R.drawable.vf_5));
-        listBook.add(new Book(6,"f", 6, 45.000, 0, "abcdefghijklmnopq", R.drawable.vf_6));
-        listBook.add(new Book(8,"g", 7, 45.000, 0, "abcdefghijklmnopq", R.drawable.vf_7));
-        listBook.add(new Book(9,"h", 8, 45.000, 0, "abcdefghijklmnopq", R.drawable.vf_8));
-    }
-
-    public void setUpRecyclerView(Context context, List<Book> listBook, RecyclerView recyclerView){
+    public void setUpRecyclerView(Context context, List<Book> listBook, RecyclerView recyclerView, HomeBookAdapter adapter){
         LinearLayoutManager horizontalLayoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(horizontalLayoutManager);
-        HomeBookAdapter adapter = new HomeBookAdapter(context, listBook);
+        adapter = new HomeBookAdapter(context, listBook);
         recyclerView.setAdapter(adapter);
     }
 }

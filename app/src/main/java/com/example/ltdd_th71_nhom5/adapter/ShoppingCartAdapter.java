@@ -24,6 +24,7 @@ import com.example.ltdd_th71_nhom5.R;
 import com.example.ltdd_th71_nhom5.ShoppingCartActivity;
 import com.example.ltdd_th71_nhom5.model.ShoppingCart;
 import com.google.gson.internal.$Gson$Preconditions;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -64,7 +65,11 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
             holder.txtBookValue.setText(String.format("%.3f VNĐ",(mData.get(position).getBook().getValue())));
         holder.txtTitle.setText(mData.get(position).getBook().getTitle());
         holder.txtQuantity.setText(String.format("X%d", mData.get(position).getQuantity()));
-        holder.imgCart.setImageResource(mData.get(position).getBook().getImgID());
+        Picasso.get()
+                .load(mData.get(position).getBook().getURL())
+                .placeholder(R.drawable.placeholder)
+                .fit()
+                .into(holder.imgCart);
 
         if ( mData.get(position).getQuantity() >= 10)
             holder.btnAdd.setVisibility(View.INVISIBLE);
@@ -84,11 +89,10 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
                 // passing data to the book activity
                 intent.putExtra("ID", mData.get(position).getBook().getBookID());
                 intent.putExtra("Title", mData.get(position).getBook().getTitle());
-                intent.putExtra("Image", mData.get(position).getBook().getImgID());
+                intent.putExtra("URL", mData.get(position).getBook().getURL());
                 intent.putExtra("Value", mData.get(position).getBook().getValue());
                 intent.putExtra("Sale", mData.get(position).getBook().getSale());
                 intent.putExtra("Description", mData.get(position).getBook().getDescription());
-                intent.putExtra("CategoryID", mData.get(position).getBook().getCategoryID());
 
                 // start the activity
                 mContext.startActivity(intent);

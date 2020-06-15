@@ -15,8 +15,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
-import android.widget.Toolbar;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -25,16 +23,13 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout;
 
 import com.example.ltdd_th71_nhom5.model.Book;
 import com.example.ltdd_th71_nhom5.model.ShoppingCart;
-import com.google.android.material.snackbar.Snackbar;
-
-import java.util.ArrayList;
+import com.squareup.picasso.Picasso;
 
 public class BookActivity extends AppCompatActivity {
     private TextView txtTitle, txtValue, txtSale, txtDescription, txtNewValue;
     private ImageView imgBookSingle;
     private Spinner spinner;
     private Button btnChoose;
-    CoordinatorLayout main_content;
 
     @SuppressLint({"DefaultLocale", "SetTextI18n"})
     @Override
@@ -56,13 +51,12 @@ public class BookActivity extends AppCompatActivity {
         Intent intent = getIntent();
         int ID = intent.getExtras().getInt("ID");
         String title = intent.getExtras().getString("Title");
-        int image = intent.getExtras().getInt("Image");
+        String imgURL = intent.getExtras().getString("URL");
         double value = intent.getExtras().getDouble("Value");
         int sale = intent.getExtras().getInt("Sale");
         String description = intent.getExtras().getString("Description");
-        int categoryID = intent.getExtras().getInt("CategoryID");
 
-        Book book = new Book(ID, title, categoryID, value, sale, description, image);
+        Book book = new Book(ID,title,value,sale,description,imgURL);
 
         //set up view
         txtTitle.setText(title);
@@ -79,7 +73,11 @@ public class BookActivity extends AppCompatActivity {
         else
             txtValue.setText(String.format("%.3f VNĐ",value));
 
-        imgBookSingle.setImageResource(image);
+        Picasso.get()
+                .load(imgURL)
+                .placeholder(R.drawable.placeholder)
+                .fit()
+                .into(imgBookSingle);
         txtDescription.setText(description);
 
         //spinner
