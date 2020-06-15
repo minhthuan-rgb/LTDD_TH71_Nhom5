@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.style.StrikethroughSpan;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,8 +15,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
-import android.widget.Toolbar;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -23,16 +23,13 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout;
 
 import com.example.ltdd_th71_nhom5.model.Book;
 import com.example.ltdd_th71_nhom5.model.ShoppingCart;
-import com.google.android.material.snackbar.Snackbar;
-
-import java.util.ArrayList;
+import com.squareup.picasso.Picasso;
 
 public class BookActivity extends AppCompatActivity {
-    private TextView txtTitle, txtValue, txtSale, txtDescription;
+    private TextView txtTitle, txtValue, txtSale, txtDescription, txtNewValue;
     private ImageView imgBookSingle;
     private Spinner spinner;
     private Button btnChoose;
-    CoordinatorLayout main_content;
 
     @SuppressLint({"DefaultLocale", "SetTextI18n"})
     @Override
@@ -44,6 +41,8 @@ public class BookActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setBackgroundDrawable(new ColorDrawable(Color.BLACK));
         actionBar.setDisplayShowTitleEnabled(false);
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
 
         //map view
         mapView();
@@ -52,19 +51,33 @@ public class BookActivity extends AppCompatActivity {
         Intent intent = getIntent();
         int ID = intent.getExtras().getInt("ID");
         String title = intent.getExtras().getString("Title");
-        int image = intent.getExtras().getInt("Image");
+        String imgURL = intent.getExtras().getString("URL");
         double value = intent.getExtras().getDouble("Value");
         int sale = intent.getExtras().getInt("Sale");
         String description = intent.getExtras().getString("Description");
-        int categoryID = intent.getExtras().getInt("CategoryID");
 
-        Book book = new Book(ID, title, categoryID, value, sale, description, image);
+        Book book = new Book(ID,title,value,sale,description,imgURL);
 
         //set up view
         txtTitle.setText(title);
-        txtValue.setText(String.format("%.3f VNĐ",value));
-        txtSale.setText(String.format("-%d",sale) + "%");
-        imgBookSingle.setImageResource(image);
+        if (sale > 0){
+            txtSale.setText(String.format("-%d",sale) + "%");
+            txtNewValue.setText(String.format("%.3f VNĐ",(value * (100 - sale))/100));
+            String oldValue = String.format("%.3f VNĐ",value);
+            SpannableString spanned = new SpannableString(oldValue);
+            spanned.setSpan(new StrikethroughSpan(),0,oldValue.length(),0);
+            txtValue.setText(spanned);
+            txtValue.setTextColor(Color.parseColor("#9E9898"));
+            txtValue.setTextSize(20);
+        }
+        else
+            txtValue.setText(String.format("%.3f VNĐ",value));
+
+        Picasso.get()
+                .load(imgURL)
+                .placeholder(R.drawable.placeholder)
+                .fit()
+                .into(imgBookSingle);
         txtDescription.setText(description);
 
         //spinner
@@ -118,13 +131,14 @@ public class BookActivity extends AppCompatActivity {
         });
     }
     private void mapView() {
-        txtTitle = (TextView)findViewById(R.id.txtTitle);
-        txtSale = (TextView)findViewById(R.id.txtSale);
-        txtValue = (TextView)findViewById(R.id.txtValue);
-        imgBookSingle = (ImageView)findViewById(R.id.imgBookSingle);
-        txtDescription = (TextView)findViewById(R.id.txtDescription);
-        spinner = (Spinner)findViewById(R.id.spinner);
-        btnChoose = (Button)findViewById(R.id.btnChoose);
+        txtTitle = findViewById(R.id.txtTitle);
+        txtSale = findViewById(R.id.txtSale);
+        txtValue = findViewById(R.id.txtValue);
+        imgBookSingle = findViewById(R.id.imgBookSingle);
+        txtDescription = findViewById(R.id.txtDescription);
+        spinner = findViewById(R.id.spinner);
+        btnChoose = findViewById(R.id.btnChoose);
+        txtNewValue = findViewById(R.id.txtNewValue);
     }
 
     private void CatchEventSpinner() {
@@ -151,12 +165,15 @@ public class BookActivity extends AppCompatActivity {
                 startActivity(cartIntent);
                 return  true;
             case R.id.action_home:
-            case R.id.action_personal:
             case R.id.action_category:
+            case R.id.action_personal:
             case R.id.action_notification:
                 Intent homeIntent = new Intent(BookActivity.this, MainActivity.class);
                 startActivity(homeIntent);
-                return  true;
+                return true;
+            case android.R.id.home:
+                onBackPressed();
+                return true;
             default:
                 return  super.onOptionsItemSelected(item);
         }

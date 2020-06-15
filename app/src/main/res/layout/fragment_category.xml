@@ -140,9 +140,5 @@
         android:background="#F2F2F2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-<<<<<<< HEAD
 
-</androidx.constraintlayout.widget.ConstraintLayout>
-=======
 </androidx.appcompat.widget.LinearLayoutCompat>
->>>>>>> feaa79556c3589960881285e55f2ccc8bda2feae

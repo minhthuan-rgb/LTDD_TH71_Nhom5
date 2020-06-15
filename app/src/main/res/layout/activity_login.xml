@@ -10,6 +10,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <ImageView
+            android:id="@+id/imgCancel"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            app:srcCompat="@drawable/x"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp" />
+
         <TextView
             android:id="@+id/txt_appName"
             android:layout_width="match_parent"
@@ -83,18 +92,25 @@
             android:layout_marginTop="50dp"
             android:layout_marginEnd="0dp"
             android:layout_marginRight="0dp"
-            android:background="@color/white"
-            android:text="Đăng nhập"/>
+            android:background="@drawable/button"
+            android:text="Đăng nhập"
+            android:textAppearance="@style/buttonText"
+            android:textSize="18sp"/>
 
         <Button
             android:id="@+id/btnSignUp"
             android:layout_width="100dp"
             android:layout_height="45dp"
             android:layout_below="@+id/txtForgotPassword"
-            android:layout_marginLeft="70dp"
             android:layout_marginTop="50dp"
-            android:background="@color/white"
-            android:text="Đăng ký" />
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_toStartOf="@+id/btnSignIn"
+            android:layout_toLeftOf="@+id/btnSignIn"
+            android:background="@drawable/button"
+            android:text="Đăng ký"
+            android:textAppearance="@style/buttonText"
+            android:textSize="18sp"/>
 
     </RelativeLayout>
 

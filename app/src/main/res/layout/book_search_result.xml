@@ -48,20 +48,31 @@
             tools:ignore="RtlHardcoded" />
 
         <TextView
+            android:id="@+id/txtNewValueSearch"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_below="@+id/txtValueSearch"
+            android:layout_marginTop="10dp"
+            android:fontFamily="sans-serif-light"
+            android:gravity="left|center"
+            android:lineHeight="32sp"
+            android:textSize="20sp"
+            android:textColor="#CF1616"
+            tools:ignore="RtlHardcoded" />
+
+        <TextView
             android:id="@+id/txtSaleSearch"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:layout_below="@+id/txtTitleSearch"
-            android:layout_marginStart="20dp"
+            android:layout_alignRight="@id/imgBookSearch"
+            android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
-            android:layout_toEndOf="@+id/txtValueSearch"
             android:fontFamily="sans-serif-light"
             android:gravity="left|center"
             android:lineHeight="32sp"
-            android:layout_marginLeft="20dp"
-            android:layout_toRightOf="@+id/txtValueSearch"
-            android:textSize="13sp"
-            android:textColor="#000"
+            android:textColor="#CA05EC"
+            android:textSize="24sp"
             tools:ignore="RtlHardcoded" />
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

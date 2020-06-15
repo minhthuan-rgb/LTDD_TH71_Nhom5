@@ -61,7 +61,8 @@ public class ShoppingCartActivity extends AppCompatActivity implements View.OnCl
         btnPay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent loginIntent = new Intent(ShoppingCartActivity.this, LoginActivity.class);
+                startActivity(loginIntent);
             }
         });
     }

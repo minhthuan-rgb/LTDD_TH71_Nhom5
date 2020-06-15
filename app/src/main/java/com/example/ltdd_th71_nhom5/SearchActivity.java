@@ -8,9 +8,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.MenuItemCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
@@ -43,9 +45,9 @@ public class SearchActivity extends AppCompatActivity  implements HotkeyAdapter.
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowTitleEnabled(false);
 
+        mapView();
+
         //MaterialSearchView
-        mySearch = findViewById(R.id.mySearch);
-        mySearch.setSuggestions(mSuggestions);
         mySearch.setOnQueryTextListener(new MaterialSearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -75,12 +77,13 @@ public class SearchActivity extends AppCompatActivity  implements HotkeyAdapter.
             }
         });
 
-        mapView();
         checkData();
     }
 
     private void mapView() {
         frameRecentQuery = (FrameLayout)findViewById(R.id.frameRecentQuery);
+        mySearch = findViewById(R.id.mySearch);
+        mySearch.setSuggestions(mSuggestions);
         //HotkeyAdapter and recyclerView
         hotkeyAdapter = new HotkeyAdapter(this,mHotKey);
         hotkeyAdapter.setClickListener(this);

@@ -63,7 +63,7 @@
         <TextView
             android:id="@+id/txtValueCart"
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:layout_height="wrap_content"
             android:layout_below="@id/txtTitleCart"
             android:layout_alignStart="@+id/txtTitleCart"
             android:layout_alignLeft="@+id/txtTitleCart"
@@ -72,10 +72,21 @@
             android:layout_marginTop="30dp"
             android:textAppearance="@style/valueCart" />
 
+        <TextView
+            android:id="@+id/txtNewValueCart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txtValueCart"
+            android:layout_alignStart="@+id/txtTitleCart"
+            android:layout_alignLeft="@+id/txtTitleCart"
+            android:layout_marginStart="0dp"
+            android:layout_marginLeft="0dp"
+            android:textAppearance="@style/valueCart" />
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="40dp"
-            android:layout_alignBottom="@+id/txtValueCart"
+            android:layout_alignTop="@+id/txtValueCart"
             android:background="@color/colorBackground"
             android:orientation="horizontal"
             android:layout_alignParentRight="true"

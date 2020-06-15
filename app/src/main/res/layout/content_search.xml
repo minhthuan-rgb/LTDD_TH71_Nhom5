@@ -20,7 +20,8 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginLeft="10dp"
-                app:srcCompat="@drawable/hotkey" />
+                app:srcCompat="@drawable/hotkey"
+                android:layout_marginStart="10dp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -28,7 +29,8 @@
                 android:text="Từ khóa hot"
                 android:layout_marginLeft="50dp"
                 android:textAppearance="@style/home_panels"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:layout_marginStart="50dp" />
 
                <androidx.recyclerview.widget.RecyclerView
                    android:id="@+id/rvHotKey"
@@ -48,7 +50,8 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginLeft="10dp"
-                app:srcCompat="@drawable/hotkey" />
+                app:srcCompat="@drawable/recent"
+                android:layout_marginStart="10dp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -56,7 +59,8 @@
                 android:text="Tìm kiếm gần đây"
                 android:layout_marginLeft="50dp"
                 android:textAppearance="@style/home_panels"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:layout_marginStart="50dp" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvRecentQuery"

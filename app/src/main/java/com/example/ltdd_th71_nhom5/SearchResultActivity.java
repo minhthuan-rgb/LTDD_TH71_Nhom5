@@ -23,7 +23,8 @@ import java.util.List;
 public class SearchResultActivity extends AppCompatActivity {
     private RecyclerView rvSearchResult;
     private TextView txtSearch;
-    List<Book> listBook;
+    List<Book> listBook = new ArrayList<>();
+    SearchResultAdapter adapter = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,10 +38,11 @@ public class SearchResultActivity extends AppCompatActivity {
         actionBar.setDisplayShowTitleEnabled(false);
         actionBar.setDisplayHomeAsUpEnabled(true);
 
+        mapView();
+
         //Textview
         Intent intent = getIntent();
         String strSearch = intent.getExtras().getString("Search text");
-        txtSearch = findViewById(R.id.txtSearch);
         txtSearch.setText(strSearch);
 
         txtSearch.setOnClickListener(new View.OnClickListener() {
@@ -49,26 +51,21 @@ public class SearchResultActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
-
         createList();
         //Recycler View
-        SearchResultAdapter adapter = new SearchResultAdapter(this, listBook);
-        rvSearchResult = findViewById(R.id.rvSearchResult);
+        adapter = new SearchResultAdapter(this, listBook);
         StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         rvSearchResult.setLayoutManager(layoutManager);
         rvSearchResult.setAdapter(adapter);
     }
 
+    private void mapView() {
+        txtSearch = findViewById(R.id.txtSearch);
+        rvSearchResult = findViewById(R.id.rvSearchResult);
+    }
+
     public void createList(){
-        listBook = new ArrayList<>();
-        listBook.add(new Book(1,"a", 1, 45.000, 50, "abcdefghijklmnopq", R.drawable.vf_1));
-        listBook.add(new Book(2,"b", 2, 45.000, 40, "abcdefghijklmnopq", R.drawable.vf_2));
-        listBook.add(new Book(3,"c", 3, 45.000, 30, "abcdefghijklmnopq", R.drawable.vf_3));
-        listBook.add(new Book(4,"d", 4, 45.000, 20, "abcdefghijklmnopq", R.drawable.vf_4));
-        listBook.add(new Book(5,"e", 5, 45.000, 10, "abcdefghijklmnopq", R.drawable.vf_5));
-        listBook.add(new Book(6,"f", 6, 45.000, 0, "abcdefghijklmnopq", R.drawable.vf_6));
-        listBook.add(new Book(8,"g", 7, 45.000, 0, "abcdefghijklmnopq", R.drawable.vf_7));
-        listBook.add(new Book(9,"h", 8, 45.000, 0, "abcdefghijklmnopq", R.drawable.vf_8));
+
     }
 
     @Override
