@@ -7,9 +7,7 @@ public class Book {
     private int sale;
     private String description;
     private String URL;
-
     public Book(){
-
     }
 
     public Book(String bookID, String title, double value, int sale, String description, String URL) {

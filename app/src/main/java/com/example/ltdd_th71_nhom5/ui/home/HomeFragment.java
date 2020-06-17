@@ -8,8 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.Toast;
 import android.widget.ViewFlipper;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -18,21 +18,21 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.ltdd_th71_nhom5.MainActivity;
 import com.example.ltdd_th71_nhom5.R;
-import com.example.ltdd_th71_nhom5.model.Book;
 import com.example.ltdd_th71_nhom5.adapter.HomeBookAdapter;
+import com.example.ltdd_th71_nhom5.model.Book;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class HomeFragment extends Fragment{
     ViewFlipper vfHome;
     Animation in, out;
-    RecyclerView recyclerFlash, recyclerLove, recyclerDetective, recyclerHorror, recyclerAdventure, recyclerNovel;
+    RecyclerView recyclerFlash, recyclerEconomy, recyclerLiterary, recyclerMentality, recyclerParenting,
+            recyclerFLanguage, recyclerChildren;
     HomeBookAdapter adapter1 = null, adapter2 = null, adapter3 = null, adapter4 = null,
-            adapter5 = null, adapter6 = null;
+            adapter5 = null, adapter6 = null, adapter7 = null;
 
 
     public HomeFragment() {
@@ -42,7 +42,42 @@ public class HomeFragment extends Fragment{
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_home, container, false);
 
-        // view flipper
+        mapView(root);
+
+        // init adapter
+        adapter1 = new HomeBookAdapter(root.getContext(), MainActivity.flashdealList);
+        adapter2 = new HomeBookAdapter(root.getContext(), MainActivity.literaryList);
+        adapter3 = new HomeBookAdapter(root.getContext(), MainActivity.economyList);
+        adapter4 = new HomeBookAdapter(root.getContext(), MainActivity.mentalityList);
+        adapter5 = new HomeBookAdapter(root.getContext(), MainActivity.parentingList);
+        adapter6 = new HomeBookAdapter(root.getContext(), MainActivity.fLanguageList);
+        adapter7 = new HomeBookAdapter(root.getContext(), MainActivity.childrenList);
+
+        //get data
+        loadData("FlashDeal", MainActivity.flashdealList, adapter1);
+        loadData("VanHoc", MainActivity.literaryList, adapter2);
+        loadData("KinhTe", MainActivity.economyList, adapter3);
+        loadData("TamLy", MainActivity.mentalityList, adapter4);
+        loadData("NuoiDayCon", MainActivity.parentingList, adapter5);
+        loadData("NgoaiNgu", MainActivity.fLanguageList, adapter6);
+        loadData("ThieuNhi", MainActivity.childrenList, adapter7);
+
+
+
+        //set up recyclerView
+        setUpRecyclerView(root.getContext(),recyclerFlash, adapter1);
+        setUpRecyclerView(root.getContext(),recyclerLiterary, adapter2);
+        setUpRecyclerView(root.getContext(),recyclerEconomy, adapter3);
+        setUpRecyclerView(root.getContext(),recyclerMentality, adapter4);
+        setUpRecyclerView(root.getContext(),recyclerParenting, adapter5);
+        setUpRecyclerView(root.getContext(),recyclerFLanguage, adapter6);
+        setUpRecyclerView(root.getContext(),recyclerChildren, adapter7);
+
+        return root;
+    }
+
+    private void mapView(View root) {
+        //view flipper
         vfHome = root.findViewById(R.id.vfHome);
         in = AnimationUtils.loadAnimation(root.getContext(), R.anim.fade_in);
         out = AnimationUtils.loadAnimation(root.getContext(), R.anim.fade_out);
@@ -50,41 +85,17 @@ public class HomeFragment extends Fragment{
         vfHome.setOutAnimation(out);
         vfHome.setAutoStart(true);
 
-        //map view
+        //recycler view
         recyclerFlash = root.findViewById(R.id.recyclerFlash);
-        recyclerDetective = root.findViewById(R.id.recyclerDetective);
-        recyclerLove = root.findViewById(R.id.recyclerLove);
-        recyclerHorror = root.findViewById(R.id.recyclerHorror);
-        recyclerAdventure = root.findViewById(R.id.recyclerAdventure);
-        recyclerNovel = root.findViewById(R.id.recyclerNovel);
-
-        MainActivity.flashdealList = new ArrayList<>();
-        String s = "FlashDeal";
-
-
-        // init adapter
-        adapter1 = new HomeBookAdapter(root.getContext(), MainActivity.flashdealList);
-        adapter1 = new HomeBookAdapter(root.getContext(), MainActivity.flashdealList);
-        adapter1 = new HomeBookAdapter(root.getContext(), MainActivity.flashdealList);
-        adapter1 = new HomeBookAdapter(root.getContext(), MainActivity.flashdealList);
-        adapter1 = new HomeBookAdapter(root.getContext(), MainActivity.flashdealList);
-        adapter1 = new HomeBookAdapter(root.getContext(), MainActivity.flashdealList);
-
-        //get data
-        LoadDuLieu(s, MainActivity.flashdealList, adapter1);
-
-        //set up recyclerView
-        setUpRecyclerView(root.getContext(),recyclerFlash, adapter1);
-        setUpRecyclerView(root.getContext(),recyclerDetective, adapter2);
-        setUpRecyclerView(root.getContext(),recyclerLove, adapter3);
-        setUpRecyclerView(root.getContext(),recyclerHorror, adapter4);
-        setUpRecyclerView(root.getContext(),recyclerAdventure, adapter5);
-        setUpRecyclerView(root.getContext(),recyclerNovel, adapter6);
-
-        return root;
+        recyclerLiterary = root.findViewById(R.id.recyclerLiterary);
+        recyclerEconomy = root.findViewById(R.id.recyclerEconomy);
+        recyclerMentality = root.findViewById(R.id.recyclerMentality);
+        recyclerParenting = root.findViewById(R.id.recyclerParenting);
+        recyclerFLanguage = root.findViewById(R.id.recyclerFLanguage);
+        recyclerChildren = root.findViewById(R.id.recyclerChildren);
     }
 
-    private void LoadDuLieu(String s, List<Book> listBook, HomeBookAdapter adapter) {
+    private void loadData(String s, List<Book> listBook, HomeBookAdapter adapter) {
         MainActivity.mData.child(s).addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {

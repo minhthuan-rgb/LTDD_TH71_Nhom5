@@ -62,8 +62,8 @@ public class BookActivity extends AppCompatActivity {
         txtTitle.setText(title);
         if (sale > 0){
             txtSale.setText(String.format("-%d",sale) + "%");
-            txtNewValue.setText(String.format("%.3f VNĐ",((value * (100 - sale))/100)/1000));
-            String oldValue = String.format("%.3f VNĐ",value/1000);
+            txtNewValue.setText(String.format("%.3f VNĐ",(value * (100 - sale))/100));
+            String oldValue = String.format("%.3f VNĐ",value);
             SpannableString spanned = new SpannableString(oldValue);
             spanned.setSpan(new StrikethroughSpan(),0,oldValue.length(),0);
             txtValue.setText(spanned);
@@ -71,7 +71,7 @@ public class BookActivity extends AppCompatActivity {
             txtValue.setTextSize(20);
         }
         else
-            txtValue.setText(String.format("%.3f VNĐ",value/1000));
+            txtValue.setText(String.format("%.3f VNĐ",value));
 
         Picasso.get()
                 .load(imgURL)

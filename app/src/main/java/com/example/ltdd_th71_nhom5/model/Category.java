@@ -2,18 +2,18 @@ package com.example.ltdd_th71_nhom5.model;
 
 import java.security.Key;
 
-public class LoaiSach {
+public class Category {
     String id;
-    String tenLoaiSach;
+    String categoryName;
     String URl;
 
-    public LoaiSach() {
+    public Category() {
     }
 
 
-    public LoaiSach(String id, String tenLoaiSach, String URl) {
+    public Category(String id, String categoryName, String URl) {
         this.id = id;
-        this.tenLoaiSach = tenLoaiSach;
+        this.categoryName = categoryName;
         this.URl = URl;
     }
 
@@ -25,12 +25,12 @@ public class LoaiSach {
         this.id = id;
     }
 
-    public String getTenLoaiSach() {
-        return tenLoaiSach;
+    public String getCategoryName() {
+        return categoryName;
     }
 
-    public void setTenLoaiSach(String tenLoaiSach) {
-        this.tenLoaiSach = tenLoaiSach;
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
     }
 
     public String getURl() {

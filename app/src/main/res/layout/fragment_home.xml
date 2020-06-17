@@ -113,7 +113,7 @@
                 android:layout_marginTop="10dp"/>
 
             <RelativeLayout
-                android:id="@+id/relativeDetective"
+                android:id="@+id/relativeLiterary"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
                 android:layout_below="@+id/relativeFlash"
@@ -123,113 +123,11 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="Trinh thám"
-                    android:textAppearance="@style/home_panels"/>
-
-                <Button
-                    android:id="@+id/btnMoreDetective"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:background="@color/transparency"
-                    android:text="Xem thêm"
-                    android:textSize="10sp" />
-            </RelativeLayout>
-
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerDetective"
-                android:layout_width="match_parent"
-                android:layout_height="120dp"
-                android:orientation="horizontal"
-                android:layout_below="@+id/relativeDetective"
-                android:layout_marginTop="10dp"/>
-
-
-            <RelativeLayout
-                android:id="@+id/relativeLove"
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:layout_below="@+id/relativeDetective"
-                android:background="@drawable/background_navigation"
-                android:layout_marginTop="130dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="Ngôn tình"
-                    android:textAppearance="@style/home_panels" />
-                <Button
-                    android:id="@+id/btnMoreLove"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:background="@color/transparency"
-                    android:text="Xem thêm"
-                    android:textSize="10sp" />
-            </RelativeLayout>
-
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerLove"
-                android:layout_width="match_parent"
-                android:layout_height="120dp"
-                android:orientation="horizontal"
-                android:layout_below="@+id/relativeLove"
-                android:layout_marginTop="10dp"/>
-
-
-            <RelativeLayout
-                android:id="@+id/relativeHorror"
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:background="@drawable/background_navigation"
-                android:layout_below="@+id/relativeLove"
-                android:layout_marginTop="130dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="Kinh dị"
-                    android:textAppearance="@style/home_panels"/>
-                <Button
-                    android:id="@+id/btnMoreHorror"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:background="@color/transparency"
-                    android:text="Xem thêm"
-                    android:textSize="10sp" />
-            </RelativeLayout>
-
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerHorror"
-                android:layout_width="match_parent"
-                android:layout_height="120dp"
-                android:orientation="horizontal"
-                android:layout_below="@+id/relativeHorror"
-                android:layout_marginTop="10dp"/>
-
-
-            <RelativeLayout
-                android:id="@+id/relativeAdventure"
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:background="@drawable/background_navigation"
-                android:layout_below="@+id/relativeHorror"
-                android:layout_marginTop="130dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
                     android:text="Văn học"
                     android:textAppearance="@style/home_panels"/>
+
                 <Button
-                    android:id="@+id/btnMoreAdventure"
+                    android:id="@+id/btnMoreLiterary"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_alignParentEnd="true"
@@ -241,29 +139,131 @@
 
 
             <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerAdventure"
+                android:id="@+id/recyclerLiterary"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:orientation="horizontal"
+                android:layout_below="@+id/relativeLiterary"
+                android:layout_marginTop="10dp"/>
+
+
+            <RelativeLayout
+                android:id="@+id/relativeEconomy"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_below="@+id/relativeLiterary"
+                android:background="@drawable/background_navigation"
+                android:layout_marginTop="130dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Kinh tế"
+                    android:textAppearance="@style/home_panels" />
+                <Button
+                    android:id="@+id/btnMoreEconomy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:background="@color/transparency"
+                    android:text="Xem thêm"
+                    android:textSize="10sp" />
+            </RelativeLayout>
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerEconomy"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:orientation="horizontal"
+                android:layout_below="@+id/relativeEconomy"
+                android:layout_marginTop="10dp"/>
+
+
+            <RelativeLayout
+                android:id="@+id/relativeMentality"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:background="@drawable/background_navigation"
+                android:layout_below="@+id/relativeEconomy"
+                android:layout_marginTop="130dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Tâm lý - Kĩ năng sống"
+                    android:textAppearance="@style/home_panels"/>
+                <Button
+                    android:id="@+id/btnMoreMentality"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:background="@color/transparency"
+                    android:text="Xem thêm"
+                    android:textSize="10sp" />
+            </RelativeLayout>
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerMentality"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:orientation="horizontal"
+                android:layout_below="@+id/relativeMentality"
+                android:layout_marginTop="10dp"/>
+
+
+            <RelativeLayout
+                android:id="@+id/relativeParenting"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:background="@drawable/background_navigation"
+                android:layout_below="@+id/relativeMentality"
+                android:layout_marginTop="130dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Nuôi dạy con"
+                    android:textAppearance="@style/home_panels"/>
+                <Button
+                    android:id="@+id/btnMoreParenting"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:background="@color/transparency"
+                    android:text="Xem thêm"
+                    android:textSize="10sp" />
+            </RelativeLayout>
+
+
+            <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerParenting"
             android:layout_width="match_parent"
             android:layout_height="120dp"
             android:orientation="horizontal"
-            android:layout_below="@+id/relativeAdventure"
+            android:layout_below="@+id/relativeParenting"
             android:layout_marginTop="10dp"/>
 
 
             <RelativeLayout
-                android:id="@+id/relativeNovel"
+                android:id="@+id/relativeFLanguage"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
                 android:background="@drawable/background_navigation"
-                android:layout_below="@+id/relativeAdventure"
+                android:layout_below="@+id/relativeParenting"
                 android:layout_marginTop="130dp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="Tiểu thuyết"
+                    android:text="Sách học ngoại ngữ"
                     android:textAppearance="@style/home_panels"/>
                 <Button
-                    android:id="@+id/btnMoreNovel"
+                    android:id="@+id/btnMoreFLanguage"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_alignParentEnd="true"
@@ -275,15 +275,47 @@
 
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerNovel"
+                android:id="@+id/recyclerFLanguage"
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
                 android:orientation="horizontal"
-                android:layout_below="@+id/relativeNovel"
+                android:layout_below="@+id/relativeFLanguage"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="87dp"/>
 
+            <RelativeLayout
+                android:id="@+id/relativeChildren"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:background="@drawable/background_navigation"
+                android:layout_below="@+id/relativeFLanguage"
+                android:layout_marginTop="130dp">
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Thiếu nhi"
+                    android:textAppearance="@style/home_panels"/>
+                <Button
+                    android:id="@+id/btnMoreChildren"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:background="@color/transparency"
+                    android:text="Xem thêm"
+                    android:textSize="10sp" />
+            </RelativeLayout>
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerChildren"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:orientation="horizontal"
+                android:layout_below="@+id/relativeChildren"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="87dp"/>
         </RelativeLayout>
     </RelativeLayout>
 </ScrollView>
