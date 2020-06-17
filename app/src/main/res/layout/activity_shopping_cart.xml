@@ -86,16 +86,13 @@
         android:orientation="vertical">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:layout_weight="6"
             android:id="@+id/rvShoppingCart"
             android:layout_width="match_parent"
-            android:layout_height="0dp"/>
+            android:layout_height="0dp"
+            android:layout_weight="7"/>
 
         <include
             layout="@layout/bottom_shopping_cart_activity"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="4"
-            android:onClick="btnContinue_Click" />
+            android:onClick="btnContinue_Click"/>
     </LinearLayout>
 </FrameLayout>

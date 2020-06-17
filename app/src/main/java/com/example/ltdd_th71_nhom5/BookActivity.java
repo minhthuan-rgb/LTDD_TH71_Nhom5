@@ -49,7 +49,7 @@ public class BookActivity extends AppCompatActivity {
 
         //Recieve data
         Intent intent = getIntent();
-        int ID = intent.getExtras().getInt("ID");
+        String ID = intent.getExtras().getString("ID");
         String title = intent.getExtras().getString("Title");
         String imgURL = intent.getExtras().getString("URL");
         double value = intent.getExtras().getDouble("Value");
@@ -62,8 +62,8 @@ public class BookActivity extends AppCompatActivity {
         txtTitle.setText(title);
         if (sale > 0){
             txtSale.setText(String.format("-%d",sale) + "%");
-            txtNewValue.setText(String.format("%.3f VNĐ",(value * (100 - sale))/100));
-            String oldValue = String.format("%.3f VNĐ",value);
+            txtNewValue.setText(String.format("%.3f VNĐ",((value * (100 - sale))/100)/1000));
+            String oldValue = String.format("%.3f VNĐ",value/1000);
             SpannableString spanned = new SpannableString(oldValue);
             spanned.setSpan(new StrikethroughSpan(),0,oldValue.length(),0);
             txtValue.setText(spanned);
@@ -71,7 +71,7 @@ public class BookActivity extends AppCompatActivity {
             txtValue.setTextSize(20);
         }
         else
-            txtValue.setText(String.format("%.3f VNĐ",value));
+            txtValue.setText(String.format("%.3f VNĐ",value/1000));
 
         Picasso.get()
                 .load(imgURL)

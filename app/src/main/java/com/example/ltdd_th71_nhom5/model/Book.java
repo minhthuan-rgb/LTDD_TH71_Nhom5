@@ -1,7 +1,7 @@
 package com.example.ltdd_th71_nhom5.model;
 
 public class Book {
-    private int bookID;
+    private String bookID;
     private String title;
     private double value;
     private int sale;
@@ -12,7 +12,7 @@ public class Book {
 
     }
 
-    public Book(int bookID, String title, double value, int sale, String description, String URL) {
+    public Book(String bookID, String title, double value, int sale, String description, String URL) {
         this.bookID = bookID;
         this.title = title;
         this.value = value;
@@ -21,11 +21,11 @@ public class Book {
         this.URL = URL;
     }
 
-    public int getBookID() {
+    public String getBookID() {
         return bookID;
     }
 
-    public void setBookID(int bookID) {
+    public void setBookID(String bookID) {
         this.bookID = bookID;
     }
 

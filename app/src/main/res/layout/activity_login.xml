@@ -95,7 +95,8 @@
             android:background="@drawable/button"
             android:text="Đăng nhập"
             android:textAppearance="@style/buttonText"
-            android:textSize="18sp"/>
+            android:textSize="18sp"
+            android:clickable="true"/>
 
         <Button
             android:id="@+id/btnSignUp"
@@ -110,7 +111,8 @@
             android:background="@drawable/button"
             android:text="Đăng ký"
             android:textAppearance="@style/buttonText"
-            android:textSize="18sp"/>
+            android:textSize="18sp"
+            android:clickable="true"/>
 
     </RelativeLayout>
 
