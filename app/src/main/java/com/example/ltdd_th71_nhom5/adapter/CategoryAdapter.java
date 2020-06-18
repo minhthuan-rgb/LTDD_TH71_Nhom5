@@ -11,16 +11,17 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.ltdd_th71_nhom5.R;
-import com.example.ltdd_th71_nhom5.model.Model_category;
+import com.example.ltdd_th71_nhom5.model.Category;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
     Context context;
-    List<Model_category> models;
+    List<Category> models;
     private OnCategoryListener mOnCategoryListener;
 
-    public CategoryAdapter(Context context, List<Model_category> models,OnCategoryListener onCategoryListener) {
+    public CategoryAdapter(Context context, List<Category> models,OnCategoryListener onCategoryListener) {
         this.context = context;
         this.models = models;
         this.mOnCategoryListener = onCategoryListener;
@@ -36,9 +37,13 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.myText1.setText(models.get(position).getTitle());
-        holder.myImage.setImageResource(models.get(position).getImg());
-
+        holder.categoryName.setText(models.get(position).getCategoryName());
+        Picasso.get()
+                .load(models.get(position).getURL())
+                .placeholder(R.drawable.placeholder)
+                .error(R.drawable.error)
+                .fit()
+                .into(holder.myImage);
     }
 
     @Override
@@ -46,14 +51,18 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
         return models.size();
     }
 
+    public String getItemKey(int position){
+        return models.get(position).getKey();
+    }
+
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        TextView myText1;
+        TextView categoryName;
         ImageView myImage;
         OnCategoryListener onCategoryListener;
 
         public ViewHolder(@NonNull View itemView,OnCategoryListener onCategoryListener) {
             super(itemView);
-            myText1 = itemView.findViewById(R.id.txt_category);
+            categoryName = itemView.findViewById(R.id.txtCategory);
             myImage = itemView.findViewById(R.id.imageCategory);
             this.onCategoryListener = onCategoryListener;
 
