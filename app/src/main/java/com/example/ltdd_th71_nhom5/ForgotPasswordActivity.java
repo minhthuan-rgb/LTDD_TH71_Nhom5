@@ -112,7 +112,6 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         txtContactSended = findViewById(R.id.txtContactSended);
         layoutContact = findViewById(R.id.layoutContact);
         layoutSended = findViewById(R.id.layoutSended);
-
         layoutContact.setVisibility(View.VISIBLE);
         layoutSended.setVisibility(View.INVISIBLE);
     }

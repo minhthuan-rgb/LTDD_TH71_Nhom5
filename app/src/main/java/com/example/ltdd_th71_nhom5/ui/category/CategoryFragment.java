@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.ltdd_th71_nhom5.R;
 import com.example.ltdd_th71_nhom5.adapter.CategoryAdapter;
+import com.example.ltdd_th71_nhom5.model.Category;
 import com.example.ltdd_th71_nhom5.model.Model_category;
 
 import java.util.ArrayList;
@@ -35,9 +36,9 @@ public class CategoryFragment extends Fragment implements CategoryAdapter.OnCate
         return root;
     }
 
-    private List<Model_category> getmyList(){
+    private List<Category> getmyList(){
 
-        ArrayList<Model_category> models = new ArrayList<>();
+        /*ArrayList<Category> models = new ArrayList<>();
         Model_category m = new Model_category();
         m.setTitle("Lãng mạn");
         m.setImg(R.drawable.langman);
@@ -128,7 +129,7 @@ public class CategoryFragment extends Fragment implements CategoryAdapter.OnCate
         m.setImg(R.drawable.kinhdi);
         models.add(m);
         
-        return models;
+        return models;*/
     }
 
     @Override
