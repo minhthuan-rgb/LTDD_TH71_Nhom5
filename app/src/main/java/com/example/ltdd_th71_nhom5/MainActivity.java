@@ -6,6 +6,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -34,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
     public static List<String> listRecentQuery;
     public static boolean isLogin = false;
     public static DatabaseReference mData = FirebaseDatabase.getInstance().getReference();
-    List<Category> listCategory;
+    public static List<Category> listCategory;
     public static  List<User> listUser;
     public  static  List<Book> flashdealList, allBookList, literaryList, economyList, mentalityList,
             parentingList, fLanguageList, childrenList, detectiveList, horrorList, novelList;
@@ -42,7 +43,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         initList();
+
 
         /*mData.child("FlashDeal").push().setValue(new Book(10, "Tình Yêu Hai Tốt Ba Xấu", 103000, 25,
                 "",
@@ -112,34 +115,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        mData.child("LoaiSach").addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                Category category = dataSnapshot.getValue(Category.class);
-                category.setId(dataSnapshot.getKey());
-                listCategory.add(category);
-            }
 
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-            }
-
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
 
         mData.child("FlashDeal").addChildEventListener(new ChildEventListener() {
             @Override
