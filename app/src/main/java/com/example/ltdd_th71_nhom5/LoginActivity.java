@@ -53,6 +53,14 @@ public class LoginActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
+
+        btnSignUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent reGister = new Intent(getApplicationContext(), RegisterActivity.class);
+                startActivity(reGister);
+            }
+        });
     }
 
     private void mapView() {
