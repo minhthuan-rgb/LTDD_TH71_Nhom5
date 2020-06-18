@@ -24,6 +24,7 @@ import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class HomeFragment extends Fragment{
@@ -33,6 +34,8 @@ public class HomeFragment extends Fragment{
             recyclerFLanguage, recyclerChildren;
     HomeBookAdapter adapter1 = null, adapter2 = null, adapter3 = null, adapter4 = null,
             adapter5 = null, adapter6 = null, adapter7 = null;
+    public List<Book> flashdealList, literaryList, economyList, mentalityList,
+            parentingList, fLanguageList, childrenList;
 
 
     public HomeFragment() {
@@ -43,24 +46,25 @@ public class HomeFragment extends Fragment{
         View root = inflater.inflate(R.layout.fragment_home, container, false);
 
         mapView(root);
+        initList();
 
         // init adapter
-        adapter1 = new HomeBookAdapter(root.getContext(), MainActivity.flashdealList);
-        adapter2 = new HomeBookAdapter(root.getContext(), MainActivity.literaryList);
-        adapter3 = new HomeBookAdapter(root.getContext(), MainActivity.economyList);
-        adapter4 = new HomeBookAdapter(root.getContext(), MainActivity.mentalityList);
-        adapter5 = new HomeBookAdapter(root.getContext(), MainActivity.parentingList);
-        adapter6 = new HomeBookAdapter(root.getContext(), MainActivity.fLanguageList);
-        adapter7 = new HomeBookAdapter(root.getContext(), MainActivity.childrenList);
+        adapter1 = new HomeBookAdapter(root.getContext(), flashdealList);
+        adapter2 = new HomeBookAdapter(root.getContext(), literaryList);
+        adapter3 = new HomeBookAdapter(root.getContext(), economyList);
+        adapter4 = new HomeBookAdapter(root.getContext(), mentalityList);
+        adapter5 = new HomeBookAdapter(root.getContext(), parentingList);
+        adapter6 = new HomeBookAdapter(root.getContext(), fLanguageList);
+        adapter7 = new HomeBookAdapter(root.getContext(), childrenList);
 
         //get data
-        loadData("FlashDeal", MainActivity.flashdealList, adapter1);
-        loadData("VanHoc", MainActivity.literaryList, adapter2);
-        loadData("KinhTe", MainActivity.economyList, adapter3);
-        loadData("TamLy", MainActivity.mentalityList, adapter4);
-        loadData("NuoiDayCon", MainActivity.parentingList, adapter5);
-        loadData("NgoaiNgu", MainActivity.fLanguageList, adapter6);
-        loadData("ThieuNhi", MainActivity.childrenList, adapter7);
+        loadData("FlashDeal", flashdealList, adapter1);
+        loadData("VanHoc", literaryList, adapter2);
+        loadData("KinhTe", economyList, adapter3);
+        loadData("TamLy", mentalityList, adapter4);
+        loadData("NuoiDayCon", parentingList, adapter5);
+        loadData("NgoaiNgu", fLanguageList, adapter6);
+        loadData("ThieuNhi", childrenList, adapter7);
 
 
 
@@ -74,6 +78,16 @@ public class HomeFragment extends Fragment{
         setUpRecyclerView(root.getContext(),recyclerChildren, adapter7);
 
         return root;
+    }
+
+    private void initList() {
+        flashdealList = new ArrayList<>();
+        literaryList = new ArrayList<>();
+        economyList = new ArrayList<>();
+        mentalityList = new ArrayList<>();
+        parentingList = new ArrayList<>();
+        fLanguageList = new ArrayList<>();
+        childrenList = new ArrayList<>();
     }
 
     private void mapView(View root) {

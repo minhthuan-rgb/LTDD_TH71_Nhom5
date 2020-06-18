@@ -29,10 +29,9 @@
             android:ems="10"
             android:gravity="center"
             android:inputType="textPersonName"
-            android:text="Họ tên"
+            android:hint="Họ tên"
             android:textColor="@color/gray_active_icon"
-
-            android:textSize="25dp" />
+            android:textSize="25sp" />
 
         <EditText
             android:id="@+id/editTextSoDienThoai"
@@ -44,9 +43,9 @@
             android:ems="10"
             android:gravity="center"
             android:inputType="textPersonName"
-            android:text="Số điện thoại"
+            android:hint="Số điện thoại"
             android:textColor="@color/gray_active_icon"
-            android:textSize="25dp" />
+            android:textSize="25sp" />
 
         <EditText
             android:id="@+id/editTextEmail"
@@ -58,9 +57,10 @@
             android:ems="10"
             android:gravity="center"
             android:inputType="textPersonName"
-            android:text="Email"
+            android:hint="Email"
             android:textColor="@color/gray_active_icon"
-            android:textSize="25dp" />
+            android:textSize="25sp"
+            tools:ignore="TextFields" />
 
         <EditText
             android:id="@+id/editTextMatKhau"
@@ -72,9 +72,9 @@
             android:ems="10"
             android:gravity="center"
             android:inputType="textPassword"
-            android:text="Mật khẩu"
+            android:hint="Mật khẩu"
             android:textColor="@color/gray_active_icon"
-            android:textSize="25dp" />
+            android:textSize="25sp" />
 
         <EditText
             android:id="@+id/editTextDiaChi"
@@ -88,7 +88,7 @@
             android:inputType="textPersonName"
             android:hint="Địa chỉ"
             android:textColor="@color/gray_active_icon"
-            android:textSize="25dp"/>
+            android:textSize="25sp"/>
     </LinearLayout>
 
     <LinearLayout
@@ -106,28 +106,19 @@
             android:layout_marginHorizontal="100dp"
             android:text="Đăng ký"
             android:textStyle="bold"
-            android:textSize="25dp"
-            android:textAppearance="@style/buttonText"
-            />
+            android:textSize="25sp"
+            android:textAppearance="@style/buttonText" />
 
         <TextView
             android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="Khi đăng ký"
+            android:text="Khi đăng ký\nlà bạn đã chấp nhận điều khoản sử dụng."
             android:gravity="center"
             android:textColor="@color/white"
-            android:textStyle="bold"/>
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="là bạn đã chấp nhận điều khoản sử dụng."
-            android:gravity="center"
-            android:textColor="@color/white"
-            android:textStyle="bold"/>
+            android:textStyle="bold"
+            android:padding="2dp"/>
     </LinearLayout>
 
     </androidx.appcompat.widget.LinearLayoutCompat>

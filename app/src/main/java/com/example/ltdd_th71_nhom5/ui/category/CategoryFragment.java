@@ -22,10 +22,11 @@ import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CategoryFragment extends Fragment implements CategoryAdapter.OnCategoryListener{
-
+    public List<Category> listCategory;
     RecyclerView recyclerView;
     CategoryAdapter mAdapter = null;
     View root;
@@ -36,8 +37,9 @@ public class CategoryFragment extends Fragment implements CategoryAdapter.OnCate
         root = inflater.inflate(R.layout.fragment_category, container, false);
 
         recyclerView = root.findViewById(R.id.recView_Category);
-        mAdapter = new CategoryAdapter(root.getContext(), MainActivity.listCategory,this);
-        getCategoryList(root, MainActivity.listCategory, mAdapter);
+        listCategory = new ArrayList<>();
+        mAdapter = new CategoryAdapter(root.getContext(), listCategory,this);
+        getCategoryList(root, listCategory, mAdapter);
         recyclerView.setLayoutManager(new GridLayoutManager(root.getContext(),3));
         recyclerView.setAdapter(mAdapter);
 

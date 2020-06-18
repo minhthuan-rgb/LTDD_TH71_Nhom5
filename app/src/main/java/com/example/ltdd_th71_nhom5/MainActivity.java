@@ -21,6 +21,7 @@ import com.example.ltdd_th71_nhom5.model.Category;
 import com.example.ltdd_th71_nhom5.model.ShoppingCart;
 import com.example.ltdd_th71_nhom5.model.User;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -35,10 +36,8 @@ public class MainActivity extends AppCompatActivity {
     public static List<String> listRecentQuery;
     public static boolean isLogin = false;
     public static DatabaseReference mData = FirebaseDatabase.getInstance().getReference();
-    public static List<Category> listCategory;
     public static  List<User> listUser;
-    public  static  List<Book> flashdealList, allBookList, literaryList, economyList, mentalityList,
-            parentingList, fLanguageList, childrenList, detectiveList, horrorList, novelList;
+    public  static  List<Book> allBookList, detectiveList, horrorList, novelList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,9 +46,9 @@ public class MainActivity extends AppCompatActivity {
         initList();
 
 
-        /*mData.child("FlashDeal").push().setValue(new Book(10, "Tình Yêu Hai Tốt Ba Xấu", 103000, 25,
-                "",
-                ""));*/
+        /*mData.child("FlashDeal").push().setValue(new Book(null, "Tình Yêu Hai Tốt Ba Xấu", 103000, 25,
+                "test",
+                "https://cf.shopee.vn/file/36ce2fc502e8912f8703c8d9be4c953b"));*/
 
 
         //mData.child("TaiKhoan").push().setValue(new User("", "Hoàng Đức Nhật", "Long Khánh", null, "kuro", "123", null));
@@ -68,17 +67,9 @@ public class MainActivity extends AppCompatActivity {
 
     private void initList() {
         detectiveList = new ArrayList<>();
-        literaryList = new ArrayList<>();
-        economyList = new ArrayList<>();
-        mentalityList = new ArrayList<>();
-        parentingList = new ArrayList<>();
-        fLanguageList = new ArrayList<>();
-        childrenList = new ArrayList<>();
         horrorList = new ArrayList<>();
         novelList = new ArrayList<>();
         allBookList = new ArrayList<>();
-        listCategory = new ArrayList<>();
-        flashdealList = new ArrayList<>();
         listUser = new ArrayList<>();
         if(listShoppingCart == null)
             listShoppingCart = new ArrayList<>();

@@ -65,7 +65,7 @@ public class SearchResultActivity extends AppCompatActivity {
     }
 
     public void createList(){
-
+        listBook = MainActivity.allBookList;
     }
 
     @Override

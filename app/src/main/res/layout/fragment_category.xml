@@ -16,23 +16,20 @@
         android:layout_height="match_parent"
         android:layout_weight="3"
         android:layout_marginTop="20dp"
-        android:layout_marginBottom="55dp"
-        >
+        android:layout_marginBottom="55dp">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
-                android:id="@+id/imageView2"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="8dp"
                 android:layout_marginLeft="8dp"
-                android:layout_marginTop="32dp"
                 android:src="@drawable/category_suggest"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -44,7 +41,6 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="4dp"
-                android:background="@drawable/category_bg"
                 android:orientation="vertical"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/imageView2">
@@ -59,7 +55,9 @@
                     android:text="Lãng mạn"
                     android:textColor="#000000"
                     android:textSize="12sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:layout_marginVertical="2dp"
+                    android:background="@drawable/category_bg"/>
 
                 <TextView
                     android:id="@+id/cate_phieuluu"
@@ -71,7 +69,9 @@
                     android:text="Phiêu lưu"
                     android:textColor="#000000"
                     android:textSize="12sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:layout_marginVertical="2dp"
+                    android:background="@drawable/category_bg"/>
 
                 <TextView
                     android:id="@+id/cate_KinhTe"
@@ -83,7 +83,9 @@
                     android:text="Kinh tế"
                     android:textColor="#000000"
                     android:textSize="12sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:layout_marginVertical="2dp"
+                    android:background="@drawable/category_bg"/>
 
                 <TextView
                     android:id="@+id/cate_TreEm"
@@ -95,7 +97,9 @@
                     android:text="Trẻ em"
                     android:textColor="#000000"
                     android:textSize="12sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:layout_marginVertical="2dp"
+                    android:background="@drawable/category_bg"/>
 
                 <TextView
                     android:id="@+id/cate_TieuThuyet"
@@ -107,7 +111,9 @@
                     android:text="Tiểu thuyết"
                     android:textColor="#000000"
                     android:textSize="12sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:layout_marginVertical="2dp"
+                    android:background="@drawable/category_bg"/>
 
                 <TextView
                     android:id="@+id/cate_SinhHoc"
@@ -119,7 +125,9 @@
                     android:text="Sinh học"
                     android:textColor="#000000"
                     android:textSize="12sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:layout_marginVertical="2dp"
+                    android:background="@drawable/category_bg"/>
 
                 <TextView
                     android:id="@+id/cate_ToanHoc"
@@ -131,7 +139,9 @@
                     android:text="Toán học"
                     android:textColor="#000000"
                     android:textSize="12sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:layout_marginVertical="2dp"
+                    android:background="@drawable/category_bg"/>
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
