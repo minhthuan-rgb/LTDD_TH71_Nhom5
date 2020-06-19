@@ -2,6 +2,7 @@ package com.example.ltdd_th71_nhom5;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.View;
@@ -27,6 +28,8 @@ public class RegisterActivity extends AppCompatActivity {
             public void onClick(View v) {
                 MainActivity.mData.child("TaiKhoan").setValue(new User(null, txtHoTen.getText().toString(), txtDiaChi.getText().toString(), "+84" + txtSoDienThoai.getText().toString(), txtEmail.getText().toString(), txtMatKhau.getText().toString(), null));
                 Toast.makeText(RegisterActivity.this, "Đăng kí thành công!", Toast.LENGTH_SHORT).show();
+                Intent loGin = new Intent(getApplicationContext(), LoginActivity.class);
+                startActivity(loGin);
             }
         });
     }

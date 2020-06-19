@@ -42,7 +42,7 @@
             android:background="@drawable/button"
             android:ems="10"
             android:gravity="center"
-            android:inputType="textPersonName"
+            android:inputType="number"
             android:hint="Số điện thoại"
             android:textColor="@color/gray_active_icon"
             android:textSize="25sp" />
