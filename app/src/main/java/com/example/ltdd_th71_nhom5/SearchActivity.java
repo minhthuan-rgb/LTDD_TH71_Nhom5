@@ -2,40 +2,51 @@ package com.example.ltdd_th71_nhom5;
 
 
 import android.content.Intent;
+import android.icu.text.UnicodeSetSpanner;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.MenuItemCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
+import com.arlib.floatingsearchview.FloatingSearchView;
+import com.arlib.floatingsearchview.suggestions.model.SearchSuggestion;
 import com.example.ltdd_th71_nhom5.adapter.HotkeyAdapter;
 import com.example.ltdd_th71_nhom5.adapter.RecentQueryAdapter;
-import com.miguelcatalan.materialsearchview.MaterialSearchView;
+import com.example.ltdd_th71_nhom5.model.Book;
+import com.example.ltdd_th71_nhom5.model.Suggestion;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 
-public class SearchActivity extends AppCompatActivity  implements HotkeyAdapter.ItemClickListener, RecentQueryAdapter.RecentItemClickListener{
-    public MaterialSearchView mySearch;
-    private  String[] mSuggestions;
+import java.util.ArrayList;
+import java.util.List;
+
+public class SearchActivity extends AppCompatActivity  implements HotkeyAdapter.ItemClickListener,
+        RecentQueryAdapter.RecentItemClickListener{
     private  String[] mHotKey;
     private RecyclerView rvHotKey, rvRecentQuery;
     private HotkeyAdapter hotkeyAdapter;
     private RecentQueryAdapter queryAdapter;
     private FrameLayout frameRecentQuery;
+    private FloatingSearchView mSearchView;
+    private List<Suggestion> mSuggestions =new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
-        mSuggestions = new String[]{"Ha Noi", "Ha nam", "Da nang", "Dong nai", "Phú Tho", "Quang ngai", "Thanh hoa", "Hue"};
         mHotKey = new String[]{"a","b", "c", "d", "e", "f", "Túp lều bác Tôm","Quẳng gánh lo đi và vui sống","3 ngày ở nước Tý hon","Đất Rừng Phương Nam",
         "Truyện Kiều","Đại Việt sử ký toàn thư","Đời mưa gió","Kỹ nghệ lấy Tây","Đại Nam quốc âm tự vị","Lục Vân Tiên"};
 
@@ -43,47 +54,66 @@ public class SearchActivity extends AppCompatActivity  implements HotkeyAdapter.
         Toolbar toolbar = findViewById(R.id.toolbarSearch);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayShowTitleEnabled(false);
+        actionBar.setDisplayShowTitleEnabled(true);
+        actionBar.setTitle("Tìm kiếm");
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
+        initSuggestionList();
 
         mapView();
 
-        //MaterialSearchView
-        mySearch.setOnQueryTextListener(new MaterialSearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                if(query != "") {
-                    Intent intent = new Intent(SearchActivity.this, SearchResultActivity.class);
-                    intent.putExtra("Search text", query);
-                    startActivity(intent);
-                    addRecentQuery(query);
-                }
-                return true;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-               return false;
-            }
-        });
-
-        mySearch.setOnSearchViewListener(new MaterialSearchView.SearchViewListener() {
-            @Override
-            public void onSearchViewShown() {
-            }
-
-            @Override
-            public void onSearchViewClosed() {
-                onBackPressed();
-            }
-        });
+        searchViewEventListener();
 
         checkData();
     }
 
+    private void searchViewEventListener() {
+        mSearchView.setOnQueryChangeListener((oldQuery, newQuery) -> {
+            if (!oldQuery.equals("") && newQuery.equals("")) {
+                mSearchView.clearSuggestions();
+            } else {
+                mSearchView.showProgress();
+                mSearchView.swapSuggestions(getSuggestion(newQuery));
+                mSearchView.setSuggestionRightIconColor(R.drawable.suggestion_item_background);
+                mSearchView.hideProgress();
+            }
+        });
+
+        mSearchView.setOnSearchListener(new FloatingSearchView.OnSearchListener() {
+            @Override
+            public void onSuggestionClicked(SearchSuggestion searchSuggestion) {
+                Suggestion suggestion = (Suggestion) searchSuggestion;
+                onSearchAction(suggestion.getBody());
+            }
+
+            @Override
+            public void onSearchAction(String currentQuery) {
+                Intent intent = new Intent(getApplicationContext(), SearchResultActivity.class);
+                intent.putExtra("Search text", currentQuery);
+                startActivity(intent);
+            }
+        });
+    }
+
+    private void initSuggestionList() {
+       for (Book book : MainActivity.allBookList){
+           mSuggestions.add(new Suggestion(book.getTitle()));
+       }
+    }
+
+    private List<Suggestion> getSuggestion(String query){
+        List<Suggestion> suggestions = new ArrayList<>();
+        for(Suggestion suggestion:mSuggestions){
+            if(suggestion.getBody().toLowerCase().contains(query.toLowerCase())){
+                suggestions.add(suggestion);
+            }
+        }
+        return suggestions;
+    }
+
+
     private void mapView() {
         frameRecentQuery = (FrameLayout)findViewById(R.id.frameRecentQuery);
-        mySearch = findViewById(R.id.mySearch);
-        mySearch.setSuggestions(mSuggestions);
         //HotkeyAdapter and recyclerView
         hotkeyAdapter = new HotkeyAdapter(this,mHotKey);
         hotkeyAdapter.setClickListener(this);
@@ -99,6 +129,19 @@ public class SearchActivity extends AppCompatActivity  implements HotkeyAdapter.
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         rvRecentQuery.setLayoutManager(linearLayoutManager);
         rvRecentQuery.setAdapter(queryAdapter);
+
+        //mSearchView
+        mSearchView = findViewById(R.id.mSearchView);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+        if (id == android.R.id.home) {
+            onBackPressed();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void checkData() {
@@ -125,24 +168,12 @@ public class SearchActivity extends AppCompatActivity  implements HotkeyAdapter.
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.search_menu,menu);
-        MenuItem item = menu.findItem(R.id.search);
-        mySearch.setMenuItem(item);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
     public void onItemClick(View view, int position) {
-        if (!mySearch.isSearchOpen())
-            mySearch.showSearch();
-        mySearch.setQuery(hotkeyAdapter.getItem(position),true);
+
     }
 
     @Override
     public void onRecentItemClick(View view, int position) {
-        if (!mySearch.isSearchOpen())
-            mySearch.showSearch();
-        mySearch.setQuery(queryAdapter.getItem(position),false);
+
     }
 }

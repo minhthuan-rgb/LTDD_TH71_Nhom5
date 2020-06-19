@@ -14,6 +14,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -23,11 +24,13 @@ import com.example.ltdd_th71_nhom5.model.Book;
 import com.example.ltdd_th71_nhom5.ui.home.HomeFragment;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 public class MoreBookActivity extends AppCompatActivity {
     TextView txtTitleCategory;
-    ImageView imgFilter;
+    ImageView imgUp, imgDown;
     RecyclerView rvMoreBook;
     HomeBookAdapter adapter = null;
     List<Book> lisBook;
@@ -55,6 +58,34 @@ public class MoreBookActivity extends AppCompatActivity {
         adapter = new HomeBookAdapter(this, lisBook);
         HomeFragment.loadData(key, lisBook, adapter, false);
         setUpRecyclerView(rvMoreBook, adapter);
+
+        cacthViewEventClickListener();
+    }
+
+    private void cacthViewEventClickListener() {
+        imgDown.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                imgDown.setVisibility(View.INVISIBLE);
+                imgUp.setVisibility(View.VISIBLE);
+                Collections.sort(lisBook, (p1,p2)-> {
+                    return p2.getTitle().compareTo(p1.getTitle());
+                });
+                adapter.notifyDataSetChanged();
+            }
+        });
+
+        imgUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                imgDown.setVisibility(View.VISIBLE);
+                imgUp.setVisibility(View.INVISIBLE);
+                Collections.sort(lisBook, (p1,p2)-> {
+                    return p1.getTitle().compareTo(p2.getTitle());
+                });
+                adapter.notifyDataSetChanged();
+            }
+        });
     }
 
     @Override
@@ -65,8 +96,11 @@ public class MoreBookActivity extends AppCompatActivity {
 
     private void mapView() {
         txtTitleCategory = findViewById(R.id.txtTitleCategory);
-        imgFilter = findViewById(R.id.imgFilter);
+        imgUp = findViewById(R.id.imgUp);
+        imgDown = findViewById(R.id.imgDown);
         rvMoreBook = findViewById(R.id.rvMoreBook);
+        imgDown.setVisibility(View.VISIBLE);
+        imgUp.setVisibility(View.INVISIBLE);
     }
 
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {

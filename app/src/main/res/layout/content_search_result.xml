@@ -1,23 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/listNotNull"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".SearchActivity"
     android:background="@color/backgroundSearch"
     android:layout_marginTop="10dp">
 
-    <FrameLayout
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvSearchResult"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:background="@color/backgroundSearch">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvSearchResult"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="40dp" />
-    </FrameLayout>
-</ScrollView>
+        android:layout_marginTop="40dp" />
+</FrameLayout>

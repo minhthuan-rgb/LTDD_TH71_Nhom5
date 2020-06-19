@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
     public static boolean isLogin = false;
     public static DatabaseReference mData = FirebaseDatabase.getInstance().getReference();
     public static  List<User> listUser;
-    public  static  List<Book> allBookList, detectiveList, horrorList, novelList;
+    public  static  List<Book> allBookList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,16 +66,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initList() {
-        detectiveList = new ArrayList<>();
-        horrorList = new ArrayList<>();
-        novelList = new ArrayList<>();
         allBookList = new ArrayList<>();
         listUser = new ArrayList<>();
+
         if(listShoppingCart == null)
             listShoppingCart = new ArrayList<>();
 
         if (listRecentQuery == null)
             listRecentQuery = new ArrayList<>();
+
+        //loadAllBookList();
 
 //        mData.child("TaiKhoan").addChildEventListener(new ChildEventListener() {
 //            @Override
@@ -105,15 +105,15 @@ public class MainActivity extends AppCompatActivity {
 //
 //            }
 //        });
+    }
 
-
-
+    public static void loadAllBookList(){
         mData.child("FlashDeal").addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 Book book = dataSnapshot.getValue(Book.class);
                 book.setBookID(dataSnapshot.getKey());
-                allBookList.add(book);
+                MainActivity.allBookList.add(book);
             }
 
             @Override
@@ -136,12 +136,13 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
         mData.child("TrinhTham").addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 Book book = dataSnapshot.getValue(Book.class);
                 book.setBookID(dataSnapshot.getKey());
-                allBookList.add(book);
+                MainActivity.allBookList.add(book);
             }
 
             @Override
@@ -169,7 +170,7 @@ public class MainActivity extends AppCompatActivity {
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 Book book = dataSnapshot.getValue(Book.class);
                 book.setBookID(dataSnapshot.getKey());
-                allBookList.add(book);
+                MainActivity.allBookList.add(book);
             }
 
             @Override
@@ -197,7 +198,7 @@ public class MainActivity extends AppCompatActivity {
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 Book book = dataSnapshot.getValue(Book.class);
                 book.setBookID(dataSnapshot.getKey());
-                allBookList.add(book);
+                MainActivity.allBookList.add(book);
             }
 
             @Override
@@ -225,7 +226,7 @@ public class MainActivity extends AppCompatActivity {
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 Book book = dataSnapshot.getValue(Book.class);
                 book.setBookID(dataSnapshot.getKey());
-                allBookList.add(book);
+                MainActivity.allBookList.add(book);
             }
 
             @Override
@@ -253,7 +254,7 @@ public class MainActivity extends AppCompatActivity {
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 Book book = dataSnapshot.getValue(Book.class);
                 book.setBookID(dataSnapshot.getKey());
-                allBookList.add(book);
+                MainActivity.allBookList.add(book);
             }
 
             @Override
@@ -281,7 +282,7 @@ public class MainActivity extends AppCompatActivity {
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 Book book = dataSnapshot.getValue(Book.class);
                 book.setBookID(dataSnapshot.getKey());
-                allBookList.add(book);
+                MainActivity.allBookList.add(book);
             }
 
             @Override
@@ -309,7 +310,7 @@ public class MainActivity extends AppCompatActivity {
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 Book book = dataSnapshot.getValue(Book.class);
                 book.setBookID(dataSnapshot.getKey());
-                allBookList.add(book);
+                MainActivity.allBookList.add(book);
             }
 
             @Override
@@ -337,7 +338,7 @@ public class MainActivity extends AppCompatActivity {
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 Book book = dataSnapshot.getValue(Book.class);
                 book.setBookID(dataSnapshot.getKey());
-                allBookList.add(book);
+                MainActivity.allBookList.add(book);
             }
 
             @Override
@@ -365,7 +366,7 @@ public class MainActivity extends AppCompatActivity {
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 Book book = dataSnapshot.getValue(Book.class);
                 book.setBookID(dataSnapshot.getKey());
-                allBookList.add(book);
+                MainActivity.allBookList.add(book);
             }
 
             @Override
