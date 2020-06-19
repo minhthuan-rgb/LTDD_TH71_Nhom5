@@ -26,7 +26,7 @@ public class RegisterActivity extends AppCompatActivity {
         btnDangKy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MainActivity.mData.child("TaiKhoan").setValue(new User(null, txtHoTen.getText().toString(), txtDiaChi.getText().toString(), "+84" + txtSoDienThoai.getText().toString(), txtEmail.getText().toString(), txtMatKhau.getText().toString(), null));
+                MainActivity.mData.child("TaiKhoan").push().setValue(new User("", txtHoTen.getText().toString(), txtDiaChi.getText().toString(), "+84" + txtSoDienThoai.getText().toString(), txtEmail.getText().toString(), txtMatKhau.getText().toString(), null));
                 Toast.makeText(RegisterActivity.this, "Đăng kí thành công!", Toast.LENGTH_SHORT).show();
                 onBackPressed();
             }
