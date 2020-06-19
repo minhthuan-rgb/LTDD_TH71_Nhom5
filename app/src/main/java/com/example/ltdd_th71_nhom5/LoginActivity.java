@@ -12,16 +12,19 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.ltdd_th71_nhom5.ui.home.HomeFragment;
+import com.google.firebase.auth.FirebaseAuth;
+
 public class LoginActivity extends AppCompatActivity {
     EditText txtNameLogin, txtPassWord;
     Button btnSignIn, btnSignUp;
     TextView txtForgotPassword;
     ImageView imgCancel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
         mapView();
         catchViewClickEvent();
     }
@@ -32,8 +35,12 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Toast.makeText(LoginActivity.this, "Đăng nhập", Toast.LENGTH_SHORT).show();
                 for(int i = 0; i < MainActivity.listUser.size(); i++){
-                    if(txtNameLogin.getText().toString().equals(MainActivity.listUser.get(i).getId()) && txtPassWord.getText().toString().equals(MainActivity.listUser.get(i).getPassWord()))
+                    if(txtNameLogin.getText().toString().equals(MainActivity.listUser.get(i).getId()) && txtPassWord.getText().toString().equals(MainActivity.listUser.get(i).getPassWord())) {
                         Toast.makeText(LoginActivity.this, "Đăng nhập thành công!", Toast.LENGTH_SHORT).show();
+                        MainActivity.isLogin = true;
+                        Intent home = new Intent(LoginActivity.this, HomeFragment.class);
+                        startActivity(home);
+                    }
                 }
 
             }
