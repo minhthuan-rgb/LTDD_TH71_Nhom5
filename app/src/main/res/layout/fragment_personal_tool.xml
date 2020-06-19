@@ -8,15 +8,25 @@
     android:background="@color/colorBackground"
     tools:context=".ui.personal.PersonalFragment">
 
+    <ImageView
+        android:id="@+id/imgLogin"
+        android:layout_width="394dp"
+        android:layout_height="140dp"
+        android:src="@drawable/g1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.53"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="394dp"
-        android:layout_height="420dp"
+        android:layout_width="392dp"
+        android:layout_height="wrap_content"
         android:background="@drawable/chunhat"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView">
+        app:layout_constraintTop_toBottomOf="@+id/imgLogin">
 
         <TextView
             android:id="@+id/sPQuanLy"
@@ -121,27 +131,19 @@
             tools:ignore="MissingConstraints" />
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/imgLogin"
-        android:layout_width="400dp"
-        android:layout_height="140dp"
-        android:src="@drawable/g1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <LinearLayout
         android:id="@+id/linearLayout3"
         android:layout_width="394dp"
         android:layout_height="110dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="55dp"
         android:background="@drawable/chunhat"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.51"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        app:layout_constraintVertical_bias="0.218">
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
 
         <TextView
             android:id="@+id/caiDat"
