@@ -14,7 +14,8 @@
     android:focusable="true">
     <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
 
         <ImageView
             android:id="@+id/imgBookSearch"
@@ -24,13 +25,13 @@
 
         <TextView
             android:id="@+id/txtTitleSearch"
-            android:layout_width="wrap_content"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_below="@+id/imgBookSearch"
             android:layout_marginTop="10dp"
             android:fontFamily="@font/quando"
-            android:gravity="center_horizontal|top"
             android:lineHeight="27sp"
+            android:gravity="center_horizontal"
             android:textAppearance="@style/single_book_title"
             android:textColor="#000" />
 

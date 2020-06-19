@@ -6,32 +6,48 @@
     tools:context=".MoreBookActivity"
     android:background="#000000">
 
-
-    <ImageView
-        android:id="@+id/img1"
-        android:layout_width="35dp"
-        android:layout_height="30dp"
-        android:scaleType="fitXY"
-        android:src="@drawable/cultures" />
-
-
-    <TextView
-        android:id="@+id/txtTitleCategory"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:gravity="center_horizontal|top"
-        android:layout_marginHorizontal="35dp"
-        android:text=""/>
+        android:layout_height="50dp">
 
-    <ImageView
-        android:id="@+id/img2"
-        android:layout_width="35dp"
-        android:layout_height="30dp"
-        android:layout_marginEnd="0dp"
-        android:layout_marginRight="0dp"
-        android:scaleType="fitXY"
-        android:src="@drawable/cultures"
-        android:layout_gravity="end"/>
+        <ImageView
+            android:id="@+id/img1"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="35dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/cultures"
+            android:layout_gravity="center"/>
 
+
+        <TextView
+            android:id="@+id/txtTitleCategory"
+            android:layout_weight="8"
+            android:layout_width="0dp"
+            android:layout_height="35dp"
+            android:gravity="center_horizontal|top"
+            android:textColor="#F2F2F2"
+            android:textSize="20sp"
+            android:fontFamily="@font/roboto_slab_bold"
+            android:textAlignment="center"
+            android:layout_gravity="center"/>
+
+        <ImageView
+            android:id="@+id/imgFilter"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="35dp"
+            android:layout_marginEnd="0dp"
+            android:layout_marginRight="0dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/hello"
+            android:layout_gravity="end|center"/>
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvMoreBook"
+        android:layout_marginTop="60dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

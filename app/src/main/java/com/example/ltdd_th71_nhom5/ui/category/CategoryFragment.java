@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,10 +13,10 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.ltdd_th71_nhom5.MainActivity;
+import com.example.ltdd_th71_nhom5.MoreBookActivity;
 import com.example.ltdd_th71_nhom5.R;
 import com.example.ltdd_th71_nhom5.adapter.CategoryAdapter;
 import com.example.ltdd_th71_nhom5.model.Category;
-import com.example.ltdd_th71_nhom5.model.ShoppingCart;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -29,17 +28,16 @@ public class CategoryFragment extends Fragment implements CategoryAdapter.OnCate
     public List<Category> listCategory;
     RecyclerView recyclerView;
     CategoryAdapter mAdapter = null;
-    View root;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
-        root = inflater.inflate(R.layout.fragment_category, container, false);
+        View root = inflater.inflate(R.layout.fragment_category, container, false);
 
         recyclerView = root.findViewById(R.id.recView_Category);
         listCategory = new ArrayList<>();
         mAdapter = new CategoryAdapter(root.getContext(), listCategory,this);
-        getCategoryList(root, listCategory, mAdapter);
+        getCategoryList(listCategory, mAdapter);
         recyclerView.setLayoutManager(new GridLayoutManager(root.getContext(),3));
         recyclerView.setAdapter(mAdapter);
 
@@ -47,7 +45,7 @@ public class CategoryFragment extends Fragment implements CategoryAdapter.OnCate
     }
 
 
-    private void getCategoryList(View root,List<Category> listCategory, CategoryAdapter adapter){
+    private void getCategoryList(List<Category> listCategory, CategoryAdapter adapter){
         MainActivity.mData.child("LoaiSach").addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
@@ -81,7 +79,9 @@ public class CategoryFragment extends Fragment implements CategoryAdapter.OnCate
 
     @Override
     public void onCategoryClick(int position) {
-        Intent allIntent = new Intent(root.getContext(), ShoppingCart.class);
+        Intent allIntent = new Intent(getContext(), MoreBookActivity.class);
+        allIntent.putExtra("Key", mAdapter.getItemKey(position));
+        allIntent.putExtra("CategoryName", mAdapter.getItemName(position));
         startActivity(allIntent);
     }
 }
