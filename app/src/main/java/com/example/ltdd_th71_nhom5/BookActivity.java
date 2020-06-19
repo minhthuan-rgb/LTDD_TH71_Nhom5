@@ -49,7 +49,7 @@ public class BookActivity extends AppCompatActivity {
 
         //Recieve data
         Intent intent = getIntent();
-        int ID = intent.getExtras().getInt("ID");
+        String ID = intent.getExtras().getString("ID");
         String title = intent.getExtras().getString("Title");
         String imgURL = intent.getExtras().getString("URL");
         double value = intent.getExtras().getDouble("Value");

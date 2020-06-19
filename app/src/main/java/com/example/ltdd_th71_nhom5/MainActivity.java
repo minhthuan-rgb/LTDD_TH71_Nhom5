@@ -4,24 +4,24 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.SearchView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
 
 import com.example.ltdd_th71_nhom5.model.Book;
+import com.example.ltdd_th71_nhom5.model.Category;
 import com.example.ltdd_th71_nhom5.model.ShoppingCart;
+import com.example.ltdd_th71_nhom5.model.User;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -35,17 +35,85 @@ public class MainActivity extends AppCompatActivity {
     public static List<ShoppingCart> listShoppingCart;
     public static List<String> listRecentQuery;
     public static boolean isLogin = false;
-    DatabaseReference mData = FirebaseDatabase.getInstance().getReference();
-
+    public static DatabaseReference mData = FirebaseDatabase.getInstance().getReference();
+    public static  List<User> listUser;
+    public  static  List<Book> allBookList, detectiveList, horrorList, novelList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mData.child("TrinhTham").addChildEventListener(new ChildEventListener() {
+
+        initList();
+
+
+        /*mData.child("FlashDeal").push().setValue(new Book(null, "Tình Yêu Hai Tốt Ba Xấu", 103000, 25,
+                "test",
+                "https://cf.shopee.vn/file/36ce2fc502e8912f8703c8d9be4c953b"));*/
+
+
+        //mData.child("TaiKhoan").push().setValue(new User("", "Hoàng Đức Nhật", "Long Khánh", null, "kuro", "123", null));
+
+        BottomNavigationView navView = findViewById(R.id.nav_view);
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+        NavigationUI.setupWithNavController(navView, navController);
+
+        //action bar
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayShowTitleEnabled(true);
+        actionBar.setBackgroundDrawable(new ColorDrawable(Color.BLACK));
+
+        initList();
+    }
+
+    private void initList() {
+        detectiveList = new ArrayList<>();
+        horrorList = new ArrayList<>();
+        novelList = new ArrayList<>();
+        allBookList = new ArrayList<>();
+        listUser = new ArrayList<>();
+        if(listShoppingCart == null)
+            listShoppingCart = new ArrayList<>();
+
+        if (listRecentQuery == null)
+            listRecentQuery = new ArrayList<>();
+
+//        mData.child("TaiKhoan").addChildEventListener(new ChildEventListener() {
+//            @Override
+//            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+//                User user = dataSnapshot.getValue(User.class);
+//                user.setUserId(dataSnapshot.getKey());
+//                listUser.add(user);
+//            }
+//
+//            @Override
+//            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+//
+//            }
+//
+//            @Override
+//            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+//
+//            }
+//
+//            @Override
+//            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+//
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError databaseError) {
+//
+//            }
+//        });
+
+
+
+        mData.child("FlashDeal").addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 Book book = dataSnapshot.getValue(Book.class);
-                Toast.makeText(MainActivity.this, book.getTitle().toString(), Toast.LENGTH_SHORT).show();
+                book.setBookID(dataSnapshot.getKey());
+                allBookList.add(book);
             }
 
             @Override
@@ -68,28 +136,260 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-        BottomNavigationView navView = findViewById(R.id.nav_view);
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-        /*AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_home, R.id.navigation_category, R.id.navigation_notifications, R.id.navigation_personal)
-                .build();*/
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-        //NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-        NavigationUI.setupWithNavController(navView, navController);
+        mData.child("TrinhTham").addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                Book book = dataSnapshot.getValue(Book.class);
+                book.setBookID(dataSnapshot.getKey());
+                allBookList.add(book);
+            }
 
-        //action bar
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayShowTitleEnabled(true);
-        actionBar.setBackgroundDrawable(new ColorDrawable(Color.BLACK));
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
+            }
 
-        if(listShoppingCart == null)
-            listShoppingCart = new ArrayList<>();
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
 
-        if (listRecentQuery == null)
-            listRecentQuery = new ArrayList<>();
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        mData.child("VanHoc").addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                Book book = dataSnapshot.getValue(Book.class);
+                book.setBookID(dataSnapshot.getKey());
+                allBookList.add(book);
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        mData.child("KinhTe").addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                Book book = dataSnapshot.getValue(Book.class);
+                book.setBookID(dataSnapshot.getKey());
+                allBookList.add(book);
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        mData.child("TamLy").addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                Book book = dataSnapshot.getValue(Book.class);
+                book.setBookID(dataSnapshot.getKey());
+                allBookList.add(book);
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        mData.child("NuoiDayCon").addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                Book book = dataSnapshot.getValue(Book.class);
+                book.setBookID(dataSnapshot.getKey());
+                allBookList.add(book);
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        mData.child("NgoaiNgu").addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                Book book = dataSnapshot.getValue(Book.class);
+                book.setBookID(dataSnapshot.getKey());
+                allBookList.add(book);
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        mData.child("ThieuNhi").addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                Book book = dataSnapshot.getValue(Book.class);
+                book.setBookID(dataSnapshot.getKey());
+                allBookList.add(book);
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        mData.child("KinhDi").addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                Book book = dataSnapshot.getValue(Book.class);
+                book.setBookID(dataSnapshot.getKey());
+                allBookList.add(book);
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        mData.child("TieuThuyet").addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                Book book = dataSnapshot.getValue(Book.class);
+                book.setBookID(dataSnapshot.getKey());
+                allBookList.add(book);
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

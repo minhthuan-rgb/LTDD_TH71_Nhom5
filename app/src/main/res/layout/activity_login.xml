@@ -64,7 +64,8 @@
             android:gravity="center_horizontal|top|bottom"
             android:hint="Mật khẩu"
             android:textColor="#000000"
-            android:background="@drawable/textview"/>
+            android:background="@drawable/textview"
+            android:inputType="textPassword"/>
 
         <TextView
             android:id="@+id/txtForgotPassword"
@@ -95,7 +96,8 @@
             android:background="@drawable/button"
             android:text="Đăng nhập"
             android:textAppearance="@style/buttonText"
-            android:textSize="18sp"/>
+            android:textSize="18sp"
+            android:clickable="true"/>
 
         <Button
             android:id="@+id/btnSignUp"
@@ -110,7 +112,8 @@
             android:background="@drawable/button"
             android:text="Đăng ký"
             android:textAppearance="@style/buttonText"
-            android:textSize="18sp"/>
+            android:textSize="18sp"
+            android:clickable="true"/>
 
     </RelativeLayout>
 
