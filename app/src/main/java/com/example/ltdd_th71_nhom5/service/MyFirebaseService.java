@@ -14,6 +14,7 @@ import android.os.Build;
 import android.os.IBinder;
 import android.util.Log;
 
+import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
 
 import com.example.ltdd_th71_nhom5.MainActivity;
@@ -45,6 +46,7 @@ public class MyFirebaseService extends FirebaseMessagingService {
         // TODO: Implement this method to send token to your app server.
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     private void sendNotification(String messageBody) {
         Intent intent = new Intent(this, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -55,8 +57,8 @@ public class MyFirebaseService extends FirebaseMessagingService {
 
         NotificationCompat.Builder notificationBuilder =
                 new NotificationCompat.Builder(this, channelId)
-                        .setSmallIcon(R.drawable.ic_launcher_background)
-                        .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher_background))
+                        .setSmallIcon(R.drawable.people_2)
+                        .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.people_2))
                         .setContentTitle(getString(R.string.project_id))
                         .setContentText(messageBody)
                         .setAutoCancel(true)

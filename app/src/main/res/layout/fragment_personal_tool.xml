@@ -1,23 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="5dp"
     android:background="@color/colorBackground"
     tools:context=".ui.personal.PersonalFragment">
 
-    <ImageView
-        android:id="@+id/imgLogin"
-        android:layout_width="394dp"
-        android:layout_height="140dp"
-        android:src="@drawable/g1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.53"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_marginTop="5dp"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent">
+
+        <FrameLayout
+            android:id="@+id/frameLogin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.53"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" >
+            <ImageView
+                android:id="@+id/imgLogin"
+                android:layout_width="match_parent"
+                android:layout_height="140dp"
+                android:src="@drawable/g1" />
+
+            <LinearLayout
+                android:id="@+id/isLogin"
+                android:layout_width="match_parent"
+                android:layout_height="140dp"
+                android:orientation="horizontal">
+
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginStart="40dp" >
+
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:background="@drawable/social" />
+
+                    <ImageView
+                        android:id="@+id/ellipse_2"
+                        android:layout_width="70dp"
+                        android:layout_height="68dp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        />
+                </FrameLayout>
+            </LinearLayout>
+        </FrameLayout>
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -27,7 +63,7 @@
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgLogin">
+        app:layout_constraintTop_toBottomOf="@+id/frameLogin">
 
         <TextView
             android:id="@+id/sPQuanLy"
@@ -44,7 +80,9 @@
             android:textColor="#000000"
             android:textSize="19sp"
             android:textStyle="bold"
-            tools:ignore="MissingConstraints" />
+            tools:ignore="MissingConstraints"
+            android:drawableStart="@drawable/tools_and_utensils"
+            android:drawableEnd="@drawable/multimedia_option" />
 
         <TextView
             android:id="@+id/sPDaMua"
@@ -61,7 +99,9 @@
             android:textColor="#000000"
             android:textSize="19sp"
             android:textStyle="bold"
-            tools:ignore="MissingConstraints" />
+            tools:ignore="MissingConstraints"
+            android:drawableStart="@drawable/cartblack"
+            android:drawableEnd="@drawable/multimedia_option" />
 
         <TextView
             android:id="@+id/sPDaXem"
@@ -78,7 +118,9 @@
             android:textColor="#000000"
             android:textSize="19sp"
             android:textStyle="bold"
-            tools:ignore="MissingConstraints" />
+            tools:ignore="MissingConstraints"
+            android:drawableStart="@drawable/eye"
+            android:drawableEnd="@drawable/multimedia_option" />
 
         <TextView
             android:id="@+id/sPMuaSau"
@@ -95,7 +137,9 @@
             android:textColor="#000000"
             android:textSize="19sp"
             android:textStyle="bold"
-            tools:ignore="MissingConstraints" />
+            tools:ignore="MissingConstraints"
+            android:drawableStart="@drawable/fashion"
+            android:drawableEnd="@drawable/multimedia_option" />
 
         <TextView
             android:id="@+id/sPYeuThich"
@@ -112,7 +156,9 @@
             android:textColor="#000000"
             android:textSize="19sp"
             android:textStyle="bold"
-            tools:ignore="MissingConstraints" />
+            tools:ignore="MissingConstraints"
+            android:drawableStart="@drawable/love_and_romance"
+            android:drawableEnd="@drawable/multimedia_option" />
 
         <TextView
             android:id="@+id/sPNhanXet"
@@ -129,7 +175,9 @@
             android:textColor="#000000"
             android:textSize="19sp"
             android:textStyle="bold"
-            tools:ignore="MissingConstraints" />
+            tools:ignore="MissingConstraints"
+            android:drawableStart="@drawable/communications"
+            android:drawableEnd="@drawable/multimedia_option" />
     </LinearLayout>
 
     <LinearLayout
@@ -163,7 +211,9 @@
             android:textStyle="bold"
             tools:ignore="MissingConstraints"
             tools:layout_editor_absoluteX="3dp"
-            tools:layout_editor_absoluteY="262dp" />
+            tools:layout_editor_absoluteY="262dp"
+            android:drawableStart="@drawable/settings"
+            android:drawableEnd="@drawable/multimedia_option" />
 
         <TextView
             android:id="@+id/hoTro"
@@ -181,7 +231,10 @@
             android:textStyle="bold"
             tools:ignore="MissingConstraints"
             tools:layout_editor_absoluteX="3dp"
-            tools:layout_editor_absoluteY="262dp" />
+            tools:layout_editor_absoluteY="262dp"
+            android:drawableStart="@drawable/electronics"
+            android:drawableEnd="@drawable/multimedia_option" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
     public static DatabaseReference mData = FirebaseDatabase.getInstance().getReference();
     public static  List<User> listUser;
     public  static  List<Book> allBookList;
+    public static User currentUser = new User();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,42 +70,40 @@ public class MainActivity extends AppCompatActivity {
         allBookList = new ArrayList<>();
         listUser = new ArrayList<>();
 
-        if(listShoppingCart == null)
+        if (listShoppingCart == null)
             listShoppingCart = new ArrayList<>();
 
         if (listRecentQuery == null)
             listRecentQuery = new ArrayList<>();
 
-        //loadAllBookList();
+        mData.child("TaiKhoan").addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                User user = dataSnapshot.getValue(User.class);
+                user.setUserId(dataSnapshot.getKey());
+                listUser.add(user);
+            }
 
-//        mData.child("TaiKhoan").addChildEventListener(new ChildEventListener() {
-//            @Override
-//            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-//                User user = dataSnapshot.getValue(User.class);
-//                user.setUserId(dataSnapshot.getKey());
-//                listUser.add(user);
-//            }
-//
-//            @Override
-//            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-//
-//            }
-//
-//            @Override
-//            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-//
-//            }
-//
-//            @Override
-//            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-//
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError databaseError) {
-//
-//            }
-//        });
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
     public static void loadAllBookList(){

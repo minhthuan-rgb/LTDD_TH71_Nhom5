@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.ltdd_th71_nhom5.model.User;
 import com.example.ltdd_th71_nhom5.ui.home.HomeFragment;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -38,8 +39,9 @@ public class LoginActivity extends AppCompatActivity {
                     if(txtNameLogin.getText().toString().equals(MainActivity.listUser.get(i).getId()) && txtPassWord.getText().toString().equals(MainActivity.listUser.get(i).getPassWord())) {
                         Toast.makeText(LoginActivity.this, "Đăng nhập thành công!", Toast.LENGTH_SHORT).show();
                         MainActivity.isLogin = true;
-                        Intent home = new Intent(LoginActivity.this, HomeFragment.class);
-                        startActivity(home);
+                        MainActivity.currentUser = MainActivity.listUser.get(i);
+
+                        break;
                     }
                 }
 
