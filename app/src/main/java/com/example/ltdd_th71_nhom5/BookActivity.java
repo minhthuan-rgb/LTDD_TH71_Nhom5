@@ -89,6 +89,7 @@ public class BookActivity extends AppCompatActivity {
             public void onClick(View v) {
                 int quantity = Integer.parseInt(spinner.getSelectedItem().toString());
                 double newValue = 0;
+
                 if(MainActivity.listShoppingCart.size() > 0){
                     boolean exists = false;
                     for(int i = 0; i < MainActivity.listShoppingCart.size(); i++){
