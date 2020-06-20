@@ -55,6 +55,10 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
         return models.get(position).getKey();
     }
 
+    public String getItemName(int position){
+        return  models.get(position).getCategoryName();
+    }
+
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView categoryName;
         ImageView myImage;

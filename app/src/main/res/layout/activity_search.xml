@@ -1,32 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/backgroundSearch">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:ignore="MissingConstraints">
-        <FrameLayout
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbarSearch"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/backgroundSearch"/>
 
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbarSearch"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:background="@color/backgroundSearch"/>
-
-            <com.miguelcatalan.materialsearchview.MaterialSearchView
-                android:id="@+id/mySearch"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-        </FrameLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
     <include layout="@layout/content_search"/>
+
+    <com.arlib.floatingsearchview.FloatingSearchView
+        android:id="@+id/mSearchView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:iconifiedByDefault="false"
+        app:floatingSearch_suggestionsListAnimDuration="250"
+        android:layout_marginHorizontal="15dp"
+        android:layout_marginTop="?attr/actionBarSize"
+        app:floatingSearch_searchHint="Nhập từ khóa cần tìm"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

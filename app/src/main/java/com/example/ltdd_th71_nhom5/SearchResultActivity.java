@@ -5,12 +5,14 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
@@ -25,6 +27,9 @@ public class SearchResultActivity extends AppCompatActivity {
     private TextView txtSearch;
     List<Book> listBook = new ArrayList<>();
     SearchResultAdapter adapter = null;
+    String strSearch;
+    CoordinatorLayout listNull;
+    FrameLayout listNotNull;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +47,7 @@ public class SearchResultActivity extends AppCompatActivity {
 
         //Textview
         Intent intent = getIntent();
-        String strSearch = intent.getExtras().getString("Search text");
+        strSearch = intent.getExtras().getString("Search text");
         txtSearch.setText(strSearch);
 
         txtSearch.setOnClickListener(new View.OnClickListener() {
@@ -51,21 +56,41 @@ public class SearchResultActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
-        createList();
-        //Recycler View
+
         adapter = new SearchResultAdapter(this, listBook);
+        createList();
         StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         rvSearchResult.setLayoutManager(layoutManager);
         rvSearchResult.setAdapter(adapter);
+
+        checkData();
+    }
+
+    private void checkData() {
+        if(listBook.size() > 0) {
+            listNotNull.setVisibility(View.VISIBLE);
+            listNull.setVisibility(View.INVISIBLE);
+        }
+        else{
+            listNotNull.setVisibility(View.INVISIBLE);
+            listNull.setVisibility(View.VISIBLE);
+        }
     }
 
     private void mapView() {
         txtSearch = findViewById(R.id.txtSearch);
         rvSearchResult = findViewById(R.id.rvSearchResult);
+        listNotNull = findViewById(R.id.listNotNull);
+        listNull = findViewById(R.id.listNull);
     }
 
     public void createList(){
-        listBook = MainActivity.allBookList;
+        for(Book book: MainActivity.allBookList){
+            if (book.getTitle().toLowerCase().contains(strSearch)) {
+                listBook.add(book);
+                adapter.notifyDataSetChanged();
+            }
+        }
     }
 
     @Override

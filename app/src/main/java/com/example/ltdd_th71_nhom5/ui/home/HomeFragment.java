@@ -34,7 +34,7 @@ public class HomeFragment extends Fragment{
             recyclerFLanguage, recyclerChildren;
     HomeBookAdapter adapter1 = null, adapter2 = null, adapter3 = null, adapter4 = null,
             adapter5 = null, adapter6 = null, adapter7 = null;
-    public List<Book> flashdealList, literaryList, economyList, mentalityList,
+    List<Book> flashdealList, literaryList, economyList, mentalityList,
             parentingList, fLanguageList, childrenList;
 
 
@@ -47,35 +47,36 @@ public class HomeFragment extends Fragment{
 
         mapView(root);
         initList();
+        MainActivity.loadAllBookList();
 
         // init adapter
-        adapter1 = new HomeBookAdapter(root.getContext(), flashdealList);
-        adapter2 = new HomeBookAdapter(root.getContext(), literaryList);
-        adapter3 = new HomeBookAdapter(root.getContext(), economyList);
-        adapter4 = new HomeBookAdapter(root.getContext(), mentalityList);
-        adapter5 = new HomeBookAdapter(root.getContext(), parentingList);
-        adapter6 = new HomeBookAdapter(root.getContext(), fLanguageList);
-        adapter7 = new HomeBookAdapter(root.getContext(), childrenList);
+        adapter1 = new HomeBookAdapter(getContext(), flashdealList);
+        adapter2 = new HomeBookAdapter(getContext(), literaryList);
+        adapter3 = new HomeBookAdapter(getContext(), economyList);
+        adapter4 = new HomeBookAdapter(getContext(), mentalityList);
+        adapter5 = new HomeBookAdapter(getContext(), parentingList);
+        adapter6 = new HomeBookAdapter(getContext(), fLanguageList);
+        adapter7 = new HomeBookAdapter(getContext(), childrenList);
 
         //get data
-        loadData("FlashDeal", flashdealList, adapter1);
-        loadData("VanHoc", literaryList, adapter2);
-        loadData("KinhTe", economyList, adapter3);
-        loadData("TamLy", mentalityList, adapter4);
-        loadData("NuoiDayCon", parentingList, adapter5);
-        loadData("NgoaiNgu", fLanguageList, adapter6);
-        loadData("ThieuNhi", childrenList, adapter7);
+        loadData("FlashDeal", flashdealList, adapter1, true);
+        loadData("VanHoc", literaryList, adapter2, true);
+        loadData("KinhTe", economyList, adapter3, true);
+        loadData("TamLy", mentalityList, adapter4, true);
+        loadData("NuoiDayCon", parentingList, adapter5, true);
+        loadData("NgoaiNgu", fLanguageList, adapter6, true);
+        loadData("ThieuNhi", childrenList, adapter7, true);
 
 
 
         //set up recyclerView
-        setUpRecyclerView(root.getContext(),recyclerFlash, adapter1);
-        setUpRecyclerView(root.getContext(),recyclerLiterary, adapter2);
-        setUpRecyclerView(root.getContext(),recyclerEconomy, adapter3);
-        setUpRecyclerView(root.getContext(),recyclerMentality, adapter4);
-        setUpRecyclerView(root.getContext(),recyclerParenting, adapter5);
-        setUpRecyclerView(root.getContext(),recyclerFLanguage, adapter6);
-        setUpRecyclerView(root.getContext(),recyclerChildren, adapter7);
+        setUpRecyclerView(recyclerFlash, adapter1);
+        setUpRecyclerView(recyclerLiterary, adapter2);
+        setUpRecyclerView(recyclerEconomy, adapter3);
+        setUpRecyclerView(recyclerMentality, adapter4);
+        setUpRecyclerView(recyclerParenting, adapter5);
+        setUpRecyclerView(recyclerFLanguage, adapter6);
+        setUpRecyclerView(recyclerChildren, adapter7);
 
         return root;
     }
@@ -93,8 +94,8 @@ public class HomeFragment extends Fragment{
     private void mapView(View root) {
         //view flipper
         vfHome = root.findViewById(R.id.vfHome);
-        in = AnimationUtils.loadAnimation(root.getContext(), R.anim.fade_in);
-        out = AnimationUtils.loadAnimation(root.getContext(), R.anim.fade_out);
+        in = AnimationUtils.loadAnimation(getContext(), R.anim.fade_in);
+        out = AnimationUtils.loadAnimation(getContext(), R.anim.fade_out);
         vfHome.setInAnimation(in);
         vfHome.setOutAnimation(out);
         vfHome.setAutoStart(true);
@@ -109,14 +110,22 @@ public class HomeFragment extends Fragment{
         recyclerChildren = root.findViewById(R.id.recyclerChildren);
     }
 
-    private void loadData(String s, List<Book> listBook, HomeBookAdapter adapter) {
+    public static void loadData(String s, List<Book> listBook, HomeBookAdapter adapter, boolean getTopFive) {
         MainActivity.mData.child(s).addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 Book book = dataSnapshot.getValue(Book.class);
                 book.setBookID(dataSnapshot.getKey());
-                listBook.add(book);
-                adapter.notifyDataSetChanged();
+                if (getTopFive) {
+                    if (listBook.size() < 5) {
+                        listBook.add(book);
+                        adapter.notifyDataSetChanged();
+                    }
+                }
+                else{
+                    listBook.add(book);
+                    adapter.notifyDataSetChanged();
+                }
             }
 
             @Override
@@ -141,8 +150,8 @@ public class HomeFragment extends Fragment{
         });
     }
 
-    public static void setUpRecyclerView(Context context , RecyclerView recyclerView, HomeBookAdapter adapter){
-        LinearLayoutManager horizontalLayoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
+    private void setUpRecyclerView(RecyclerView recyclerView, HomeBookAdapter adapter){
+        LinearLayoutManager horizontalLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(horizontalLayoutManager);
         recyclerView.setAdapter(adapter);
     }
