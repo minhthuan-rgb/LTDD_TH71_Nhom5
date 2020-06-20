@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.opengl.Visibility;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,8 +14,10 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -22,8 +25,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.ltdd_th71_nhom5.adapter.ShoppingCartAdapter;
 import com.example.ltdd_th71_nhom5.model.Book;
+import com.example.ltdd_th71_nhom5.model.Order;
 import com.example.ltdd_th71_nhom5.model.ShoppingCart;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class ShoppingCartActivity extends AppCompatActivity implements View.OnClickListener{
@@ -59,10 +64,23 @@ public class ShoppingCartActivity extends AppCompatActivity implements View.OnCl
         btnContinue1.setOnClickListener(ShoppingCartActivity.this);
         btnContinue2.setOnClickListener(ShoppingCartActivity.this);
         btnPay.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View v) {
-                Intent loginIntent = new Intent(ShoppingCartActivity.this, LoginActivity.class);
-                startActivity(loginIntent);
+                if(MainActivity.currentUser.getId() == null)
+                {
+                    Intent loginIntent = new Intent(ShoppingCartActivity.this, LoginActivity.class);
+                    startActivity(loginIntent);
+                }
+                else
+                {
+                    MainActivity.currentOrder.setDate(LocalDateTime.now().toString());
+                    MainActivity.currentOrder.setListCart(MainActivity.listShoppingCart);
+                    MainActivity.listOrderCurrentUser.add(MainActivity.currentOrder);
+                    //MainActivity.mData.child("TaiKhoan").child(MainActivity.currentUser.getUserId().toString()).child("orDer").setValue(MainActivity.listOrderCurrentUser);
+                    Toast.makeText(ShoppingCartActivity.this, "Thanh toán thành công!", Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
     }

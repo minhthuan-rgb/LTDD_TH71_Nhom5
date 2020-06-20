@@ -40,6 +40,8 @@ public class LoginActivity extends AppCompatActivity {
                         Toast.makeText(LoginActivity.this, "Đăng nhập thành công!", Toast.LENGTH_SHORT).show();
                         MainActivity.isLogin = true;
                         MainActivity.currentUser = MainActivity.listUser.get(i);
+                        onBackPressed();
+
 
                         break;
                     }

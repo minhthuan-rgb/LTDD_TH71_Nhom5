@@ -9,19 +9,19 @@ public class    User {
     String phone;
     String id;
     String passWord;
-    List<ShoppingCart> gioHang;
+    List<Order> orDer;
 
     public User() {
     }
 
-    public User(String userId, String userName, String diaChi, String phone, String id, String passWord, List<ShoppingCart> gioHang) {
+    public User(String userId, String userName, String diaChi, String phone, String id, String passWord, List<Order> orDer) {
         this.userId = userId;
         this.userName = userName;
         this.diaChi = diaChi;
         this.phone = phone;
         this.id = id;
         this.passWord = passWord;
-        this.gioHang = gioHang;
+        this.orDer = orDer;
     }
 
     public String getUserId() {
@@ -72,11 +72,11 @@ public class    User {
         this.passWord = passWord;
     }
 
-    public List<ShoppingCart> getGioHang() {
-        return gioHang;
+    public List<Order> getOrDer() {
+        return orDer;
     }
 
-    public void setGioHang(List<ShoppingCart> gioHang) {
-        this.gioHang = gioHang;
+    public void setOrDer(List<Order> orDer) {
+        this.orDer = orDer;
     }
 }

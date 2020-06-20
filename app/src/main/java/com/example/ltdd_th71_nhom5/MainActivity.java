@@ -18,6 +18,7 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.example.ltdd_th71_nhom5.model.Book;
 import com.example.ltdd_th71_nhom5.model.Category;
+import com.example.ltdd_th71_nhom5.model.Order;
 import com.example.ltdd_th71_nhom5.model.ShoppingCart;
 import com.example.ltdd_th71_nhom5.model.User;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -38,13 +39,15 @@ public class MainActivity extends AppCompatActivity {
     public static DatabaseReference mData = FirebaseDatabase.getInstance().getReference();
     public static  List<User> listUser;
     public  static  List<Book> allBookList;
+    public static List<Order> listOrderCurrentUser;
+    public static  Order currentOrder = new Order();
     public static User currentUser = new User();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        initList();
+
 
 
         /*mData.child("FlashDeal").push().setValue(new Book(null, "Tình Yêu Hai Tốt Ba Xấu", 103000, 25,
@@ -73,6 +76,8 @@ public class MainActivity extends AppCompatActivity {
         if (listShoppingCart == null)
             listShoppingCart = new ArrayList<>();
 
+        if(listOrderCurrentUser == null)
+            listOrderCurrentUser = new ArrayList<>();
         if (listRecentQuery == null)
             listRecentQuery = new ArrayList<>();
 
@@ -81,6 +86,7 @@ public class MainActivity extends AppCompatActivity {
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 User user = dataSnapshot.getValue(User.class);
                 user.setUserId(dataSnapshot.getKey());
+                listOrderCurrentUser = user.getOrDer();
                 listUser.add(user);
             }
 
