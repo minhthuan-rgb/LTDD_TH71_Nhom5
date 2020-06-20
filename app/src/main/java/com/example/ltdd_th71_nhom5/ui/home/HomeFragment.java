@@ -47,7 +47,6 @@ public class HomeFragment extends Fragment{
 
         mapView(root);
         initList();
-        MainActivity.loadAllBookList();
 
         // init adapter
         adapter1 = new HomeBookAdapter(getContext(), flashdealList);

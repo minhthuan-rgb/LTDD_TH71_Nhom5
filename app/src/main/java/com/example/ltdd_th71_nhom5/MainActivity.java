@@ -44,9 +44,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        initList();
-
-
         /*mData.child("FlashDeal").push().setValue(new Book(null, "Tình Yêu Hai Tốt Ba Xấu", 103000, 25,
                 "test",
                 "https://cf.shopee.vn/file/36ce2fc502e8912f8703c8d9be4c953b"));*/
@@ -75,6 +72,8 @@ public class MainActivity extends AppCompatActivity {
 
         if (listRecentQuery == null)
             listRecentQuery = new ArrayList<>();
+
+        loadAllBookList();
 
         mData.child("TaiKhoan").addChildEventListener(new ChildEventListener() {
             @Override

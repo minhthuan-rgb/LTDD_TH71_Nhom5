@@ -5,12 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorBackground"
-    tools:context=".ui.personal.PersonalFragment">
+    tools:context=".ui.personal.PersonalFragment"
+    android:layout_marginBottom="30dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_marginTop="5dp"
-    android:layout_height="wrap_content"
-    android:layout_width="match_parent">
+        android:layout_marginTop="5dp"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_marginHorizontal="10dp">
 
         <FrameLayout
             android:id="@+id/frameLogin"
@@ -19,7 +21,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.53"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" >
+            app:layout_constraintTop_toTopOf="parent">
             <ImageView
                 android:id="@+id/imgLogin"
                 android:layout_width="match_parent"
@@ -30,40 +32,77 @@
                 android:id="@+id/isLogin"
                 android:layout_width="match_parent"
                 android:layout_height="140dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:background="@color/backGroundNavigation"
+                app:layout_constraintHorizontal_bias="0.53">
 
                 <FrameLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginLeft="40dp"
-                    android:layout_marginStart="40dp" >
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginStart="20dp" >
 
                     <ImageView
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:background="@drawable/social" />
+                        android:layout_width="90dp"
+                        android:layout_height="90dp"
+                        android:background="@drawable/ellipse"/>
 
                     <ImageView
-                        android:id="@+id/ellipse_2"
-                        android:layout_width="70dp"
-                        android:layout_height="68dp"
-                        android:layout_centerHorizontal="true"
-                        android:layout_centerVertical="true"
-                        />
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:background="@drawable/social"
+                        android:layout_gravity="center"/>
                 </FrameLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp">
+
+                    <TextView
+                        android:id="@+id/txtUserName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="24sp"/>
+
+                    <TextView
+                        android:id="@+id/txtEmail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="18sp"
+                        android:layout_marginTop="5dp"/>
+
+                    <TextView
+                        android:id="@+id/txtSignOut"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="20sp"
+                        android:fontFamily="@font/roboto_slab_light"
+                        android:layout_gravity="right"
+                        android:layout_marginRight="20dp"
+                        android:text="Đăng xuất"
+                        android:textColor="#000"
+                        android:textAppearance="@style/forgot_password"
+                        android:layout_marginEnd="20dp" />
+                </LinearLayout>
+
             </LinearLayout>
         </FrameLayout>
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="392dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/chunhat"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/frameLogin">
+        app:layout_constraintTop_toBottomOf="@+id/frameLogin"
+        android:layout_marginTop="15dp">
 
         <TextView
             android:id="@+id/sPQuanLy"
@@ -182,7 +221,7 @@
 
     <LinearLayout
         android:id="@+id/linearLayout3"
-        android:layout_width="394dp"
+        android:layout_width="match_parent"
         android:layout_height="110dp"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="55dp"

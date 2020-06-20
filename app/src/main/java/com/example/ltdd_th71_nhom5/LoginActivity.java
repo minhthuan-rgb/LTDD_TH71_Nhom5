@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.ltdd_th71_nhom5.model.ShoppingCart;
 import com.example.ltdd_th71_nhom5.model.User;
 import com.example.ltdd_th71_nhom5.ui.home.HomeFragment;
 import com.google.firebase.auth.FirebaseAuth;
@@ -21,11 +22,14 @@ public class LoginActivity extends AppCompatActivity {
     Button btnSignIn, btnSignUp;
     TextView txtForgotPassword;
     ImageView imgCancel;
+    String activity = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        Intent intent = getIntent();
+        activity = intent.getExtras().getString("Activity");
         mapView();
         catchViewClickEvent();
     }
@@ -34,17 +38,24 @@ public class LoginActivity extends AppCompatActivity {
         btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(LoginActivity.this, "Đăng nhập", Toast.LENGTH_SHORT).show();
+                boolean exists = false;
                 for(int i = 0; i < MainActivity.listUser.size(); i++){
                     if(txtNameLogin.getText().toString().equals(MainActivity.listUser.get(i).getId()) && txtPassWord.getText().toString().equals(MainActivity.listUser.get(i).getPassWord())) {
-                        Toast.makeText(LoginActivity.this, "Đăng nhập thành công!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Đăng nhập thành công!", Toast.LENGTH_SHORT).show();
                         MainActivity.isLogin = true;
                         MainActivity.currentUser = MainActivity.listUser.get(i);
-
+                        exists = true;
+                        Intent intent;
+                        if (activity.equals("Person"))
+                            intent = new Intent(getApplicationContext(), MainActivity.class);
+                        else
+                            intent = new Intent(getApplicationContext(), ShoppingCart.class);
+                        startActivity(intent);
                         break;
                     }
                 }
-
+                if (!exists)
+                    Toast.makeText(getApplicationContext(), "Sai tên đăng nhập/mật khẩu. Vui lòng kiểm tra lại.", Toast.LENGTH_LONG).show();
             }
         });
 

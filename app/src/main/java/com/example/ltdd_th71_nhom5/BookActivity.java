@@ -1,6 +1,8 @@
 package com.example.ltdd_th71_nhom5;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -55,22 +57,21 @@ public class BookActivity extends AppCompatActivity {
         int sale = intent.getExtras().getInt("Sale");
         String description = intent.getExtras().getString("Description");
 
-        Book book = new Book(ID,title,value,sale,description,imgURL);
+        Book book = new Book(ID, title, value, sale, description, imgURL);
 
         //set up view
         txtTitle.setText(title);
-        if (sale > 0){
-            txtSale.setText(String.format("-%d",sale) + "%");
-            txtNewValue.setText(String.format("%.3f VNĐ",(value * (100 - sale))/100));
-            String oldValue = String.format("%.3f VNĐ",value);
+        if (sale > 0) {
+            txtSale.setText(String.format("-%d", sale) + "%");
+            txtNewValue.setText(String.format("%.3f VNĐ", (value * (100 - sale)) / 100));
+            String oldValue = String.format("%.3f VNĐ", value);
             SpannableString spanned = new SpannableString(oldValue);
-            spanned.setSpan(new StrikethroughSpan(),0,oldValue.length(),0);
+            spanned.setSpan(new StrikethroughSpan(), 0, oldValue.length(), 0);
             txtValue.setText(spanned);
             txtValue.setTextColor(Color.parseColor("#9E9898"));
             txtValue.setTextSize(20);
-        }
-        else
-            txtValue.setText(String.format("%.3f VNĐ",value));
+        } else
+            txtValue.setText(String.format("%.3f VNĐ", value));
 
         Picasso.get()
                 .load(imgURL)
@@ -88,10 +89,15 @@ public class BookActivity extends AppCompatActivity {
             public void onClick(View v) {
                 int quantity = Integer.parseInt(spinner.getSelectedItem().toString());
                 double newValue = 0;
+<<<<<<< HEAD
+                if (MainActivity.listShoppingCart.size() > 0) {
+=======
+
                 if(MainActivity.listShoppingCart.size() > 0){
+>>>>>>> ee0953eff181cddbdb9ebc22c8e0d85d04e2a30f
                     boolean exists = false;
-                    for(int i = 0; i < MainActivity.listShoppingCart.size(); i++){
-                        if (MainActivity.listShoppingCart.get(i).getBook().getBookID() == ID){
+                    for (int i = 0; i < MainActivity.listShoppingCart.size(); i++) {
+                        if (MainActivity.listShoppingCart.get(i).getBook().getBookID() == ID) {
                             MainActivity.listShoppingCart.get(i)
                                     .setQuantity(MainActivity.listShoppingCart.get(i).getQuantity() + quantity);
 
@@ -100,9 +106,9 @@ public class BookActivity extends AppCompatActivity {
 
                             if (sale != 0)
                                 newValue = (MainActivity.listShoppingCart.get(i).getQuantity() * value
-                                        *(100 - sale))/100;
+                                        * (100 - sale)) / 100;
                             else
-                                newValue = value*MainActivity.listShoppingCart.get(i).getQuantity();
+                                newValue = value * MainActivity.listShoppingCart.get(i).getQuantity();
 
                             MainActivity.listShoppingCart.get(i).setNewValue(newValue);
                             exists = true;
@@ -110,22 +116,33 @@ public class BookActivity extends AppCompatActivity {
                         }
                     }
 
-                    if (!exists){
+                    if (!exists) {
                         if (sale != 0)
-                            newValue = (quantity * value * (100 - sale))/100;
+                            newValue = (quantity * value * (100 - sale)) / 100;
                         else
                             newValue = quantity * value;
 
                         MainActivity.listShoppingCart.add(new ShoppingCart(book, quantity, newValue));
                     }
-                }else{
+                } else {
                     if (sale != 0)
-                        newValue = (quantity * value * (100 - sale))/100;
+                        newValue = (quantity * value * (100 - sale)) / 100;
                     else
                         newValue = quantity * value;
 
                     MainActivity.listShoppingCart.add(new ShoppingCart(book, quantity, newValue));
                 }
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(BookActivity.this);
+                builder.setTitle("Một sản phẩm đã được thêm vào giỏ hàng");
+                builder.setMessage(book.getTitle() + "\nGiá: " + String.format("%.3f VND",
+                        book.getValue()) +"\nSale: " + String.format("%d", book.getSale()) + "%");
+                builder.setPositiveButton("Xem giỏ hàng", (dialog, which) -> {
+                    Intent cartIntent = new Intent(BookActivity.this, ShoppingCartActivity.class);
+                    startActivity(cartIntent);
+                });
+
+                builder.show();
             }
         });
     }

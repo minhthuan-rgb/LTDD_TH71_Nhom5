@@ -62,6 +62,7 @@ public class ShoppingCartActivity extends AppCompatActivity implements View.OnCl
             @Override
             public void onClick(View v) {
                 Intent loginIntent = new Intent(ShoppingCartActivity.this, LoginActivity.class);
+                loginIntent.putExtra("Activity", "Cart");
                 startActivity(loginIntent);
             }
         });
@@ -108,13 +109,11 @@ public class ShoppingCartActivity extends AppCompatActivity implements View.OnCl
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
-        switch (id){
-            case android.R.id.home:
-                onBackPressed();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
+        if (id == android.R.id.home) {
+            onBackPressed();
+            return true;
         }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
