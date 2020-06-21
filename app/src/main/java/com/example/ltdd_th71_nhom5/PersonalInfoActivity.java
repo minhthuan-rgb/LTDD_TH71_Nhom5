@@ -74,6 +74,8 @@ public class PersonalInfoActivity extends AppCompatActivity {
                             .child("diaChi").setValue(editTextDiaChi_Personal.getText().toString());
                     MainActivity.mData.child("TaiKhoan").child(MainActivity.currentUser.getUserId())
                             .child("phone").setValue("+84" + editTextSDT_Personal.getText().toString().substring(1));
+                    Toast.makeText(getApplicationContext(), "Lưu thành công!", Toast.LENGTH_LONG).show();
+                    onBackPressed();
                 }
             }
         });
