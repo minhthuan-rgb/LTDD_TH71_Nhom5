@@ -94,8 +94,7 @@ public class OrderManagementActivity extends AppCompatActivity implements OrderA
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
         if (id == android.R.id.home) {
-            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-            startActivity(intent);
+            onBackPressed();
             return true;
         }
         return super.onOptionsItemSelected(item);

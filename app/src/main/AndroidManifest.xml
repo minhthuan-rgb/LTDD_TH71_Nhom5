@@ -21,7 +21,8 @@
         <activity
             android:name=".OrderManagementActivity"
             android:theme="@style/AppTheme" />
-        <activity android:name=".PersonalInfoActivity" />
+        <activity android:name=".PersonalInfoActivity"
+            android:theme="@style/AppTheme" />
 
         <service
             android:name=".service.MyFirebaseService"

@@ -18,6 +18,7 @@ import com.example.ltdd_th71_nhom5.BookManagementActivity;
 import com.example.ltdd_th71_nhom5.LoginActivity;
 import com.example.ltdd_th71_nhom5.MainActivity;
 import com.example.ltdd_th71_nhom5.OrderManagementActivity;
+import com.example.ltdd_th71_nhom5.PersonalInfoActivity;
 import com.example.ltdd_th71_nhom5.R;
 import com.example.ltdd_th71_nhom5.model.Book;
 import com.example.ltdd_th71_nhom5.model.User;
@@ -76,6 +77,14 @@ public class PersonalFragment extends Fragment {
                 startActivity(intent);
             }
         }));
+
+        isLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), PersonalInfoActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void checkIsLogin() {
