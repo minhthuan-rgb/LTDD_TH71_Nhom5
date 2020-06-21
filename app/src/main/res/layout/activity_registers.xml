@@ -39,6 +39,7 @@
             android:ems="10"
             android:gravity="center"
             android:inputType="textPersonName"
+            android:textColor="@color/black"
             android:hint="Họ tên"
             android:textSize="25sp" />
 
@@ -53,6 +54,7 @@
             android:gravity="center"
             android:inputType="number"
             android:hint="Số điện thoại"
+            android:textColor="@color/black"
             android:textSize="25sp" />
 
         <EditText
@@ -67,6 +69,7 @@
             android:inputType="textEmailAddress"
             android:hint="Email"
             android:textSize="25sp"
+            android:textColor="@color/black"
             tools:ignore="TextFields" />
 
         <EditText
@@ -80,6 +83,7 @@
             android:gravity="center"
             android:inputType="textPassword"
             android:hint="Mật khẩu"
+            android:textColor="@color/black"
             android:textSize="25sp" />
 
         <EditText
@@ -93,6 +97,7 @@
             android:gravity="center"
             android:inputType="textPersonName"
             android:hint="Địa chỉ"
+            android:textColor="@color/black"
             android:textSize="25sp"/>
     </LinearLayout>
 

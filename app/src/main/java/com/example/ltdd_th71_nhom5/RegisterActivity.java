@@ -26,13 +26,46 @@ public class RegisterActivity extends AppCompatActivity {
         btnDangKy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MainActivity.mData.child("TaiKhoan").push().setValue(new User("", txtHoTen.getText().toString(), txtDiaChi.getText().toString(), "+84" + txtSoDienThoai.getText().toString(), txtEmail.getText().toString(), txtMatKhau.getText().toString(), null));
-                Toast.makeText(RegisterActivity.this, "Đăng kí thành công!", Toast.LENGTH_SHORT).show();
-                onBackPressed();
+                if (checkEditText(txtHoTen) && checkEditText(txtSoDienThoai) && isValidEmail(txtEmail.getText().toString()) && checkEditText(txtMatKhau) && checkEditText(txtDiaChi)) {
+                    if (isUniqueEmail(txtEmail)){
+                        MainActivity.mData.child("TaiKhoan").push().setValue(new User("", txtHoTen.getText().toString(), txtDiaChi.getText().toString(), "+84" + txtSoDienThoai.getText().toString(), txtEmail.getText().toString(), txtMatKhau.getText().toString(), null));
+                        Toast.makeText(RegisterActivity.this, "Đăng kí thành công!", Toast.LENGTH_SHORT).show();
+                        onBackPressed();
+                    }
+                }
             }
         });
     }
-    private void mapView() {
+
+    private boolean checkEditText(EditText editText) {
+        if (editText.getText().toString().trim().length() > 0)
+            return true;
+        else {
+            editText.setError("Vui lòng nhập dữ liệu!");
+        }
+        return false;
+    }
+
+    private boolean isValidEmail(String target) {
+        if (target.matches("[a-zA-Z0-9._-]+@[a-z]+.[a-z]+"))
+            return true;
+        else {
+            txtEmail.setError("Email sai định dạng!");
+        }
+        return false;
+    }
+
+    private boolean isUniqueEmail(EditText edtText) {
+        for (int i = 0; i < MainActivity.listUser.size(); i++) {
+            if (edtText.getText().toString().equals(MainActivity.listUser.get(i).getId())) {
+                edtText.setError("Email đã tồn tại!");
+                return false;
+            }
+        }
+        return true;
+    }
+
+        private void mapView() {
         txtHoTen = findViewById(R.id.editTextHoTen);
         txtMatKhau = findViewById(R.id.editTextMatKhau);
         btnDangKy = findViewById(R.id.btnDangKy);
