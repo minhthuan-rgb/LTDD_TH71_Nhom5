@@ -47,22 +47,29 @@ public class ForgotPasswordActivity2 extends AppCompatActivity {
 
         cacthButtonClickEvent();
     }
-
+    private boolean checkEditText(EditText editText) {
+        if (editText.getText().toString().trim().length() > 0)
+            return true;
+        else {
+            editText.setError("Vui lòng nhập dữ liệu!");
+        }
+        return false;
+    }
     private void cacthButtonClickEvent() {
         btnSummit.setOnClickListener(v -> {
             String newPW = txtNewPW.getText().toString();
             String againPW = txtAgain.getText().toString();
-            if (newPW.isEmpty() || againPW.isEmpty())
-                Toast.makeText(ForgotPasswordActivity2.this, "Bạn phải nhập đầy đủ cả hai ô mật khẩu", Toast.LENGTH_LONG).show();
-            else if (!newPW.equals(againPW))
-                Toast.makeText(ForgotPasswordActivity2.this, "Mật khẩu không trùng khớp", Toast.LENGTH_LONG).show();
-            else{
-                MainActivity.mData.child("TaiKhoan").child(key).child("passWord").setValue(newPW);
-                MainActivity.listUser.get(position).setPassWord(newPW);
-                layoutResetPW.setVisibility(View.INVISIBLE);
-                layoutFinish.setVisibility(View.VISIBLE);
-                actionBar.setDisplayHomeAsUpEnabled(false);
-                actionBar.setDisplayShowTitleEnabled(false);
+            if (checkEditText(txtNewPW) || checkEditText(txtAgain)) {
+                if (!newPW.equals(againPW))
+                    Toast.makeText(ForgotPasswordActivity2.this, "Mật khẩu không trùng khớp", Toast.LENGTH_LONG).show();
+                else {
+                    MainActivity.mData.child("TaiKhoan").child(key).child("passWord").setValue(newPW);
+                    MainActivity.listUser.get(position).setPassWord(newPW);
+                    layoutResetPW.setVisibility(View.INVISIBLE);
+                    layoutFinish.setVisibility(View.VISIBLE);
+                    actionBar.setDisplayHomeAsUpEnabled(false);
+                    actionBar.setDisplayShowTitleEnabled(false);
+                }
             }
         });
 
