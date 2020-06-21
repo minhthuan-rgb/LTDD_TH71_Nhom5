@@ -111,7 +111,7 @@
         android:layout_marginTop="15dp">
 
         <TextView
-            android:id="@+id/sPQuanLy"
+            android:id="@+id/txtOrderManagement"
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:layout_gravity="center"
@@ -127,10 +127,11 @@
             android:textStyle="bold"
             tools:ignore="MissingConstraints"
             android:drawableStart="@drawable/tools_and_utensils"
-            android:drawableEnd="@drawable/multimedia_option" />
+            android:drawableEnd="@drawable/multimedia_option"
+            android:focusable="true"/>
 
         <TextView
-            android:id="@+id/sPDaMua"
+            android:id="@+id/txtBookManagement"
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:layout_gravity="center"

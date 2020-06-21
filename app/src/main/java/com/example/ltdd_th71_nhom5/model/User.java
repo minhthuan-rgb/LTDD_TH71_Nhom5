@@ -2,7 +2,7 @@ package com.example.ltdd_th71_nhom5.model;
 
 import java.util.List;
 
-public class    User {
+public class User {
     String userId;
     String userName;
     String diaChi;

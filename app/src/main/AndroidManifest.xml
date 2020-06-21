@@ -12,12 +12,21 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true">
-        <activity android:name=".PersonalInfoActivity"></activity>
+        <activity
+            android:name=".BookManagementActivity"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".OrderDetailActivity"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".OrderManagementActivity"
+            android:theme="@style/AppTheme" />
+        <activity android:name=".PersonalInfoActivity" />
 
         <service
             android:name=".service.MyFirebaseService"
             android:enabled="true"
-            android:exported="true"></service>
+            android:exported="true" />
 
         <activity
             android:name=".MoreBookActivity"

@@ -14,15 +14,18 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.example.ltdd_th71_nhom5.BookManagementActivity;
 import com.example.ltdd_th71_nhom5.LoginActivity;
 import com.example.ltdd_th71_nhom5.MainActivity;
+import com.example.ltdd_th71_nhom5.OrderManagementActivity;
 import com.example.ltdd_th71_nhom5.R;
+import com.example.ltdd_th71_nhom5.model.Book;
 import com.example.ltdd_th71_nhom5.model.User;
 
 public class PersonalFragment extends Fragment {
     ImageView imgLogin;
     LinearLayout isLogin;
-    TextView txtUserName, txtEmail, txtSignOut;
+    TextView txtUserName, txtEmail, txtSignOut, txtOrderManagement, txtBookManagement;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -57,6 +60,22 @@ public class PersonalFragment extends Fragment {
                 startActivity(intent);
             }
         });
+
+        txtOrderManagement.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), OrderManagementActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        txtBookManagement.setOnClickListener((new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), BookManagementActivity.class);
+                startActivity(intent);
+            }
+        }));
     }
 
     private void checkIsLogin() {
@@ -79,5 +98,7 @@ public class PersonalFragment extends Fragment {
         txtEmail = root.findViewById(R.id.txtEmail);
         txtSignOut = root.findViewById(R.id.txtSignOut);
         txtSignOut.setPaintFlags(txtSignOut.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+        txtOrderManagement = root.findViewById(R.id.txtOrderManagement);
+        txtBookManagement = root.findViewById(R.id.txtBookManagement);
     }
 }

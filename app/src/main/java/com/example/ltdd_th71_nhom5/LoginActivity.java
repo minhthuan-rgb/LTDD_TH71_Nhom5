@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.ltdd_th71_nhom5.model.Book;
 import com.example.ltdd_th71_nhom5.model.ShoppingCart;
 import com.example.ltdd_th71_nhom5.model.User;
 import com.example.ltdd_th71_nhom5.ui.home.HomeFragment;
@@ -49,6 +50,10 @@ public class LoginActivity extends AppCompatActivity {
                         Intent intent;
                         if (activity.equals("Person"))
                             intent = new Intent(getApplicationContext(), MainActivity.class);
+                        else if (activity.equals("Order"))
+                            intent = new Intent(getApplicationContext(), OrderManagementActivity.class);
+                        else if (activity.equals("Book"))
+                            intent = new Intent(getApplicationContext(), BookManagementActivity.class);
                         else
                             intent = new Intent(getApplicationContext(), ShoppingCartActivity.class);
                         startActivity(intent);

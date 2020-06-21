@@ -109,7 +109,7 @@ public class SearchActivity extends AppCompatActivity  implements HotkeyAdapter.
 
 
     private void mapView() {
-        frameRecentQuery = (FrameLayout)findViewById(R.id.frameRecentQuery);
+        frameRecentQuery = findViewById(R.id.frameRecentQuery);
         //HotkeyAdapter and recyclerView
         hotkeyAdapter = new HotkeyAdapter(this,mHotKey);
         hotkeyAdapter.setClickListener(this);
