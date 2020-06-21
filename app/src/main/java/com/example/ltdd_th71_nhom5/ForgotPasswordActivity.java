@@ -70,22 +70,24 @@ public class ForgotPasswordActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 boolean exists = false;
-                for(int i = 0; i < MainActivity.listUser.size(); i++){
-                    if(txtContact.getText().toString().equals(MainActivity.listUser.get(i).getId())) {
-                        addNotification(MainActivity.listUser.get(i).getUserId(), i);
-                        txtContactSended.setText(
-                                String.format("Mật khẩu đã được gửi đến Email %s. Vui lòng kiểm tra thông báo để cập nhật thông tin.",
-                                        txtContact.getText()));
-                        layoutContact.setVisibility(View.INVISIBLE);
-                        layoutSended.setVisibility(View.VISIBLE);
-                        exists = true;
-                        actionBar.setDisplayHomeAsUpEnabled(false);
-                        actionBar.setDisplayShowTitleEnabled(false);
-                        break;
+                if(checkEditText(txtContact) && isValidEmail(txtContact.getText().toString())) {
+                    for (int i = 0; i < MainActivity.listUser.size(); i++) {
+                        if (txtContact.getText().toString().equals(MainActivity.listUser.get(i).getId())) {
+                            addNotification(MainActivity.listUser.get(i).getUserId(), i);
+                            txtContactSended.setText(
+                                    String.format("Mật khẩu đã được gửi đến Email %s. Vui lòng kiểm tra thông báo để cập nhật thông tin.",
+                                            txtContact.getText()));
+                            layoutContact.setVisibility(View.INVISIBLE);
+                            layoutSended.setVisibility(View.VISIBLE);
+                            exists = true;
+                            actionBar.setDisplayHomeAsUpEnabled(false);
+                            actionBar.setDisplayShowTitleEnabled(false);
+                            break;
+                        }
                     }
+                    if (!exists)
+                        Toast.makeText(ForgotPasswordActivity.this, "Email không tồn tại.", Toast.LENGTH_LONG).show();
                 }
-                if (!exists)
-                    Toast.makeText(ForgotPasswordActivity.this, "Email không tồn tại.", Toast.LENGTH_LONG).show();
             }
         });
 
@@ -97,7 +99,24 @@ public class ForgotPasswordActivity extends AppCompatActivity {
             }
         });
     }
-
+    private boolean isValidEmail(String target) {
+        if (target.matches("[a-zA-Z0-9._-]+@[a-z]+.[a-z]+"))
+            return true;
+        else if (target.matches("[a-zA-Z0-9._-]+@[a-z]+.[a-z]+.[a-z]+"))
+            return true;
+        else {
+            txtContact.setError("Email sai định dạng!");
+        }
+        return false;
+    }
+    private boolean checkEditText(EditText editText) {
+        if (editText.getText().toString().trim().length() > 0)
+            return true;
+        else {
+            editText.setError("Vui lòng nhập dữ liệu!");
+        }
+        return false;
+    }
     private void addNotification(String key, int position) {
         Intent forgotPWIntent = new Intent(this, ForgotPasswordActivity2.class);
         forgotPWIntent.putExtra("Key", key);
