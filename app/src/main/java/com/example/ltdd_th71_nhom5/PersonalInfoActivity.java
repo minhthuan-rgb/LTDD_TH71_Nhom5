@@ -48,17 +48,26 @@ public class PersonalInfoActivity extends AppCompatActivity {
 
     private void catchViewEventListener() {
         btnLuu.setOnClickListener(v -> {
-            if (checkBox.isChecked()) {
-                if (!edtMKCu.getText().toString().equals(MainActivity.currentUser.getPassWord()))
-                    Toast.makeText(getApplicationContext(), "Mật khẩu cũ không chính xác!", Toast.LENGTH_LONG).show();
-                else if (!edtMKMoi.getText().toString().equals(edtAuthMK.getText().toString()))
-                    Toast.makeText(getApplicationContext(), "Xác nhận mật khẩu mới không trùng khớp!", Toast.LENGTH_LONG).show();
-                else if (edtMKCu.getText().toString().equals(edtMKMoi.getText().toString()))
-                    Toast.makeText(getApplicationContext(), "Mật khẩu mới trùng với mật khẩu cũ!", Toast.LENGTH_LONG).show();
-                else {
-                    MainActivity.mData.child("TaiKhoan").child(MainActivity.currentUser.getUserId())
-                            .child("passWord").setValue(edtMKMoi.getText().toString());
-                    MainActivity.currentUser.setPassWord(edtMKMoi.getText().toString());
+            if(checkEditText(editTextHoTen_Personal) && checkEditText(editTextSDT_Personal) && checkEditText(editTextDiaChi_Personal)) {
+                if (checkBox.isChecked()) {
+                    if (!edtMKCu.getText().toString().equals(MainActivity.currentUser.getPassWord()))
+                        Toast.makeText(getApplicationContext(), "Mật khẩu cũ không chính xác!", Toast.LENGTH_LONG).show();
+                    else if (!edtMKMoi.getText().toString().equals(edtAuthMK.getText().toString()))
+                        Toast.makeText(getApplicationContext(), "Xác nhận mật khẩu mới không trùng khớp!", Toast.LENGTH_LONG).show();
+                    else if (edtMKCu.getText().toString().equals(edtMKMoi.getText().toString()))
+                        Toast.makeText(getApplicationContext(), "Mật khẩu mới trùng với mật khẩu cũ!", Toast.LENGTH_LONG).show();
+                    else {
+                        MainActivity.mData.child("TaiKhoan").child(MainActivity.currentUser.getUserId())
+                                .child("passWord").setValue(edtMKMoi.getText().toString());
+                        MainActivity.currentUser.setPassWord(edtMKMoi.getText().toString());
+                        MainActivity.mData.child("TaiKhoan").child(MainActivity.currentUser.getUserId())
+                                .child("userName").setValue(editTextHoTen_Personal.getText().toString());
+                        MainActivity.mData.child("TaiKhoan").child(MainActivity.currentUser.getUserId())
+                                .child("diaChi").setValue(editTextDiaChi_Personal.getText().toString());
+                        MainActivity.mData.child("TaiKhoan").child(MainActivity.currentUser.getUserId())
+                                .child("phone").setValue("+84" + editTextSDT_Personal.getText().toString().substring(1));
+                    }
+                } else {
                     MainActivity.mData.child("TaiKhoan").child(MainActivity.currentUser.getUserId())
                             .child("userName").setValue(editTextHoTen_Personal.getText().toString());
                     MainActivity.mData.child("TaiKhoan").child(MainActivity.currentUser.getUserId())
@@ -66,14 +75,6 @@ public class PersonalInfoActivity extends AppCompatActivity {
                     MainActivity.mData.child("TaiKhoan").child(MainActivity.currentUser.getUserId())
                             .child("phone").setValue("+84" + editTextSDT_Personal.getText().toString().substring(1));
                 }
-            }
-            else {
-                MainActivity.mData.child("TaiKhoan").child(MainActivity.currentUser.getUserId())
-                        .child("userName").setValue(editTextHoTen_Personal.getText().toString());
-                MainActivity.mData.child("TaiKhoan").child(MainActivity.currentUser.getUserId())
-                        .child("diaChi").setValue(editTextDiaChi_Personal.getText().toString());
-                MainActivity.mData.child("TaiKhoan").child(MainActivity.currentUser.getUserId())
-                        .child("phone").setValue("+84" + editTextSDT_Personal.getText().toString().substring(1));
             }
         });
 
@@ -96,6 +97,14 @@ public class PersonalInfoActivity extends AppCompatActivity {
         editTextHoTen_Personal = findViewById(R.id.editTextHoTen_Personal);
         editTextSDT_Personal = findViewById(R.id.editTextSDT_Personal);
         txtEmail_Personal = findViewById(R.id.txtEmail_Personal);
+    }
+    private boolean checkEditText(EditText editText) {
+        if (editText.getText().toString().trim().length() > 0)
+            return true;
+        else {
+            editText.setError("Vui lòng nhập dữ liệu!");
+        }
+        return false;
     }
 
     @Override
