@@ -97,6 +97,8 @@ public class PersonalInfoActivity extends AppCompatActivity {
         editTextHoTen_Personal = findViewById(R.id.editTextHoTen_Personal);
         editTextSDT_Personal = findViewById(R.id.editTextSDT_Personal);
         txtEmail_Personal = findViewById(R.id.txtEmail_Personal);
+        linearChangePW = findViewById(R.id.linearChangePW);
+        linearChangePW.setVisibility(View.INVISIBLE);
     }
     private boolean checkEditText(EditText editText) {
         if (editText.getText().toString().trim().length() > 0)
