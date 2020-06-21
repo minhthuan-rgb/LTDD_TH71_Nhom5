@@ -6,7 +6,6 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,11 +16,10 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
 
 import com.example.ltdd_th71_nhom5.model.Book;
-import com.example.ltdd_th71_nhom5.model.Category;
+import com.example.ltdd_th71_nhom5.model.Order;
 import com.example.ltdd_th71_nhom5.model.ShoppingCart;
 import com.example.ltdd_th71_nhom5.model.User;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -39,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
     public static  List<User> listUser;
     public  static  List<Book> allBookList;
     public static User currentUser = new User();
+    public static List<Order> listOrder;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,6 +71,9 @@ public class MainActivity extends AppCompatActivity {
 
         if (listRecentQuery == null)
             listRecentQuery = new ArrayList<>();
+
+        if(listOrder == null)
+            listOrder = new ArrayList<>();
 
         loadAllBookList();
 

@@ -1,5 +1,6 @@
 package com.example.ltdd_th71_nhom5;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -24,7 +25,7 @@ import java.util.List;
 
 public class SearchResultActivity extends AppCompatActivity {
     private RecyclerView rvSearchResult;
-    private TextView txtSearch;
+    private TextView txtSearch, txtCountResult, txtNotification;
     List<Book> listBook = new ArrayList<>();
     SearchResultAdapter adapter = null;
     String strSearch;
@@ -66,14 +67,17 @@ public class SearchResultActivity extends AppCompatActivity {
         checkData();
     }
 
+    @SuppressLint("DefaultLocale")
     private void checkData() {
         if(listBook.size() > 0) {
+            txtCountResult.setText(String.format("Bao gồm (%d) kết quả", listBook.size()));
             listNotNull.setVisibility(View.VISIBLE);
             listNull.setVisibility(View.INVISIBLE);
         }
         else{
             listNotNull.setVisibility(View.INVISIBLE);
             listNull.setVisibility(View.VISIBLE);
+            txtNotification.setText(String.format("Không có kết quả nào cho \"%s\"", strSearch));
         }
     }
 
@@ -82,6 +86,8 @@ public class SearchResultActivity extends AppCompatActivity {
         rvSearchResult = findViewById(R.id.rvSearchResult);
         listNotNull = findViewById(R.id.listNotNull);
         listNull = findViewById(R.id.listNull);
+        txtCountResult = findViewById(R.id.txtCountResult);
+        txtNotification = findViewById(R.id.txtNotification);
     }
 
     public void createList(){

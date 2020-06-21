@@ -84,47 +84,32 @@ public class BookActivity extends AppCompatActivity {
         CatchEventSpinner();
 
         // Button Choose
-        btnChoose.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int quantity = Integer.parseInt(spinner.getSelectedItem().toString());
-                double newValue = 0;
-<<<<<<< HEAD
-                if (MainActivity.listShoppingCart.size() > 0) {
-=======
+        btnChoose.setOnClickListener(v -> {
+            int quantity = Integer.parseInt(spinner.getSelectedItem().toString());
+            double newValue = 0;
+            if(MainActivity.listShoppingCart.size() > 0){
+                boolean exists = false;
+                for (int i = 0; i < MainActivity.listShoppingCart.size(); i++) {
+                    if (MainActivity.listShoppingCart.get(i).getBook().getBookID().equals(ID)) {
+                        MainActivity.listShoppingCart.get(i)
+                                .setQuantity(MainActivity.listShoppingCart.get(i).getQuantity() + quantity);
 
-                if(MainActivity.listShoppingCart.size() > 0){
->>>>>>> ee0953eff181cddbdb9ebc22c8e0d85d04e2a30f
-                    boolean exists = false;
-                    for (int i = 0; i < MainActivity.listShoppingCart.size(); i++) {
-                        if (MainActivity.listShoppingCart.get(i).getBook().getBookID() == ID) {
-                            MainActivity.listShoppingCart.get(i)
-                                    .setQuantity(MainActivity.listShoppingCart.get(i).getQuantity() + quantity);
+                        if (MainActivity.listShoppingCart.get(i).getQuantity() > 10)
+                            MainActivity.listShoppingCart.get(i).setQuantity(10);
 
-                            if (MainActivity.listShoppingCart.get(i).getQuantity() > 10)
-                                MainActivity.listShoppingCart.get(i).setQuantity(10);
-
-                            if (sale != 0)
-                                newValue = (MainActivity.listShoppingCart.get(i).getQuantity() * value
-                                        * (100 - sale)) / 100;
-                            else
-                                newValue = value * MainActivity.listShoppingCart.get(i).getQuantity();
-
-                            MainActivity.listShoppingCart.get(i).setNewValue(newValue);
-                            exists = true;
-                            break;
-                        }
-                    }
-
-                    if (!exists) {
                         if (sale != 0)
-                            newValue = (quantity * value * (100 - sale)) / 100;
+                            newValue = (MainActivity.listShoppingCart.get(i).getQuantity() * value
+                                    * (100 - sale)) / 100;
                         else
-                            newValue = quantity * value;
+                            newValue = value * MainActivity.listShoppingCart.get(i).getQuantity();
 
-                        MainActivity.listShoppingCart.add(new ShoppingCart(book, quantity, newValue));
+                        MainActivity.listShoppingCart.get(i).setNewValue(newValue);
+                        exists = true;
+                        break;
                     }
-                } else {
+                }
+
+                if (!exists) {
                     if (sale != 0)
                         newValue = (quantity * value * (100 - sale)) / 100;
                     else
@@ -132,18 +117,25 @@ public class BookActivity extends AppCompatActivity {
 
                     MainActivity.listShoppingCart.add(new ShoppingCart(book, quantity, newValue));
                 }
+            } else {
+                if (sale != 0)
+                    newValue = (quantity * value * (100 - sale)) / 100;
+                else
+                    newValue = quantity * value;
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(BookActivity.this);
-                builder.setTitle("Một sản phẩm đã được thêm vào giỏ hàng");
-                builder.setMessage(book.getTitle() + "\nGiá: " + String.format("%.3f VND",
-                        book.getValue()) +"\nSale: " + String.format("%d", book.getSale()) + "%");
-                builder.setPositiveButton("Xem giỏ hàng", (dialog, which) -> {
-                    Intent cartIntent = new Intent(BookActivity.this, ShoppingCartActivity.class);
-                    startActivity(cartIntent);
-                });
-
-                builder.show();
+                MainActivity.listShoppingCart.add(new ShoppingCart(book, quantity, newValue));
             }
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(BookActivity.this);
+            builder.setTitle("Một sản phẩm đã được thêm vào giỏ hàng");
+            builder.setMessage(book.getTitle() + "\nGiá: " + String.format("%.3f VND",
+                    book.getValue()) + (sale > 0 ?(String.format("%d", book.getSale()) + "%"):""));
+            builder.setPositiveButton("Xem giỏ hàng", (dialog, which) -> {
+                Intent cartIntent = new Intent(BookActivity.this, ShoppingCartActivity.class);
+                startActivity(cartIntent);
+            });
+
+            builder.show();
         });
     }
     private void mapView() {

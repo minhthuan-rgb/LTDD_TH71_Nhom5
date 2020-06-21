@@ -5,6 +5,9 @@ public class ShoppingCart {
     private int quantity;
     private double newValue;
 
+    public ShoppingCart(){
+    }
+
     public ShoppingCart(Book book, int quantity, double newValue) {
         this.book = book;
         this.quantity = quantity;

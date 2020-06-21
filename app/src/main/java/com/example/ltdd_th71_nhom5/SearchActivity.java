@@ -2,16 +2,14 @@ package com.example.ltdd_th71_nhom5;
 
 
 import android.content.Intent;
-import android.icu.text.UnicodeSetSpanner;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
-import android.widget.Toast;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -20,14 +18,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.arlib.floatingsearchview.FloatingSearchView;
+import com.arlib.floatingsearchview.suggestions.SearchSuggestionsAdapter;
 import com.arlib.floatingsearchview.suggestions.model.SearchSuggestion;
 import com.example.ltdd_th71_nhom5.adapter.HotkeyAdapter;
 import com.example.ltdd_th71_nhom5.adapter.RecentQueryAdapter;
 import com.example.ltdd_th71_nhom5.model.Book;
 import com.example.ltdd_th71_nhom5.model.Suggestion;
-import com.google.firebase.database.ChildEventListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,7 +36,7 @@ public class SearchActivity extends AppCompatActivity  implements HotkeyAdapter.
     private RecentQueryAdapter queryAdapter;
     private FrameLayout frameRecentQuery;
     private FloatingSearchView mSearchView;
-    private List<Suggestion> mSuggestions =new ArrayList<>();
+    private List<Suggestion> mSuggestions = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,6 +85,7 @@ public class SearchActivity extends AppCompatActivity  implements HotkeyAdapter.
             @Override
             public void onSearchAction(String currentQuery) {
                 Intent intent = new Intent(getApplicationContext(), SearchResultActivity.class);
+                addRecentQuery(currentQuery);
                 intent.putExtra("Search text", currentQuery);
                 startActivity(intent);
             }
@@ -104,9 +101,8 @@ public class SearchActivity extends AppCompatActivity  implements HotkeyAdapter.
     private List<Suggestion> getSuggestion(String query){
         List<Suggestion> suggestions = new ArrayList<>();
         for(Suggestion suggestion:mSuggestions){
-            if(suggestion.getBody().toLowerCase().contains(query.toLowerCase())){
-                suggestions.add(suggestion);
-            }
+            if(suggestion.getBody().toLowerCase().contains(query.toLowerCase()))
+                    suggestions.add(suggestion);
         }
         return suggestions;
     }
@@ -149,6 +145,7 @@ public class SearchActivity extends AppCompatActivity  implements HotkeyAdapter.
             frameRecentQuery.setVisibility(View.VISIBLE);
         else
             frameRecentQuery.setVisibility(View.INVISIBLE);
+
     }
 
     private void addRecentQuery(String query) {
@@ -169,7 +166,6 @@ public class SearchActivity extends AppCompatActivity  implements HotkeyAdapter.
 
     @Override
     public void onItemClick(View view, int position) {
-
     }
 
     @Override

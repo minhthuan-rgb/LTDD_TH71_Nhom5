@@ -45,11 +45,12 @@ public class LoginActivity extends AppCompatActivity {
                         MainActivity.isLogin = true;
                         MainActivity.currentUser = MainActivity.listUser.get(i);
                         exists = true;
+                        MainActivity.listOrder = MainActivity.listUser.get(i).getOrDer();
                         Intent intent;
                         if (activity.equals("Person"))
                             intent = new Intent(getApplicationContext(), MainActivity.class);
                         else
-                            intent = new Intent(getApplicationContext(), ShoppingCart.class);
+                            intent = new Intent(getApplicationContext(), ShoppingCartActivity.class);
                         startActivity(intent);
                         break;
                     }
@@ -59,12 +60,9 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        txtForgotPassword.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent forgotPWIntent = new Intent(LoginActivity.this, ForgotPasswordActivity.class);
-                startActivity(forgotPWIntent);
-            }
+        txtForgotPassword.setOnClickListener(v -> {
+            Intent forgotPWIntent = new Intent(LoginActivity.this, ForgotPasswordActivity.class);
+            startActivity(forgotPWIntent);
         });
 
         imgCancel.setOnClickListener(new View.OnClickListener() {

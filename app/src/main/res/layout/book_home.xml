@@ -20,7 +20,8 @@
             android:id="@+id/imgBookHome"
             android:scaleType="fitXY"
             android:layout_width="90dp"
-            android:layout_height="108dp"/>
+            android:layout_height="108dp"
+            android:layout_margin="5dp"/>
 
         <TextView
             android:id="@+id/sale"
@@ -37,5 +38,12 @@
             android:textStyle="bold"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium.Inverse"/>
 
+        <TextView
+            android:id="@+id/txtTitleHome"
+            android:layout_width="90dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/imgBookHome"
+            android:layout_marginTop="5dp"
+            android:gravity="center"/>
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

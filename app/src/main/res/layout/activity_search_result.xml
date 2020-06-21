@@ -16,7 +16,7 @@
             tools:ignore="MissingConstraints">
             <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent">
 
                 <androidx.appcompat.widget.Toolbar
                     android:id="@+id/toolbarResult"
@@ -28,7 +28,7 @@
                     android:drawableLeft="@drawable/ic_search_black"
                     android:id="@+id/txtSearch"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="50dp"
                     android:layout_gravity="center"
                     android:background="@drawable/textview"
                     android:drawableStart="@drawable/ic_search_black"
@@ -41,7 +41,8 @@
                     android:layout_marginEnd="85dp"
                     android:layout_marginLeft="65dp"
                     android:layout_marginStart="65dp"
-                    android:layout_marginVertical="10dp" />
+                    android:layout_marginVertical="10dp"
+                    android:gravity="center|left"/>
 
             </FrameLayout>
         </com.google.android.material.appbar.AppBarLayout>
@@ -51,7 +52,9 @@
         <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:id="@+id/listNull"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_marginTop="69dp"
+            android:background="@color/backgroundSearch">
 
             <ImageView
                 android:layout_width="150dp"
@@ -62,12 +65,12 @@
                 android:layout_gravity="center|top"/>
 
             <TextView
+                android:id="@+id/txtNotification"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:textColor="@color/white"
                 android:textStyle="bold"
-                android:text="Hiện tại bạn chưa có sản phẩm nào trong giỏ hàng."
                 android:layout_marginTop="250dp"
                 android:layout_gravity="center|top"/>
 
