@@ -49,6 +49,8 @@ public class RegisterActivity extends AppCompatActivity {
     private boolean isValidEmail(String target) {
         if (target.matches("[a-zA-Z0-9._-]+@[a-z]+.[a-z]+"))
             return true;
+        else if (target.matches("[a-zA-Z0-9._-]+@[a-z]+.[a-z]+.[a-z]+"))
+            return true;
         else {
             txtEmail.setError("Email sai định dạng!");
         }
