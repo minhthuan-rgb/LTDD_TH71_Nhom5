@@ -2,39 +2,36 @@ package com.example.ltdd_th71_nhom5;
 
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.arlib.floatingsearchview.FloatingSearchView;
-import com.arlib.floatingsearchview.suggestions.SearchSuggestionsAdapter;
 import com.arlib.floatingsearchview.suggestions.model.SearchSuggestion;
+import com.arlib.floatingsearchview.util.Util;
 import com.example.ltdd_th71_nhom5.adapter.HotkeyAdapter;
-import com.example.ltdd_th71_nhom5.adapter.RecentQueryAdapter;
 import com.example.ltdd_th71_nhom5.model.Book;
 import com.example.ltdd_th71_nhom5.model.Suggestion;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class SearchActivity extends AppCompatActivity  implements HotkeyAdapter.ItemClickListener,
-        RecentQueryAdapter.RecentItemClickListener{
+public class SearchActivity extends AppCompatActivity  implements HotkeyAdapter.ItemClickListener{
     private  String[] mHotKey;
-    private RecyclerView rvHotKey, rvRecentQuery;
+    private RecyclerView rvHotKey;
     private HotkeyAdapter hotkeyAdapter;
-    private RecentQueryAdapter queryAdapter;
-    private FrameLayout frameRecentQuery;
     private FloatingSearchView mSearchView;
     private List<Suggestion> mSuggestions = new ArrayList<>();
 
@@ -59,8 +56,6 @@ public class SearchActivity extends AppCompatActivity  implements HotkeyAdapter.
         mapView();
 
         searchViewEventListener();
-
-        checkData();
     }
 
     private void searchViewEventListener() {
@@ -79,16 +74,82 @@ public class SearchActivity extends AppCompatActivity  implements HotkeyAdapter.
             @Override
             public void onSuggestionClicked(SearchSuggestion searchSuggestion) {
                 Suggestion suggestion = (Suggestion) searchSuggestion;
+                boolean exists = false;
+                for(Suggestion s : mSuggestions){
+                    if (s.getBody().equals(suggestion.getBody())) {
+                        exists = true;
+                        s.setIsHistory(true);
+                        break;
+                    }
+                }
+                if (!exists) {
+                    suggestion.setIsHistory(true);
+                    mSuggestions.add(suggestion);
+                }
                 onSearchAction(suggestion.getBody());
             }
 
             @Override
             public void onSearchAction(String currentQuery) {
                 Intent intent = new Intent(getApplicationContext(), SearchResultActivity.class);
+                boolean exists = false;
+                for(Suggestion suggestion : mSuggestions){
+                    if (suggestion.getBody().toLowerCase().equals(currentQuery.toLowerCase())) {
+                        exists = true;
+                        suggestion.setIsHistory(true);
+                        break;
+                    }
+                }
+                if (!exists) {
+                    Suggestion suggestion = new Suggestion(currentQuery);
+                    suggestion.setIsHistory(true);
+                    mSuggestions.add(suggestion);
+                }
                 addRecentQuery(currentQuery);
                 intent.putExtra("Search text", currentQuery);
                 startActivity(intent);
             }
+        });
+
+        mSearchView.setOnFocusChangeListener(new FloatingSearchView.OnFocusChangeListener() {
+            @Override
+            public void onFocus() {
+                mSearchView.showProgress();
+                List<Suggestion> list = new ArrayList<>();
+                for(Suggestion suggestion:mSuggestions){
+                    if (suggestion.getIsHistory())
+                        list.add(suggestion);
+                }
+                mSearchView.swapSuggestions(list);
+                mSearchView.hideProgress();
+            }
+
+            @Override
+            public void onFocusCleared() {
+
+            }
+        });
+
+        mSearchView.setOnBindSuggestionCallback((suggestionView, leftIcon, textView, item, itemPosition) -> {
+            Suggestion suggestion = (Suggestion) item;
+
+
+            if (suggestion.getIsHistory()) {
+                leftIcon.setImageDrawable(ResourcesCompat.getDrawable(getResources(),
+                        R.drawable.recent, null));
+
+                Util.setIconColor(leftIcon, Color.parseColor("#000000"));
+                leftIcon.setAlpha(.36f);
+            } else {
+                leftIcon.setAlpha(0.0f);
+                leftIcon.setImageDrawable(null);
+            }
+
+            textView.setTextColor(Color.parseColor("#000000"));
+            String text = suggestion.getBody()
+                    .replaceFirst(mSearchView.getQuery(),
+                            "<font color=\"" + "#DD0A0A" + "\">" + mSearchView.getQuery() + "</font>");
+            textView.setText(Html.fromHtml(text));
         });
     }
 
@@ -109,7 +170,6 @@ public class SearchActivity extends AppCompatActivity  implements HotkeyAdapter.
 
 
     private void mapView() {
-        frameRecentQuery = findViewById(R.id.frameRecentQuery);
         //HotkeyAdapter and recyclerView
         hotkeyAdapter = new HotkeyAdapter(this,mHotKey);
         hotkeyAdapter.setClickListener(this);
@@ -117,14 +177,6 @@ public class SearchActivity extends AppCompatActivity  implements HotkeyAdapter.
         StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(7, StaggeredGridLayoutManager.HORIZONTAL);
         rvHotKey.setLayoutManager(layoutManager);
         rvHotKey.setAdapter(hotkeyAdapter);
-
-        //RecentQueryAdapter and recyclerView
-        queryAdapter = new RecentQueryAdapter(this, MainActivity.listRecentQuery);
-        queryAdapter.setClickListener(this);
-        rvRecentQuery = findViewById(R.id.rvRecentQuery);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-        rvRecentQuery.setLayoutManager(linearLayoutManager);
-        rvRecentQuery.setAdapter(queryAdapter);
 
         //mSearchView
         mSearchView = findViewById(R.id.mSearchView);
@@ -138,14 +190,6 @@ public class SearchActivity extends AppCompatActivity  implements HotkeyAdapter.
             return true;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    private void checkData() {
-        if(MainActivity.listRecentQuery.size() > 0)
-            frameRecentQuery.setVisibility(View.VISIBLE);
-        else
-            frameRecentQuery.setVisibility(View.INVISIBLE);
-
     }
 
     private void addRecentQuery(String query) {
@@ -166,10 +210,5 @@ public class SearchActivity extends AppCompatActivity  implements HotkeyAdapter.
 
     @Override
     public void onItemClick(View view, int position) {
-    }
-
-    @Override
-    public void onRecentItemClick(View view, int position) {
-
     }
 }

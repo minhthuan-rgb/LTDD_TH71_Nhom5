@@ -63,28 +63,18 @@ public class MoreBookActivity extends AppCompatActivity {
     }
 
     private void cacthViewEventClickListener() {
-        imgDown.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                imgDown.setVisibility(View.INVISIBLE);
-                imgUp.setVisibility(View.VISIBLE);
-                Collections.sort(lisBook, (p2,p1)-> {
-                    return p1.getTitle().compareToIgnoreCase(p2.getTitle());
-                });
-                adapter.notifyDataSetChanged();
-            }
+        imgDown.setOnClickListener(v -> {
+            imgDown.setVisibility(View.INVISIBLE);
+            imgUp.setVisibility(View.VISIBLE);
+            Collections.sort(lisBook, (p2,p1)-> p1.getTitle().compareToIgnoreCase(p2.getTitle()));
+            adapter.notifyDataSetChanged();
         });
 
-        imgUp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                imgDown.setVisibility(View.VISIBLE);
-                imgUp.setVisibility(View.INVISIBLE);
-                Collections.sort(lisBook, (p1,p2)-> {
-                    return p1.getTitle().compareToIgnoreCase(p2.getTitle());
-                });
-                adapter.notifyDataSetChanged();
-            }
+        imgUp.setOnClickListener(v -> {
+            imgDown.setVisibility(View.VISIBLE);
+            imgUp.setVisibility(View.INVISIBLE);
+            Collections.sort(lisBook, (p1,p2)-> p1.getTitle().compareToIgnoreCase(p2.getTitle()));
+            adapter.notifyDataSetChanged();
         });
     }
 
