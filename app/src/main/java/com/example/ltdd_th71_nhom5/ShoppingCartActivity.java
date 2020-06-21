@@ -156,7 +156,7 @@ public class ShoppingCartActivity extends AppCompatActivity implements View.OnCl
     @Override
     public void onClick(View v) {
         if(v.getId() == R.id.btnContinue1 || v.getId() == R.id.btnContinue2){
-            Intent homeIntent = new Intent(ShoppingCartActivity.this, MainActivity.class);
+            Intent homeIntent = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(homeIntent);
         }
     }

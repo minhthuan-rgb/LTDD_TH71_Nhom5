@@ -29,6 +29,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
     Button btnGetPW, btnContinue;
     RelativeLayout layoutContact;
     CoordinatorLayout layoutSended;
+    ActionBar actionBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +37,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         setContentView(R.layout.activity_forgot_password);
 
         //actionbar
-        ActionBar actionBar = getSupportActionBar();
+        actionBar = getSupportActionBar();
         actionBar.setBackgroundDrawable(new ColorDrawable(Color.BLACK));
         actionBar.setTitle("Quên mật khẩu");
         actionBar.setDisplayShowTitleEnabled(true);
@@ -68,16 +69,23 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         btnGetPW.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!txtContact.getText().toString().isEmpty()){
-                    addNotification();
-                    txtContactSended.setText(
-                            String.format("Mật khẩu đã được gửi đến Email/Số điện thoại %s. Vui lòng kiểm tra thông báo để cập nhật thông tin.",
-                                    txtContact.getText()));
-                    layoutContact.setVisibility(View.INVISIBLE);
-                    layoutSended.setVisibility(View.VISIBLE);
+                boolean exists = false;
+                for(int i = 0; i < MainActivity.listUser.size(); i++){
+                    if(txtContact.getText().toString().equals(MainActivity.listUser.get(i).getId())) {
+                        addNotification(MainActivity.listUser.get(i).getUserId(), i);
+                        txtContactSended.setText(
+                                String.format("Mật khẩu đã được gửi đến Email %s. Vui lòng kiểm tra thông báo để cập nhật thông tin.",
+                                        txtContact.getText()));
+                        layoutContact.setVisibility(View.INVISIBLE);
+                        layoutSended.setVisibility(View.VISIBLE);
+                        exists = true;
+                        actionBar.setDisplayHomeAsUpEnabled(false);
+                        actionBar.setDisplayShowTitleEnabled(false);
+                        break;
+                    }
                 }
-                else
-                    Toast.makeText(ForgotPasswordActivity.this, "Email/Số điện thoại không hơp lệ.", Toast.LENGTH_LONG).show();
+                if (!exists)
+                    Toast.makeText(ForgotPasswordActivity.this, "Email không tồn tại.", Toast.LENGTH_LONG).show();
             }
         });
 
@@ -90,8 +98,10 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         });
     }
 
-    private void addNotification() {
+    private void addNotification(String key, int position) {
         Intent forgotPWIntent = new Intent(this, ForgotPasswordActivity2.class);
+        forgotPWIntent.putExtra("Key", key);
+        forgotPWIntent.putExtra("Position", position);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, forgotPWIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "Channel-001")
                 .setSmallIcon(R.drawable.people_2)

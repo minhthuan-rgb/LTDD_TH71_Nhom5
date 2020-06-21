@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
@@ -24,13 +25,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SearchResultActivity extends AppCompatActivity {
-    private RecyclerView rvSearchResult;
-    private TextView txtSearch, txtCountResult, txtNotification;
+    RecyclerView rvSearchResult;
+    TextView txtSearch, txtCountResult, txtNotification;
     List<Book> listBook = new ArrayList<>();
     SearchResultAdapter adapter = null;
     String strSearch;
     CoordinatorLayout listNull;
     FrameLayout listNotNull;
+    Button btnContinue3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,13 +53,6 @@ public class SearchResultActivity extends AppCompatActivity {
         strSearch = intent.getExtras().getString("Search text");
         txtSearch.setText(strSearch);
 
-        txtSearch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
-
         adapter = new SearchResultAdapter(this, listBook);
         createList();
         StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
@@ -65,6 +60,17 @@ public class SearchResultActivity extends AppCompatActivity {
         rvSearchResult.setAdapter(adapter);
 
         checkData();
+
+        catchViewEventListener();
+    }
+
+    private void catchViewEventListener() {
+        txtSearch.setOnClickListener(v -> onBackPressed());
+
+        btnContinue3.setOnClickListener(v -> {
+            Intent homeIntent = new Intent(getApplicationContext(), MainActivity.class);
+            startActivity(homeIntent);
+        });
     }
 
     @SuppressLint("DefaultLocale")
@@ -88,6 +94,7 @@ public class SearchResultActivity extends AppCompatActivity {
         listNull = findViewById(R.id.listNull);
         txtCountResult = findViewById(R.id.txtCountResult);
         txtNotification = findViewById(R.id.txtNotification);
+        btnContinue3 = findViewById(R.id.btnContinue3);
     }
 
     public void createList(){

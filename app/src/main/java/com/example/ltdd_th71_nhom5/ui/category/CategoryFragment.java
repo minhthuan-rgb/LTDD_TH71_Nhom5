@@ -45,13 +45,11 @@ public class CategoryFragment extends Fragment implements CategoryAdapter.OnCate
         recyclerView.setAdapter(mAdapter);
 
         recyclerView1 = root.findViewById(R.id.rec_Viewcategory1);
-        mAdapter1 = new CategoryAdapter(root.getContext(),listCategory,this);
-        getCategoryList(listCategory,mAdapter1);
         recyclerView1.setLayoutManager(new GridLayoutManager(root.getContext(),3));
         final LinearLayoutManager layoutManager = new  LinearLayoutManager(root.getContext());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView1.setLayoutManager(layoutManager);
-        recyclerView1.setAdapter(mAdapter1);
+        recyclerView1.setAdapter(mAdapter);
         return root;
     }
 

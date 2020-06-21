@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,7 +21,8 @@ public class PersonalInfoActivity extends AppCompatActivity {
     CheckBox checkBox;
     Button btnLuu;
     EditText edtMKCu,edtMKMoi,edtAuthMK, editTextHoTen_Personal, editTextSDT_Personal, editTextDiaChi_Personal;
-    TextView txtMKCu,txtMKMoi,txtAuthMK, txtEmail_Personal;
+    TextView txtEmail_Personal;
+    LinearLayout linearChangePW;
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,23 +79,9 @@ public class PersonalInfoActivity extends AppCompatActivity {
 
         checkBox.setOnCheckedChangeListener((compoundButton, b) -> {
             if (checkBox.isChecked())
-            {
-                edtMKCu.setVisibility(View.VISIBLE);
-                edtMKMoi.setVisibility(View.VISIBLE);
-                edtAuthMK.setVisibility(View.VISIBLE);
-                txtAuthMK.setVisibility(View.VISIBLE);
-                txtMKCu.setVisibility(View.VISIBLE);
-                txtMKMoi.setVisibility(View.VISIBLE);
-            }
+                linearChangePW.setVisibility(View.VISIBLE);
             else
-            {
-                edtAuthMK.setVisibility(View.INVISIBLE);
-                edtMKMoi.setVisibility(View.INVISIBLE);
-                edtMKCu.setVisibility(View.INVISIBLE);
-                txtMKMoi.setVisibility(View.INVISIBLE);
-                txtMKCu.setVisibility(View.INVISIBLE);
-                txtAuthMK.setVisibility(View.INVISIBLE);
-            }
+                linearChangePW.setVisibility(View.INVISIBLE);
         });
     }
 
@@ -104,9 +92,6 @@ public class PersonalInfoActivity extends AppCompatActivity {
         edtMKCu = findViewById(R.id.editTextMatKhauCu_Personal);
         edtMKMoi = findViewById(R.id.editTextMatKhauMoi_Personal);
         edtAuthMK = findViewById(R.id.editTextAuthMKMoi_Personal);
-        txtMKCu = findViewById(R.id.textViewMKCu_Personal);
-        txtAuthMK = findViewById(R.id.textViewAuthMK_Personal);
-        txtMKMoi = findViewById(R.id.textViewMKMoi_Personal);
         editTextDiaChi_Personal = findViewById(R.id.editTextDiaChi_Personal);
         editTextHoTen_Personal = findViewById(R.id.editTextHoTen_Personal);
         editTextSDT_Personal = findViewById(R.id.editTextSDT_Personal);

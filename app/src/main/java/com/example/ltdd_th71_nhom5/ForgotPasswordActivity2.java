@@ -15,26 +15,33 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 public class ForgotPasswordActivity2 extends AppCompatActivity {
     EditText txtNewPW, txtAgain;
-    Button btnSummit, btnBackToHome;
+    Button btnSummit, btnBackToLogin, btnBackToHome;
     RelativeLayout layoutResetPW;
-    CoordinatorLayout layoutFinish;
-
+    LinearLayout layoutFinish;
+    String key = "";
+    int position;
+    ActionBar actionBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forgot_password2);
         //actionbar
-        ActionBar actionBar = getSupportActionBar();
+        actionBar = getSupportActionBar();
         actionBar.setBackgroundDrawable(new ColorDrawable(Color.BLACK));
         actionBar.setTitle("Quên mật khẩu");
         actionBar.setDisplayShowTitleEnabled(true);
         actionBar.setDisplayHomeAsUpEnabled(true);
+
+        Intent intent = getIntent();
+        key = intent.getExtras().getString("Key");
+        position = intent.getExtras().getInt("Position");
 
         mapView();
 
@@ -42,29 +49,33 @@ public class ForgotPasswordActivity2 extends AppCompatActivity {
     }
 
     private void cacthButtonClickEvent() {
-        btnSummit.setOnClickListener(new View.OnClickListener() {
-            @SuppressLint("ShowToast")
-            @Override
-            public void onClick(View v) {
-                String newPW = txtNewPW.getText().toString();
-                String againPW = txtAgain.getText().toString();
-                if (newPW.isEmpty() || againPW.isEmpty())
-                    Toast.makeText(ForgotPasswordActivity2.this, "Bạn phải nhập đầy đủ cả hai ô mật khẩu", Toast.LENGTH_LONG).show();
-                else if (!newPW.equals(againPW))
-                    Toast.makeText(ForgotPasswordActivity2.this, "Mật khẩu không trùng khớp", Toast.LENGTH_LONG).show();
-                else{
-                   layoutResetPW.setVisibility(View.INVISIBLE);
-                   layoutFinish.setVisibility(View.VISIBLE);
-                }
+        btnSummit.setOnClickListener(v -> {
+            String newPW = txtNewPW.getText().toString();
+            String againPW = txtAgain.getText().toString();
+            if (newPW.isEmpty() || againPW.isEmpty())
+                Toast.makeText(ForgotPasswordActivity2.this, "Bạn phải nhập đầy đủ cả hai ô mật khẩu", Toast.LENGTH_LONG).show();
+            else if (!newPW.equals(againPW))
+                Toast.makeText(ForgotPasswordActivity2.this, "Mật khẩu không trùng khớp", Toast.LENGTH_LONG).show();
+            else{
+                MainActivity.mData.child("TaiKhoan").child(key).child("passWord").setValue(newPW);
+                MainActivity.listUser.get(position).setPassWord(newPW);
+                layoutResetPW.setVisibility(View.INVISIBLE);
+                layoutFinish.setVisibility(View.VISIBLE);
+                actionBar.setDisplayHomeAsUpEnabled(false);
+                actionBar.setDisplayShowTitleEnabled(false);
             }
         });
 
-        btnBackToHome.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent loginIntent = new Intent(ForgotPasswordActivity2.this, LoginActivity.class);
-                startActivity(loginIntent);
-            }
+        btnBackToHome.setOnClickListener(v -> {
+            Intent mainIntent = new Intent(ForgotPasswordActivity2.this, MainActivity.class);
+            mainIntent.putExtra("Activity", "Forgot");
+            startActivity(mainIntent);
+        });
+
+        btnBackToLogin.setOnClickListener(v -> {
+            Intent loginIntent = new Intent(ForgotPasswordActivity2.this, LoginActivity.class);
+            loginIntent.putExtra("Activity", "Forgot");
+            startActivity(loginIntent);
         });
     }
 
@@ -73,6 +84,7 @@ public class ForgotPasswordActivity2 extends AppCompatActivity {
         txtAgain = findViewById(R.id.txtAgain);
         btnSummit = findViewById(R.id.btnSummit);
         btnBackToHome = findViewById(R.id.btnBackToHome);
+        btnBackToLogin = findViewById(R.id.btnBackToLogin);
         layoutResetPW = findViewById(R.id.layoutResetPW);
         layoutFinish = findViewById(R.id.layoutFinish);
 
