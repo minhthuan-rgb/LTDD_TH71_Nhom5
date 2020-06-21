@@ -28,121 +28,18 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginStart="8dp"
                 android:layout_marginLeft="8dp"
                 android:src="@drawable/category_suggest"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <LinearLayout
-                android:id="@+id/linearLayout5"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rec_Viewcategory1"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_height="match_parent"
                 android:layout_marginLeft="8dp"
-                android:layout_marginTop="4dp"
-                android:orientation="vertical"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView2">
+                android:background="#F2F2F2" />
 
-                <TextView
-                    android:id="@+id/cate_LangMan"
-                    android:layout_width="match_parent"
-                    android:layout_height="82dp"
-                    android:drawableTop="@drawable/langman"
-                    android:gravity="center"
-                    android:paddingTop="10dp"
-                    android:text="Lãng mạn"
-                    android:textColor="#000000"
-                    android:textSize="12sp"
-                    android:textStyle="bold"
-                    android:layout_marginVertical="2dp"
-                    android:background="@drawable/category_bg"/>
-
-                <TextView
-                    android:id="@+id/cate_phieuluu"
-                    android:layout_width="match_parent"
-                    android:layout_height="82dp"
-                    android:drawableTop="@drawable/phieuluu"
-                    android:gravity="center"
-                    android:paddingTop="10dp"
-                    android:text="Phiêu lưu"
-                    android:textColor="#000000"
-                    android:textSize="12sp"
-                    android:textStyle="bold"
-                    android:layout_marginVertical="2dp"
-                    android:background="@drawable/category_bg"/>
-
-                <TextView
-                    android:id="@+id/cate_KinhTe"
-                    android:layout_width="match_parent"
-                    android:layout_height="82dp"
-                    android:drawableTop="@drawable/kinhte"
-                    android:gravity="center"
-                    android:paddingTop="10dp"
-                    android:text="Kinh tế"
-                    android:textColor="#000000"
-                    android:textSize="12sp"
-                    android:textStyle="bold"
-                    android:layout_marginVertical="2dp"
-                    android:background="@drawable/category_bg"/>
-
-                <TextView
-                    android:id="@+id/cate_TreEm"
-                    android:layout_width="match_parent"
-                    android:layout_height="82dp"
-                    android:drawableTop="@drawable/treem"
-                    android:gravity="center"
-                    android:paddingTop="10dp"
-                    android:text="Trẻ em"
-                    android:textColor="#000000"
-                    android:textSize="12sp"
-                    android:textStyle="bold"
-                    android:layout_marginVertical="2dp"
-                    android:background="@drawable/category_bg"/>
-
-                <TextView
-                    android:id="@+id/cate_TieuThuyet"
-                    android:layout_width="match_parent"
-                    android:layout_height="82dp"
-                    android:drawableTop="@drawable/tieuthuyet"
-                    android:gravity="center"
-                    android:paddingTop="10dp"
-                    android:text="Tiểu thuyết"
-                    android:textColor="#000000"
-                    android:textSize="12sp"
-                    android:textStyle="bold"
-                    android:layout_marginVertical="2dp"
-                    android:background="@drawable/category_bg"/>
-
-                <TextView
-                    android:id="@+id/cate_SinhHoc"
-                    android:layout_width="match_parent"
-                    android:layout_height="82dp"
-                    android:drawableTop="@drawable/sinhhoc"
-                    android:gravity="center"
-                    android:paddingTop="10dp"
-                    android:text="Sinh học"
-                    android:textColor="#000000"
-                    android:textSize="12sp"
-                    android:textStyle="bold"
-                    android:layout_marginVertical="2dp"
-                    android:background="@drawable/category_bg"/>
-
-                <TextView
-                    android:id="@+id/cate_ToanHoc"
-                    android:layout_width="match_parent"
-                    android:layout_height="82dp"
-                    android:drawableTop="@drawable/toanhoc"
-                    android:gravity="center"
-                    android:paddingTop="10dp"
-                    android:text="Toán học"
-                    android:textColor="#000000"
-                    android:textSize="12sp"
-                    android:textStyle="bold"
-                    android:layout_marginVertical="2dp"
-                    android:background="@drawable/category_bg"/>
-            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 

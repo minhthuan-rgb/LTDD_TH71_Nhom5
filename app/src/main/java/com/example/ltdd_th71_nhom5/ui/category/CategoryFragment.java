@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.ltdd_th71_nhom5.MainActivity;
@@ -28,6 +29,8 @@ public class CategoryFragment extends Fragment implements CategoryAdapter.OnCate
     public List<Category> listCategory;
     RecyclerView recyclerView;
     CategoryAdapter mAdapter = null;
+    RecyclerView recyclerView1;
+    CategoryAdapter mAdapter1 = null;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -41,6 +44,14 @@ public class CategoryFragment extends Fragment implements CategoryAdapter.OnCate
         recyclerView.setLayoutManager(new GridLayoutManager(root.getContext(),3));
         recyclerView.setAdapter(mAdapter);
 
+        recyclerView1 = root.findViewById(R.id.rec_Viewcategory1);
+        mAdapter1 = new CategoryAdapter(root.getContext(),listCategory,this);
+        getCategoryList(listCategory,mAdapter1);
+        recyclerView1.setLayoutManager(new GridLayoutManager(root.getContext(),3));
+        final LinearLayoutManager layoutManager = new  LinearLayoutManager(root.getContext());
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        recyclerView1.setLayoutManager(layoutManager);
+        recyclerView1.setAdapter(mAdapter1);
         return root;
     }
 
