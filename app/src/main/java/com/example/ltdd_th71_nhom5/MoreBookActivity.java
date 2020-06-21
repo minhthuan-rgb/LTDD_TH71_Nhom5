@@ -68,8 +68,8 @@ public class MoreBookActivity extends AppCompatActivity {
             public void onClick(View v) {
                 imgDown.setVisibility(View.INVISIBLE);
                 imgUp.setVisibility(View.VISIBLE);
-                Collections.sort(lisBook, (p1,p2)-> {
-                    return p2.getTitle().compareTo(p1.getTitle());
+                Collections.sort(lisBook, (p2,p1)-> {
+                    return p1.getTitle().compareToIgnoreCase(p2.getTitle());
                 });
                 adapter.notifyDataSetChanged();
             }
@@ -81,7 +81,7 @@ public class MoreBookActivity extends AppCompatActivity {
                 imgDown.setVisibility(View.VISIBLE);
                 imgUp.setVisibility(View.INVISIBLE);
                 Collections.sort(lisBook, (p1,p2)-> {
-                    return p1.getTitle().compareTo(p2.getTitle());
+                    return p1.getTitle().compareToIgnoreCase(p2.getTitle());
                 });
                 adapter.notifyDataSetChanged();
             }

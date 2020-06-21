@@ -72,9 +72,9 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
                 .into(holder.imgCart);
 
         if ( mData.get(position).getQuantity() >= 10)
-            holder.btnAdd.setVisibility(View.INVISIBLE);
+            holder.btnAdd.setClickable(false);
         else if (mData.get(position).getQuantity() <= 1)
-            holder.btnSub.setVisibility(View.INVISIBLE);
+            holder.btnSub.setClickable(false);
         else {
             holder.btnAdd.setVisibility(View.VISIBLE);
             holder.btnSub.setVisibility(View.VISIBLE);
@@ -117,13 +117,13 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
                 ShoppingCartActivity.calTotalValue();
 
                 if ( mData.get(position).getQuantity() > 9) {
-                    holder.btnAdd.setVisibility(View.INVISIBLE);
-                    holder.btnSub.setVisibility(View.VISIBLE);
+                    holder.btnAdd.setClickable(false);
+                    holder.btnSub.setClickable(true);
                     holder.txtQuantity.setText(String.format("X%d", quantity));
                 }
                 else {
-                    holder.btnAdd.setVisibility(View.VISIBLE);
-                    holder.btnSub.setVisibility(View.VISIBLE);
+                    holder.btnAdd.setClickable(true);
+                    holder.btnSub.setClickable(true);
                     holder.txtQuantity.setText(String.format("X%d", quantity));
                 }
             }
@@ -148,13 +148,13 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
                 ShoppingCartActivity.calTotalValue();
 
                 if ( mData.get(position).getQuantity() < 2) {
-                    holder.btnSub.setVisibility(View.INVISIBLE);
-                    holder.btnAdd.setVisibility(View.VISIBLE);
+                    holder.btnSub.setClickable(false);
+                    holder.btnAdd.setClickable(true);;
                     holder.txtQuantity.setText(String.format("X%d", quantity));
                 }
                 else {
-                    holder.btnSub.setVisibility(View.VISIBLE);
-                    holder.btnAdd.setVisibility(View.VISIBLE);
+                    holder.btnSub.setClickable(true);;
+                    holder.btnAdd.setClickable(true);;
                     holder.txtQuantity.setText(String.format("X%d", quantity));
                 }
             }

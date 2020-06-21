@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.opengl.Visibility;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,8 +14,12 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.activity.OnBackPressedDispatcher;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -22,18 +27,29 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.ltdd_th71_nhom5.adapter.ShoppingCartAdapter;
 import com.example.ltdd_th71_nhom5.model.Book;
+import com.example.ltdd_th71_nhom5.model.Order;
 import com.example.ltdd_th71_nhom5.model.ShoppingCart;
+import com.example.ltdd_th71_nhom5.model.User;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 
 public class ShoppingCartActivity extends AppCompatActivity implements View.OnClickListener{
     ArrayList<ShoppingCart> list;
+    @SuppressLint("StaticFieldLeak")
     static LinearLayout linearNullList;
+    @SuppressLint("StaticFieldLeak")
     static LinearLayout linearListNotNull;
     RecyclerView rvShoppingCart;
     ListView lvOffer;
     Button btnContinue1, btnContinue2, btnPay;
+    @SuppressLint("StaticFieldLeak")
     static TextView totalValue;
+    @SuppressLint("StaticFieldLeak")
     static ShoppingCartAdapter adapter;
 
 
@@ -59,11 +75,31 @@ public class ShoppingCartActivity extends AppCompatActivity implements View.OnCl
         btnContinue1.setOnClickListener(ShoppingCartActivity.this);
         btnContinue2.setOnClickListener(ShoppingCartActivity.this);
         btnPay.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View v) {
-                Intent loginIntent = new Intent(ShoppingCartActivity.this, LoginActivity.class);
-                loginIntent.putExtra("Activity", "Cart");
-                startActivity(loginIntent);
+                if(!MainActivity.isLogin)
+                {
+                    Intent loginIntent = new Intent(ShoppingCartActivity.this, LoginActivity.class);
+                    loginIntent.putExtra("Activity", "Cart");
+                    startActivity(loginIntent);
+                }
+                else
+                {
+                    Order currentOrder = new Order();
+                    currentOrder.setDate(LocalDateTime.now().toString());
+
+                    List<ShoppingCart> temp = new ArrayList<>(MainActivity.listShoppingCart);
+
+                    currentOrder.setListCart(temp);
+                    MainActivity.listOrder.add(currentOrder);
+                    MainActivity.mData.child("TaiKhoan").child(MainActivity.currentUser.getUserId()).child("orDer").setValue(MainActivity.listOrder);
+                    Toast.makeText(ShoppingCartActivity.this, "Thanh toán thành công!", Toast.LENGTH_SHORT).show();
+
+                    MainActivity.listShoppingCart.clear();
+
+                    checkData();
+                }
             }
         });
     }
@@ -110,6 +146,7 @@ public class ShoppingCartActivity extends AppCompatActivity implements View.OnCl
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
         if (id == android.R.id.home) {
+
             onBackPressed();
             return true;
         }

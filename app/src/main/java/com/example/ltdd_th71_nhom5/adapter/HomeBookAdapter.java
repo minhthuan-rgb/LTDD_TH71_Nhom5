@@ -50,6 +50,7 @@ public class HomeBookAdapter extends RecyclerView.Adapter<HomeBookAdapter.ViewHo
                 .error(R.drawable.error)
                 .fit()
                 .into(holder.bookImg);
+        holder.txtTitleHome.setText(mData.get(position).getTitle());
 
         // set click listener
         holder.cardView.setOnClickListener(new View.OnClickListener() {
@@ -78,7 +79,7 @@ public class HomeBookAdapter extends RecyclerView.Adapter<HomeBookAdapter.ViewHo
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView txtSale;
+        TextView txtSale, txtTitleHome;
         ImageView bookImg;
         CardView cardView;
 
@@ -87,6 +88,7 @@ public class HomeBookAdapter extends RecyclerView.Adapter<HomeBookAdapter.ViewHo
             txtSale = itemView.findViewById(R.id.sale);
             bookImg = itemView.findViewById(R.id.imgBookHome);
             cardView = itemView.findViewById(R.id.cvBookHome);
+            txtTitleHome = itemView.findViewById(R.id.txtTitleHome);
         }
     }
 }

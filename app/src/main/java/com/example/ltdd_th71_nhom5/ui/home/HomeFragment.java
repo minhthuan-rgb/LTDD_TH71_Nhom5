@@ -23,6 +23,7 @@ import com.example.ltdd_th71_nhom5.model.Book;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.Query;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -110,21 +111,17 @@ public class HomeFragment extends Fragment{
     }
 
     public static void loadData(String s, List<Book> listBook, HomeBookAdapter adapter, boolean getTopFive) {
-        MainActivity.mData.child(s).addChildEventListener(new ChildEventListener() {
+        Query query = MainActivity.mData.child(s);
+        if (getTopFive)
+            query = MainActivity.mData.child(s).limitToFirst(5);
+
+        query.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 Book book = dataSnapshot.getValue(Book.class);
                 book.setBookID(dataSnapshot.getKey());
-                if (getTopFive) {
-                    if (listBook.size() < 5) {
-                        listBook.add(book);
-                        adapter.notifyDataSetChanged();
-                    }
-                }
-                else{
                     listBook.add(book);
                     adapter.notifyDataSetChanged();
-                }
             }
 
             @Override
