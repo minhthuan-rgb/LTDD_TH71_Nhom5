@@ -50,6 +50,7 @@ public class PersonalInfoActivity extends AppCompatActivity {
         btnLuu.setOnClickListener(v -> {
             if(checkEditText(editTextHoTen_Personal) && checkEditText(editTextSDT_Personal) && checkEditText(editTextDiaChi_Personal)) {
                 if (checkBox.isChecked()) {
+                    if(checkEditText(edtMKCu) && checkEditText(edtMKMoi) && checkEditText(edtAuthMK)){
                     if (!edtMKCu.getText().toString().equals(MainActivity.currentUser.getPassWord()))
                         Toast.makeText(getApplicationContext(), "Mật khẩu cũ không chính xác!", Toast.LENGTH_LONG).show();
                     else if (!edtMKMoi.getText().toString().equals(edtAuthMK.getText().toString()))
@@ -66,6 +67,9 @@ public class PersonalInfoActivity extends AppCompatActivity {
                                 .child("diaChi").setValue(editTextDiaChi_Personal.getText().toString());
                         MainActivity.mData.child("TaiKhoan").child(MainActivity.currentUser.getUserId())
                                 .child("phone").setValue("+84" + editTextSDT_Personal.getText().toString().substring(1));
+                        Toast.makeText(getApplicationContext(), "Lưu thành công!", Toast.LENGTH_LONG).show();
+                        onBackPressed();
+                    }
                     }
                 } else {
                     MainActivity.mData.child("TaiKhoan").child(MainActivity.currentUser.getUserId())

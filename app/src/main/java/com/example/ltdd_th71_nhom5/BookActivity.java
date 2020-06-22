@@ -22,6 +22,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.ltdd_th71_nhom5.model.Book;
 import com.example.ltdd_th71_nhom5.model.ShoppingCart;
+import com.example.ltdd_th71_nhom5.ui.home.HomeFragment;
 import com.squareup.picasso.Picasso;
 
 public class BookActivity extends AppCompatActivity {
@@ -179,6 +180,7 @@ public class BookActivity extends AppCompatActivity {
                 return true;
             case android.R.id.home:
                 onBackPressed();
+
                 return true;
             default:
                 return  super.onOptionsItemSelected(item);
