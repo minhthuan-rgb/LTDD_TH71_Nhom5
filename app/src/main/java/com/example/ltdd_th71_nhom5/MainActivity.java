@@ -21,6 +21,7 @@ import com.example.ltdd_th71_nhom5.model.Book;
 import com.example.ltdd_th71_nhom5.model.Category;
 import com.example.ltdd_th71_nhom5.model.Order;
 import com.example.ltdd_th71_nhom5.model.ShoppingCart;
+import com.example.ltdd_th71_nhom5.model.Suggestion;
 import com.example.ltdd_th71_nhom5.model.User;
 import com.example.ltdd_th71_nhom5.ui.category.CategoryFragment;
 import com.example.ltdd_th71_nhom5.ui.home.HomeFragment;
@@ -43,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
     public  static  List<Book> allBookList, allFlashDealBookList;
     public static User currentUser = new User();
     public static List<Order> listOrder;
+    public static List<Suggestion> mSuggestions;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,6 +75,9 @@ public class MainActivity extends AppCompatActivity {
 
         if(listOrder == null)
             listOrder = new ArrayList<>();
+
+        if(mSuggestions == null)
+            mSuggestions = new ArrayList<>();
 
         loadAllBookList();
 

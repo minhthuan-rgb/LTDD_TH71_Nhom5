@@ -23,16 +23,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SearchActivity extends AppCompatActivity{
-    private  String[] mHotKey;
     private FloatingSearchView mSearchView;
-    private List<Suggestion> mSuggestions = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
-
-        mHotKey = new String[]{};
 
         //Toolbar
         Toolbar toolbar = findViewById(R.id.toolbarSearch);
@@ -50,7 +46,7 @@ public class SearchActivity extends AppCompatActivity{
         mSearchView.setSearchFocused(true);
         mSearchView.showProgress();
         List<Suggestion> list = new ArrayList<>();
-        for(Suggestion suggestion:mSuggestions){
+        for(Suggestion suggestion:MainActivity.mSuggestions){
             if (suggestion.getIsHistory())
                 list.add(suggestion);
         }
@@ -75,7 +71,7 @@ public class SearchActivity extends AppCompatActivity{
             public void onSuggestionClicked(SearchSuggestion searchSuggestion) {
                 Suggestion suggestion = (Suggestion) searchSuggestion;
                 boolean exists = false;
-                for(Suggestion s : mSuggestions){
+                for(Suggestion s : MainActivity.mSuggestions){
                     if (s.getBody().equals(suggestion.getBody())) {
                         exists = true;
                         s.setIsHistory(true);
@@ -84,7 +80,7 @@ public class SearchActivity extends AppCompatActivity{
                 }
                 if (!exists) {
                     suggestion.setIsHistory(true);
-                    mSuggestions.add(suggestion);
+                    MainActivity.mSuggestions.add(suggestion);
                 }
                 onSearchAction(suggestion.getBody());
             }
@@ -93,7 +89,7 @@ public class SearchActivity extends AppCompatActivity{
             public void onSearchAction(String currentQuery) {
                 Intent intent = new Intent(getApplicationContext(), SearchResultActivity.class);
                 boolean exists = false;
-                for(Suggestion suggestion : mSuggestions){
+                for(Suggestion suggestion : MainActivity.mSuggestions){
                     if (suggestion.getBody().toLowerCase().equals(currentQuery.toLowerCase())) {
                         exists = true;
                         suggestion.setIsHistory(true);
@@ -103,7 +99,7 @@ public class SearchActivity extends AppCompatActivity{
                 if (!exists) {
                     Suggestion suggestion = new Suggestion(currentQuery);
                     suggestion.setIsHistory(true);
-                    mSuggestions.add(suggestion);
+                    MainActivity.mSuggestions.add(suggestion);
                 }
                 addRecentQuery(currentQuery);
                 intent.putExtra("Search text", currentQuery);
@@ -116,7 +112,7 @@ public class SearchActivity extends AppCompatActivity{
             public void onFocus() {
                 mSearchView.showProgress();
                 List<Suggestion> list = new ArrayList<>();
-                for(Suggestion suggestion:mSuggestions){
+                for(Suggestion suggestion:MainActivity.mSuggestions){
                     if (suggestion.getIsHistory())
                         list.add(suggestion);
                 }
@@ -155,13 +151,13 @@ public class SearchActivity extends AppCompatActivity{
 
     private void initSuggestionList() {
        for (Book book : MainActivity.allBookList){
-           mSuggestions.add(new Suggestion(book.getTitle()));
+           MainActivity.mSuggestions.add(new Suggestion(book.getTitle()));
        }
     }
 
     private List<Suggestion> getSuggestion(String query){
         List<Suggestion> suggestions = new ArrayList<>();
-        for(Suggestion suggestion:mSuggestions){
+        for(Suggestion suggestion:MainActivity.mSuggestions){
             if(suggestion.getBody().toLowerCase().contains(query.toLowerCase()))
                     suggestions.add(suggestion);
         }
