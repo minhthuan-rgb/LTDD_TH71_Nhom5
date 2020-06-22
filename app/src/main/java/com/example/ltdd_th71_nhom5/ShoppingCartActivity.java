@@ -22,9 +22,11 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.ltdd_th71_nhom5.adapter.HomeBookAdapter;
 import com.example.ltdd_th71_nhom5.adapter.ShoppingCartAdapter;
 import com.example.ltdd_th71_nhom5.model.Book;
 import com.example.ltdd_th71_nhom5.model.Order;
@@ -45,14 +47,17 @@ public class ShoppingCartActivity extends AppCompatActivity implements View.OnCl
     @SuppressLint("StaticFieldLeak")
     static LinearLayout linearListNotNull;
     RecyclerView rvShoppingCart;
-    ListView lvOffer;
+    RecyclerView rvOffer;
     Button btnContinue1, btnContinue2, btnPay;
     @SuppressLint("StaticFieldLeak")
     static TextView totalValue;
     @SuppressLint("StaticFieldLeak")
     static ShoppingCartAdapter adapter;
+    TextView txtOffer;
+    HomeBookAdapter bookAdapter;
 
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,39 +73,44 @@ public class ShoppingCartActivity extends AppCompatActivity implements View.OnCl
         mapView();
         checkData();
         calTotalValue();
-        catchEventButton();
+        catchViewEventListener();
     }
 
-    private void catchEventButton() {
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private void catchViewEventListener() {
         btnContinue1.setOnClickListener(ShoppingCartActivity.this);
         btnContinue2.setOnClickListener(ShoppingCartActivity.this);
-        btnPay.setOnClickListener(new View.OnClickListener() {
-            @RequiresApi(api = Build.VERSION_CODES.O)
-            @Override
-            public void onClick(View v) {
-                if(!MainActivity.isLogin)
-                {
-                    Intent loginIntent = new Intent(ShoppingCartActivity.this, LoginActivity.class);
-                    loginIntent.putExtra("Activity", "Cart");
-                    startActivity(loginIntent);
-                }
-                else
-                {
-                    Order currentOrder = new Order();
-                    currentOrder.setDate(LocalDateTime.now().toString());
 
-                    List<ShoppingCart> temp = new ArrayList<>(MainActivity.listShoppingCart);
-
-                    currentOrder.setListCart(temp);
-                    MainActivity.listOrder.add(currentOrder);
-                    MainActivity.mData.child("TaiKhoan").child(MainActivity.currentUser.getUserId()).child("orDer").setValue(MainActivity.listOrder);
-                    Toast.makeText(ShoppingCartActivity.this, "Thanh toán thành công!", Toast.LENGTH_SHORT).show();
-
-                    MainActivity.listShoppingCart.clear();
-
-                    checkData();
-                }
+        btnPay.setOnClickListener(v -> {
+            if(!MainActivity.isLogin)
+            {
+                Intent loginIntent = new Intent(ShoppingCartActivity.this, LoginActivity.class);
+                loginIntent.putExtra("Activity", "Cart");
+                startActivity(loginIntent);
             }
+            else
+            {
+                Order currentOrder = new Order();
+                currentOrder.setDate(LocalDateTime.now().toString());
+
+                List<ShoppingCart> temp = new ArrayList<>(MainActivity.listShoppingCart);
+
+                currentOrder.setListCart(temp);
+                MainActivity.listOrder.add(currentOrder);
+                MainActivity.mData.child("TaiKhoan").child(MainActivity.currentUser.getUserId()).child("orDer").setValue(MainActivity.listOrder);
+                Toast.makeText(ShoppingCartActivity.this, "Thanh toán thành công!", Toast.LENGTH_SHORT).show();
+
+                MainActivity.listShoppingCart.clear();
+
+                checkData();
+            }
+        });
+
+        txtOffer.setOnClickListener(v -> {
+            Intent allIntent = new Intent(getApplicationContext(), MoreBookActivity.class);
+            allIntent.putExtra("Key", "FD");
+            allIntent.putExtra("CategoryName", "Flash Deal");
+            startActivity(allIntent);
         });
     }
 
@@ -134,12 +144,19 @@ public class ShoppingCartActivity extends AppCompatActivity implements View.OnCl
         btnContinue1 = findViewById(R.id.btnContinue1);
         btnContinue2 = findViewById(R.id.btnContinue2);
         totalValue = findViewById(R.id.totalValue);
+        txtOffer = findViewById(R.id.txtOffer);
 
         rvShoppingCart = findViewById(R.id.rvShoppingCart);
-        adapter = new ShoppingCartAdapter(ShoppingCartActivity.this, MainActivity.listShoppingCart);
+        adapter = new ShoppingCartAdapter(getApplicationContext(), MainActivity.listShoppingCart);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         rvShoppingCart.setLayoutManager(layoutManager);
         rvShoppingCart.setAdapter(adapter);
+
+        rvOffer = findViewById(R.id.rvOffer);
+        bookAdapter = new HomeBookAdapter(getApplicationContext(), MainActivity.allFlashDealBookList.subList(0,5));
+        LinearLayoutManager horizontalLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
+        rvOffer.setLayoutManager(horizontalLayoutManager);
+        rvOffer.setAdapter(bookAdapter);
     }
 
     @Override

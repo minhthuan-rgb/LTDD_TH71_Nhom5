@@ -6,8 +6,13 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -22,9 +27,12 @@ import com.example.ltdd_th71_nhom5.model.Book;
 import com.example.ltdd_th71_nhom5.adapter.SearchResultAdapter;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
-public class SearchResultActivity extends AppCompatActivity {
+public class SearchResultActivity extends AppCompatActivity{
     RecyclerView rvSearchResult;
     TextView txtSearch, txtCountResult, txtNotification;
     List<Book> listBook = new ArrayList<>();
@@ -33,6 +41,8 @@ public class SearchResultActivity extends AppCompatActivity {
     CoordinatorLayout listNull;
     FrameLayout listNotNull;
     Button btnContinue3;
+    Spinner spinnerSort;
+    LinearLayout linearSort;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +65,7 @@ public class SearchResultActivity extends AppCompatActivity {
 
         adapter = new SearchResultAdapter(this, listBook);
         createList();
+        Collections.sort(listBook, (p1, p2)-> p1.getTitle().compareToIgnoreCase(p2.getTitle()));
         StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         rvSearchResult.setLayoutManager(layoutManager);
         rvSearchResult.setAdapter(adapter);
@@ -62,6 +73,8 @@ public class SearchResultActivity extends AppCompatActivity {
         checkData();
 
         catchViewEventListener();
+
+        CatchEventSpinner();
     }
 
     private void catchViewEventListener() {
@@ -71,6 +84,38 @@ public class SearchResultActivity extends AppCompatActivity {
             Intent homeIntent = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(homeIntent);
         });
+
+       spinnerSort.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+           @Override
+           public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+               switch (position){
+                   case 0:
+                       Collections.sort(listBook, (p1, p2)-> p1.getTitle().compareToIgnoreCase(p2.getTitle()));
+                       break;
+                   case 1:
+                       Collections.sort(listBook, (p2, p1)-> p1.getTitle().compareToIgnoreCase(p2.getTitle()));
+                       break;
+                   case 2:
+                       Collections.sort(listBook, (o1, o2) -> Double.compare(o1.getValue(), o2.getValue()));
+                       break;
+                   case 3:
+                       Collections.sort(listBook, (o1, o2) -> Double.compare(o2.getValue(), o1.getValue()));
+                       break;
+               }
+               adapter.notifyDataSetChanged();
+           }
+
+           @Override
+           public void onNothingSelected(AdapterView<?> parent) {
+
+           }
+       });
+    }
+
+    private void CatchEventSpinner() {
+        String[] sortType = new String[]{"Tên tăng dần","Tên giảm dần","Giá tăng dần","Giá giảm dần"};
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, sortType);
+        spinnerSort.setAdapter(arrayAdapter);
     }
 
     @SuppressLint("DefaultLocale")
@@ -79,6 +124,9 @@ public class SearchResultActivity extends AppCompatActivity {
             txtCountResult.setText(String.format("Bao gồm (%d) kết quả", listBook.size()));
             listNotNull.setVisibility(View.VISIBLE);
             listNull.setVisibility(View.INVISIBLE);
+            if (listBook.size() > 1)
+                linearSort.setVisibility(View.VISIBLE);
+            else linearSort.setVisibility(View.INVISIBLE);
         }
         else{
             listNotNull.setVisibility(View.INVISIBLE);
@@ -95,6 +143,8 @@ public class SearchResultActivity extends AppCompatActivity {
         txtCountResult = findViewById(R.id.txtCountResult);
         txtNotification = findViewById(R.id.txtNotification);
         btnContinue3 = findViewById(R.id.btnContinue3);
+        spinnerSort = findViewById(R.id.spinnerSort);
+        linearSort = findViewById(R.id.linearSort);
     }
 
     public void createList(){
@@ -122,6 +172,10 @@ public class SearchResultActivity extends AppCompatActivity {
             case R.id.action_search_shopping:
                 Intent cartIntent = new Intent(SearchResultActivity.this, ShoppingCartActivity.class);
                 startActivity(cartIntent);
+                return true;
+            case R.id.action_search_home:
+                Intent homeIntent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(homeIntent);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

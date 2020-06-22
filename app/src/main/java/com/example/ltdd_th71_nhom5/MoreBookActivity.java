@@ -33,7 +33,7 @@ public class MoreBookActivity extends AppCompatActivity {
     ImageView imgUp, imgDown;
     RecyclerView rvMoreBook;
     HomeBookAdapter adapter = null;
-    List<Book> lisBook;
+    List<Book> listBook;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,9 +54,19 @@ public class MoreBookActivity extends AppCompatActivity {
         mapView();
         txtTitleCategory.setText(name);
 
-        lisBook = new ArrayList<>();
-        adapter = new HomeBookAdapter(this, lisBook);
-        HomeFragment.loadData(key, lisBook, adapter, false);
+        listBook = new ArrayList<>();
+        if (!key.equals("FD")) {
+            adapter = new HomeBookAdapter(this, listBook);
+            HomeFragment.loadData(key, listBook, adapter, false);
+        }
+        else {
+            listBook = MainActivity.allFlashDealBookList;
+            adapter = new HomeBookAdapter(this, listBook);
+        }
+        Collections.sort(listBook, (p1, p2)-> p1.getTitle().compareToIgnoreCase(p2.getTitle()));
+        adapter.notifyDataSetChanged();
+
+
         setUpRecyclerView(rvMoreBook, adapter);
 
         cacthViewEventClickListener();
@@ -66,14 +76,14 @@ public class MoreBookActivity extends AppCompatActivity {
         imgDown.setOnClickListener(v -> {
             imgDown.setVisibility(View.INVISIBLE);
             imgUp.setVisibility(View.VISIBLE);
-            Collections.sort(lisBook, (p2,p1)-> p1.getTitle().compareToIgnoreCase(p2.getTitle()));
+            Collections.sort(listBook, (p2,p1)-> p1.getTitle().compareToIgnoreCase(p2.getTitle()));
             adapter.notifyDataSetChanged();
         });
 
         imgUp.setOnClickListener(v -> {
             imgDown.setVisibility(View.VISIBLE);
             imgUp.setVisibility(View.INVISIBLE);
-            Collections.sort(lisBook, (p1,p2)-> p1.getTitle().compareToIgnoreCase(p2.getTitle()));
+            Collections.sort(listBook, (p1,p2)-> p1.getTitle().compareToIgnoreCase(p2.getTitle()));
             adapter.notifyDataSetChanged();
         });
     }
@@ -105,9 +115,6 @@ public class MoreBookActivity extends AppCompatActivity {
                 startActivity(cartIntent);
                 return  true;
             case R.id.action_home:
-            case R.id.action_category:
-            case R.id.action_personal:
-            case R.id.action_notification:
                 Intent homeIntent = new Intent(MoreBookActivity.this, MainActivity.class);
                 startActivity(homeIntent);
                 return true;
@@ -120,7 +127,7 @@ public class MoreBookActivity extends AppCompatActivity {
     }
 
     public void setUpRecyclerView(RecyclerView recyclerView, HomeBookAdapter adapter){
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(MoreBookActivity.this, 4);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(), 4);
         recyclerView.setLayoutManager(gridLayoutManager);
         recyclerView.setAdapter(adapter);
     }

@@ -5,78 +5,85 @@
     android:layout_height="match_parent"
     android:background="@color/colorBackground">
 
-    <LinearLayout
-        android:id="@+id/linearNullList"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="6"
-            android:orientation="vertical">
-            <ImageView
-                android:layout_width="150dp"
-                android:layout_height="210dp"
-                android:layout_marginTop="30dp"
-                app:layout_constraintHorizontal_bias="0.498"
-                app:srcCompat="@drawable/head_giohang"
-                android:layout_gravity="center|top" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:textColor="@color/white"
-                android:textStyle="bold"
-                android:text="Hiện tại bạn chưa có sản phẩm nào trong giỏ hàng."
-                android:layout_marginTop="20dp"/>
-
-            <Button
-                android:id="@+id/btnContinue1"
-                android:layout_width="300dp"
-                android:layout_height="60dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/chunhat"
-                android:text="Tiếp tục mua sắm"
-                android:textColor="#333333"
-                android:textSize="22sp"
-                android:textStyle="bold"
-                app:layout_constraintHorizontal_bias="0.496" />
-        </LinearLayout>
-
+        android:layout_height="match_parent">
 
         <LinearLayout
+            android:id="@+id/linearNullList"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="4"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
-            <TextView
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="30dp"
-            android:text="Đề xuất"
-            android:textStyle="bold"
-            android:textSize="30sp"
-            android:textColor="#333333"
-            android:gravity="fill_vertical"
-            android:background="@drawable/chunhat"
-            android:paddingLeft="10dp"
-            android:drawableRight="@drawable/direction_giohang"
-            android:paddingRight="10dp"
-            app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            android:drawableEnd="@drawable/direction_giohang" />
-
-            <ListView
-                android:id="@+id/lvOffer"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="0dp"
+                android:layout_weight="6"
+                android:orientation="vertical">
+                <ImageView
+                    android:layout_width="150dp"
+                    android:layout_height="210dp"
+                    android:layout_marginTop="30dp"
+                    app:layout_constraintHorizontal_bias="0.498"
+                    app:srcCompat="@drawable/head_giohang"
+                    android:layout_gravity="center|top" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    android:text="Hiện tại bạn chưa có sản phẩm nào trong giỏ hàng."
+                    android:layout_marginTop="20dp"/>
+
+                <Button
+                    android:id="@+id/btnContinue1"
+                    android:layout_width="300dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/chunhat"
+                    android:text="Tiếp tục mua sắm"
+                    android:textColor="#333333"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    app:layout_constraintHorizontal_bias="0.496" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="4"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/txtOffer"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="10dp"
+                    android:text="Đề xuất"
+                    android:textStyle="bold"
+                    android:textSize="30sp"
+                    android:textColor="#333333"
+                    android:gravity="fill_vertical"
+                    android:background="@drawable/chunhat"
+                    android:paddingLeft="10dp"
+                    android:drawableRight="@drawable/direction_giohang"
+                    android:paddingRight="10dp"
+                    app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:drawableEnd="@drawable/direction_giohang" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/rvOffer"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
+    </ScrollView>
 
     <LinearLayout
         android:id="@+id/linearListNotNull"

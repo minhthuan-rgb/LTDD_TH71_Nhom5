@@ -18,9 +18,7 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.ltdd_th71_nhom5.adapter.HotkeyAdapter;
 import com.example.ltdd_th71_nhom5.adapter.OrderAdapter;
-import com.example.ltdd_th71_nhom5.model.Order;
 
 public class OrderManagementActivity extends AppCompatActivity implements OrderAdapter.ItemClickListener{
     Button btnLogin;

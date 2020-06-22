@@ -18,8 +18,7 @@
                 android:id="@+id/vfHome"
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
+                android:layout_marginHorizontal="5dp"
                 android:flipInterval="5000"
                 android:autoStart="false">
 

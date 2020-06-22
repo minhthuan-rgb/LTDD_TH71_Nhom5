@@ -2,12 +2,14 @@ package com.example.ltdd_th71_nhom5.ui.home;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.ViewFlipper;
 
 import androidx.annotation.NonNull;
@@ -17,6 +19,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.ltdd_th71_nhom5.MainActivity;
+import com.example.ltdd_th71_nhom5.MoreBookActivity;
 import com.example.ltdd_th71_nhom5.R;
 import com.example.ltdd_th71_nhom5.adapter.HomeBookAdapter;
 import com.example.ltdd_th71_nhom5.model.Book;
@@ -37,6 +40,7 @@ public class HomeFragment extends Fragment{
             adapter5 = null, adapter6 = null, adapter7 = null;
     List<Book> flashdealList, literaryList, economyList, mentalityList,
             parentingList, fLanguageList, childrenList;
+    Button btnMoreFlash, btnMoreLiterary, btnMoreEconomy, btnMoreMentality, btnMoreParenting, btnMoreFLanguage, btnMoreChildren;
 
 
     public HomeFragment() {
@@ -49,6 +53,7 @@ public class HomeFragment extends Fragment{
         mapView(root);
         initList();
 
+
         // init adapter
         adapter1 = new HomeBookAdapter(getContext(), flashdealList);
         adapter2 = new HomeBookAdapter(getContext(), literaryList);
@@ -59,14 +64,13 @@ public class HomeFragment extends Fragment{
         adapter7 = new HomeBookAdapter(getContext(), childrenList);
 
         //get data
-        loadData("FlashDeal", flashdealList, adapter1, true);
+        getFlashDealBook();
         loadData("VanHoc", literaryList, adapter2, true);
         loadData("KinhTe", economyList, adapter3, true);
         loadData("TamLy", mentalityList, adapter4, true);
         loadData("NuoiDayCon", parentingList, adapter5, true);
         loadData("NgoaiNgu", fLanguageList, adapter6, true);
         loadData("ThieuNhi", childrenList, adapter7, true);
-
 
 
         //set up recyclerView
@@ -77,6 +81,8 @@ public class HomeFragment extends Fragment{
         setUpRecyclerView(recyclerParenting, adapter5);
         setUpRecyclerView(recyclerFLanguage, adapter6);
         setUpRecyclerView(recyclerChildren, adapter7);
+
+        catchViewEventListener();
 
         return root;
     }
@@ -108,6 +114,15 @@ public class HomeFragment extends Fragment{
         recyclerParenting = root.findViewById(R.id.recyclerParenting);
         recyclerFLanguage = root.findViewById(R.id.recyclerFLanguage);
         recyclerChildren = root.findViewById(R.id.recyclerChildren);
+
+        //Button
+        btnMoreFlash = root.findViewById(R.id.btnMoreFlash);
+        btnMoreLiterary = root.findViewById(R.id.btnMoreLiterary);
+        btnMoreEconomy = root.findViewById(R.id.btnMoreEconomy);
+        btnMoreMentality = root.findViewById(R.id.btnMoreMentality);
+        btnMoreParenting = root.findViewById(R.id.btnMoreParenting);
+        btnMoreFLanguage = root.findViewById(R.id.btnMoreFLanguage);
+        btnMoreChildren = root.findViewById(R.id.btnMoreChildren);
     }
 
     public static void loadData(String s, List<Book> listBook, HomeBookAdapter adapter, boolean getTopFive) {
@@ -150,5 +165,366 @@ public class HomeFragment extends Fragment{
         LinearLayoutManager horizontalLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(horizontalLayoutManager);
         recyclerView.setAdapter(adapter);
+    }
+
+    private void catchViewEventListener() {
+        btnMoreFlash.setOnClickListener(v -> {
+            Intent allIntent = new Intent(getContext(), MoreBookActivity.class);
+            allIntent.putExtra("Key", "FD");
+            allIntent.putExtra("CategoryName", "Flash Deal");
+            startActivity(allIntent);
+        });
+
+        btnMoreLiterary.setOnClickListener(v -> {
+            Intent allIntent = new Intent(getContext(), MoreBookActivity.class);
+            allIntent.putExtra("Key", "VanHoc");
+            allIntent.putExtra("CategoryName", "Văn Học");
+            startActivity(allIntent);
+        });
+
+        btnMoreEconomy.setOnClickListener(v -> {
+            Intent allIntent = new Intent(getContext(), MoreBookActivity.class);
+            allIntent.putExtra("Key", "KinhTe");
+            allIntent.putExtra("CategoryName", "Kinh Tế");
+            startActivity(allIntent);
+        });
+
+        btnMoreMentality.setOnClickListener(v -> {
+            Intent allIntent = new Intent(getContext(), MoreBookActivity.class);
+            allIntent.putExtra("Key", "TamLy");
+            allIntent.putExtra("CategoryName", "Tâm Lý");
+            startActivity(allIntent);
+        });
+
+        btnMoreParenting.setOnClickListener(v -> {
+            Intent allIntent = new Intent(getContext(), MoreBookActivity.class);
+            allIntent.putExtra("Key", "NuoiDayCon");
+            allIntent.putExtra("CategoryName", "Nuôi Dạy Con");
+            startActivity(allIntent);
+        });
+
+        btnMoreFLanguage.setOnClickListener(v -> {
+            Intent allIntent = new Intent(getContext(), MoreBookActivity.class);
+            allIntent.putExtra("Key", "NgoaiNgu");
+            allIntent.putExtra("CategoryName", "Ngoại Ngữ");
+            startActivity(allIntent);
+        });
+
+        btnMoreChildren.setOnClickListener(v -> {
+            Intent allIntent = new Intent(getContext(), MoreBookActivity.class);
+            allIntent.putExtra("Key", "ThieuNhi");
+            allIntent.putExtra("CategoryName", "Thiếu Nhi");
+            startActivity(allIntent);
+        });
+    }
+
+    private void getFlashDealBook() {
+        MainActivity.mData.child("TrinhTham").addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                Book book = dataSnapshot.getValue(Book.class);
+                book.setBookID(dataSnapshot.getKey());
+                if(book.getSale() != 0) {
+                    if (flashdealList.size() < 5) {
+                        flashdealList.add(book);
+                        adapter1.notifyDataSetChanged();
+                    }
+                    MainActivity.allFlashDealBookList.add(book);
+                }
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        MainActivity.mData.child("VanHoc").addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                Book book = dataSnapshot.getValue(Book.class);
+                book.setBookID(dataSnapshot.getKey());
+                if(book.getSale() != 0) {
+                    if (flashdealList.size() < 5) {
+                        flashdealList.add(book);
+                        adapter1.notifyDataSetChanged();
+                    }
+                    MainActivity.allFlashDealBookList.add(book);
+                }
+
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        MainActivity.mData.child("KinhTe").addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                Book book = dataSnapshot.getValue(Book.class);
+                book.setBookID(dataSnapshot.getKey());
+                if(book.getSale() != 0) {
+                    if (flashdealList.size() < 5) {
+                        flashdealList.add(book);
+                        adapter1.notifyDataSetChanged();
+                    }
+                    MainActivity.allFlashDealBookList.add(book);
+                }
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        MainActivity.mData.child("TamLy").addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                Book book = dataSnapshot.getValue(Book.class);
+                book.setBookID(dataSnapshot.getKey());
+                if(book.getSale() != 0) {
+                    if (flashdealList.size() < 5) {
+                        flashdealList.add(book);
+                        adapter1.notifyDataSetChanged();
+                    }
+                    MainActivity.allFlashDealBookList.add(book);
+                }
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        MainActivity.mData.child("NuoiDayCon").addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                Book book = dataSnapshot.getValue(Book.class);
+                book.setBookID(dataSnapshot.getKey());
+                if(book.getSale() != 0) {
+                    if (flashdealList.size() < 5) {
+                        flashdealList.add(book);
+                        adapter1.notifyDataSetChanged();
+                    }
+                    MainActivity.allFlashDealBookList.add(book);
+                }
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        MainActivity.mData.child("NgoaiNgu").addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                Book book = dataSnapshot.getValue(Book.class);
+                book.setBookID(dataSnapshot.getKey());
+                if(book.getSale() != 0) {
+                    if (flashdealList.size() < 5) {
+                        flashdealList.add(book);
+                        adapter1.notifyDataSetChanged();
+                    }
+                    MainActivity.allFlashDealBookList.add(book);
+                }
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        MainActivity.mData.child("ThieuNhi").addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                Book book = dataSnapshot.getValue(Book.class);
+                book.setBookID(dataSnapshot.getKey());
+                if(book.getSale() != 0) {
+                    if (flashdealList.size() < 5) {
+                        flashdealList.add(book);
+                        adapter1.notifyDataSetChanged();
+                    }
+                    MainActivity.allFlashDealBookList.add(book);
+                }
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        MainActivity.mData.child("KinhDi").addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                Book book = dataSnapshot.getValue(Book.class);
+                book.setBookID(dataSnapshot.getKey());
+                if(book.getSale() != 0) {
+                    if (flashdealList.size() < 5) {
+                        flashdealList.add(book);
+                        adapter1.notifyDataSetChanged();
+                    }
+                    MainActivity.allFlashDealBookList.add(book);
+                }
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        MainActivity.mData.child("TieuThuyet").addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                Book book = dataSnapshot.getValue(Book.class);
+                book.setBookID(dataSnapshot.getKey());
+                if(book.getSale() != 0) {
+                    if (flashdealList.size() < 5) {
+                        flashdealList.add(book);
+                        adapter1.notifyDataSetChanged();
+                    }
+                    MainActivity.allFlashDealBookList.add(book);
+                }
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 }

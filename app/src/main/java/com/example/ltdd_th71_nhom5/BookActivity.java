@@ -128,7 +128,7 @@ public class BookActivity extends AppCompatActivity {
             AlertDialog.Builder builder = new AlertDialog.Builder(BookActivity.this);
             builder.setTitle("Một sản phẩm đã được thêm vào giỏ hàng");
             builder.setMessage(book.getTitle() + "\nGiá: " + String.format("%.3f VND",
-                    book.getValue()) + (sale > 0 ?(String.format("%d", book.getSale()) + "%"):""));
+                    book.getValue()) + (sale > 0 ?(String.format("\nSale: %d", book.getSale()) + "%"):""));
             builder.setPositiveButton("Xem giỏ hàng", (dialog, which) -> {
                 Intent cartIntent = new Intent(BookActivity.this, ShoppingCartActivity.class);
                 startActivity(cartIntent);
@@ -172,9 +172,6 @@ public class BookActivity extends AppCompatActivity {
                 startActivity(cartIntent);
                 return  true;
             case R.id.action_home:
-            case R.id.action_category:
-            case R.id.action_personal:
-            case R.id.action_notification:
                 Intent homeIntent = new Intent(BookActivity.this, MainActivity.class);
                 startActivity(homeIntent);
                 return true;

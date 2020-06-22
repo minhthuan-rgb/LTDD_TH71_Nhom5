@@ -6,32 +6,24 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.FrameLayout;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.res.ResourcesCompat;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.arlib.floatingsearchview.FloatingSearchView;
 import com.arlib.floatingsearchview.suggestions.model.SearchSuggestion;
 import com.arlib.floatingsearchview.util.Util;
-import com.example.ltdd_th71_nhom5.adapter.HotkeyAdapter;
 import com.example.ltdd_th71_nhom5.model.Book;
 import com.example.ltdd_th71_nhom5.model.Suggestion;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class SearchActivity extends AppCompatActivity  implements HotkeyAdapter.ItemClickListener{
+public class SearchActivity extends AppCompatActivity{
     private  String[] mHotKey;
-    private RecyclerView rvHotKey;
-    private HotkeyAdapter hotkeyAdapter;
     private FloatingSearchView mSearchView;
     private List<Suggestion> mSuggestions = new ArrayList<>();
 
@@ -40,8 +32,7 @@ public class SearchActivity extends AppCompatActivity  implements HotkeyAdapter.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
-        mHotKey = new String[]{"a","b", "c", "d", "e", "f", "Túp lều bác Tôm","Quẳng gánh lo đi và vui sống","3 ngày ở nước Tý hon","Đất Rừng Phương Nam",
-        "Truyện Kiều","Đại Việt sử ký toàn thư","Đời mưa gió","Kỹ nghệ lấy Tây","Đại Nam quốc âm tự vị","Lục Vân Tiên"};
+        mHotKey = new String[]{};
 
         //Toolbar
         Toolbar toolbar = findViewById(R.id.toolbarSearch);
@@ -56,6 +47,15 @@ public class SearchActivity extends AppCompatActivity  implements HotkeyAdapter.
         mapView();
 
         searchViewEventListener();
+        mSearchView.setSearchFocused(true);
+        mSearchView.showProgress();
+        List<Suggestion> list = new ArrayList<>();
+        for(Suggestion suggestion:mSuggestions){
+            if (suggestion.getIsHistory())
+                list.add(suggestion);
+        }
+        mSearchView.swapSuggestions(list);
+        mSearchView.hideProgress();
     }
 
     private void searchViewEventListener() {
@@ -170,15 +170,6 @@ public class SearchActivity extends AppCompatActivity  implements HotkeyAdapter.
 
 
     private void mapView() {
-        //HotkeyAdapter and recyclerView
-        hotkeyAdapter = new HotkeyAdapter(this,mHotKey);
-        hotkeyAdapter.setClickListener(this);
-        rvHotKey = findViewById(R.id.rvHotKey);
-        StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(7, StaggeredGridLayoutManager.HORIZONTAL);
-        rvHotKey.setLayoutManager(layoutManager);
-        rvHotKey.setAdapter(hotkeyAdapter);
-
-        //mSearchView
         mSearchView = findViewById(R.id.mSearchView);
     }
 
@@ -206,9 +197,5 @@ public class SearchActivity extends AppCompatActivity  implements HotkeyAdapter.
         }else{
             MainActivity.listRecentQuery.add(query.toLowerCase());
         }
-    }
-
-    @Override
-    public void onItemClick(View view, int position) {
     }
 }

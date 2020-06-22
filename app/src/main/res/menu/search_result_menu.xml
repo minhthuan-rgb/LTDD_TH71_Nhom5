@@ -8,17 +8,6 @@
 
     <item android:title="Trở về trang chủ"
         android:id="@+id/action_search_home"
-        android:icon="@drawable/home" />
-
-    <item android:title="Danh mục sản phẩm"
-        android:id="@+id/action_search_category"
-        android:icon="@drawable/category" />
-
-    <item android:title="Thông báo"
-        android:id="@+id/action_search_notification"
-        android:icon="@drawable/notification" />
-
-    <item android:title="Cá nhân"
-        android:id="@+id/action_search_personal"
-        android:icon="@drawable/personal" />
+        android:icon="@drawable/home"
+        app:showAsAction="never"/>
 </menu>

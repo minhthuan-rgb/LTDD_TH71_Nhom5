@@ -9,8 +9,7 @@
         android:id="@+id/navigation_home"
         android:name="com.example.ltdd_th71_nhom5.ui.home.HomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home">
-    </fragment>
+        tools:layout="@layout/fragment_home"/>
 
     <fragment
         android:id="@+id/navigation_category"
@@ -28,4 +27,5 @@
         android:name="com.example.ltdd_th71_nhom5.ui.personal.PersonalFragment"
         android:label="@string/title_personal"
         tools:layout="@layout/fragment_personal_tool" />
+
 </navigation>
